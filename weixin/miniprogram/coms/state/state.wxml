@@ -1,0 +1,13 @@
+<!--coms/state/state.wxml-->
+<view class="_state">
+    <view class="_loading" wx:if="{{loading && !ifCom}}">
+        <van-loading size="24px">加载中...</van-loading>
+    </view>
+    <view class="_null" wx:if="{{ifCom && !loading && listLength==0}}">
+        <image src="{{nullIcon || '/assets/image/null2.png'}}"></image>
+        空空如也
+    </view>
+    <view class="_com" wx:if="{{ifCom && !loading && listLength>0}}">
+        没有更多内容了
+    </view>
+</view>

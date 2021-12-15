@@ -1,0 +1,2 @@
+<!--coms/md/md.wxml-->
+<towxml nodes="{{article}}" />

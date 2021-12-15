@@ -1,0 +1,60 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "测试页面",
+                    "pathName": "pages/test/test",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/user/user",
+                    "pathName": "pages/user/user",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/ranking/ranking",
+                    "pathName": "pages/ranking/ranking",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/complete/complete",
+                    "pathName": "pages/complete/complete",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/user/user",
+                    "pathName": "pages/user/user",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/submitEvent/submitEvent",
+                    "pathName": "pages/submitEvent/submitEvent",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/todayEvent/todayEvent",
+                    "pathName": "pages/todayEvent/todayEvent",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

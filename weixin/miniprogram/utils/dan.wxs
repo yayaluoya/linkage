@@ -1,0 +1,54 @@
+var defficultyArray = {};
+defficultyArray[1] = {
+    color: '#171613',
+    name: '黑铁',
+};
+defficultyArray[2] = {
+    color: '#583321',
+    name: '青铜',
+};
+defficultyArray[3] = {
+    color: '#808681',
+    name: '白银',
+};
+defficultyArray[4] = {
+    color: '#935e1f',
+    name: '黄金',
+};
+defficultyArray[5] = {
+    color: '#2c945d',
+    name: '铂金',
+};
+defficultyArray[6] = {
+    color: '#57e0e1',
+    name: '翡翠',
+};
+defficultyArray[7] = {
+    color: '#8367be',
+    name: '钻石',
+};
+defficultyArray[8] = {
+    color: '#aa31b6',
+    name: '大师',
+};
+defficultyArray[9] = {
+    color: '#a62830',
+    name: '宗师',
+};
+defficultyArray[10] = {
+    color: '#3ba6d9',
+    name: '王者',
+};
+/**
+ * 难度字符串
+ * @param n 难度值 [1~10]
+ */
+function difficultyStr(n) {
+    return defficultyArray[n] || {
+        color: '#171613',
+        name: '暂无段位',
+    };
+}
+module.exports = {
+    difficultyStr: difficultyStr,
+};

@@ -1,0 +1,35 @@
+/**app.wxss**/
+@import "./animate.wxss";
+
+page {
+  position: relative;
+  min-height: 100vh;
+  min-width: 100vw;
+  --color: #899bb4;
+  --color-red: #f1373a;
+  --color-yellow: #fe7a57;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+.color {
+  color: var(--color);
+}
+
+.box_shasow {
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .03);
+}
+
+.text_ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

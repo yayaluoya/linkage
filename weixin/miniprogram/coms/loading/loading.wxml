@@ -1,0 +1,4 @@
+<!--coms/loading/loading.wxml-->
+<view class="background animated fadeIn" wx:if="{{showLoading}}">
+    <van-loading size="24px">加载中...</van-loading>
+</view>

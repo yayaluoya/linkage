@@ -1,0 +1,2 @@
+<!--coms/background/background.wxml-->
+<view class="background" style="background-color: {{background_color}};"></view>
