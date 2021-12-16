@@ -1,6 +1,5 @@
-import { message } from "ant-design-vue";
 import { Router } from "vue-router";
-import { EPage, IRouterMata } from ".";
+import { RouterTool } from "./RouterTool";
 
 /**
  * 处理路由

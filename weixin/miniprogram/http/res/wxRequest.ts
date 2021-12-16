@@ -1,4 +1,4 @@
-import { HttpStatus } from "./HttpStatus";
+import { HttpStatus } from "com_utils/HttpStatus";
 import { IResData } from "./IResData";
 import { RequstMedth } from "./RequstMedth";
 

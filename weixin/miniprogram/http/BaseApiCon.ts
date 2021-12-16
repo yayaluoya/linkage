@@ -1,6 +1,6 @@
 import { ApiConfig } from "./ApiConfig";
 import { ApiTool } from "./ApiTool";
-import { HttpStatus } from "./res/HttpStatus";
+import { HttpStatus } from "com_utils/HttpStatus";
 import { IResData } from "./res/IResData";
 import { IRequestOp, wxRequest } from "./res/wxRequest";
 import { SecretCode } from "./SecretCode";

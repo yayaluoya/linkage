@@ -1,8 +1,8 @@
 import axios, { Method, AxiosResponse, AxiosRequestConfig, AxiosInstance } from "axios";
 import { ApiConfig } from "./ApiConfig";
-import { HttpStatus } from "./res/HttpStatus";
 import { IResData } from "./res/IResData";
 import { SecretCode } from "./SecretCode";
+import { HttpStatus } from 'com_utils/HttpStatus';
 
 /**
  * 基类api控制器

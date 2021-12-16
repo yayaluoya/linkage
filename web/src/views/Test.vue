@@ -4,6 +4,16 @@ import { useMainStore } from "@/store/modules/main";
 import { storeToRefs } from "pinia";
 import { TestDataProxy } from "@/localData/dataItem/TestDataProxy";
 import { TestApiCon } from "@/http/apiCon/TestApiCon";
+import { RouterTool } from "@/router/RouterTool";
+import { IRouterMata } from "@/router/RouterType";
+
+/** 路由meta */
+export const meta: IRouterMata = {
+  v: [],
+  navName: "测试页面",
+  ifShow: false,
+};
+
 export default defineComponent({
   setup() {
     let mainStore = useMainStore();
@@ -20,6 +30,11 @@ export default defineComponent({
         .catch(({ mes }) => {
           console.error(mes);
         });
+
+      //查看所有路由
+      RouterTool.getRoutes().then((list) => {
+        console.log("所有路由列表", list);
+      });
     });
 
     return {

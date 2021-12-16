@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@vant/weapp": "^1.9.2",
+    "com_utils": "file:../../node_modules/@utils",
     "miniprogram-computed": "^4.2.1"
   }
 }

@@ -1,9 +1,11 @@
-import { MainApiCon } from "../../http/apiCon/MainApiCon";
+import menuButtonInfo from "../../behaviors/menuButtonInfo";
+import pageJumpB from "../../behaviors/pageJumpB";
 import { TestApiCon } from "../../http/apiCon/TestApiCon";
 import { TestDataProxy } from "../../localData/dataItem/TestDataProxy";
 
 // pages/test/test.ts
 Page({
+    behaviors: [pageJumpB, menuButtonInfo],
 
     /**
      * 页面的初始数据
@@ -25,20 +27,6 @@ Page({
             });
         }).catch(e => {
             console.log('请求失败', e);
-        });
-        //获取所有常量
-        MainApiCon.getAllConst().then((d) => {
-            console.log('所有常量数据', d);
-        });
-        //随机获取一个事件
-        MainApiCon.randomEvent({
-            userId: 1,
-        }).then((d) => {
-            console.log('随机事件', d);
-        });
-        //获取登录用户凭证
-        MainApiCon.directlyGetUserInfo().then((d) => {
-            console.log('用户信息', d);
         });
         setInterval(() => {
             TestDataProxy.instance.data.a++;

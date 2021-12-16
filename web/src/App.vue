@@ -1,21 +1,16 @@
 <script lang="ts">
 import { defineComponent } from "vue-demi";
-import Layout from ">/Layout.vue";
 export default defineComponent({
-  components: {
-    Layout,
-  },
+  components: {},
 });
 </script>
 
 <template>
-  <Layout>
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
-  </Layout>
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
 </template>
 
 <style>

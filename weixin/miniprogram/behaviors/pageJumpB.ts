@@ -7,6 +7,7 @@ type route = {
  * 路由列表
  */
 export const routers: route[] = [];
+
 /** 页面跳转方法的参数 */
 type IPageJumpPageToArg = {
     page: route;

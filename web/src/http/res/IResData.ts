@@ -1,4 +1,4 @@
-import { HttpStatus } from "./HttpStatus";
+import { HttpStatus } from "com_utils/HttpStatus";
 
 /**
  * 响应数据类型

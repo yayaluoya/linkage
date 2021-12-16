@@ -1,4 +1,7 @@
-/** 对v-md-editor的导出声明 */
+/** 
+ * 对一些npm库的声明
+*/
+
 declare module '@kangc/*' {
     const obj: any;
     export default obj;

@@ -1,7 +1,7 @@
 import { ApiConfig } from "../ApiConfig";
 import { ApiTool } from "../ApiTool";
 import { BaseApiCon, IBaseApiOp } from "../BaseApiCon";
-import { HttpStatus } from "../res/HttpStatus";
+import { HttpStatus } from "com_utils/HttpStatus";
 import { IResData } from "../res/IResData";
 import { SecretCode } from "../SecretCode";
 
