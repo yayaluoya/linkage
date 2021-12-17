@@ -1,19 +1,21 @@
 import { HttpStatus } from '@nestjs/common';
+import { Crypto } from 'src/utils/Crypto';
+import { Gzip } from 'src/utils/Zip';
+
+/** 用户token失效状态码 */
+const userNoTokenStatusCode: number = 444;
 
 /**
  * 响应数据
  */
-export class ResData<D = any> {
-    /** 响应时间戳 */
+export class ResData<D = any> implements ComN.IResData {
     timestamp: number;
-    /** 响应状态码 */
     statusCode: HttpStatus;
-    /** 附带消息 */
     mes: string;
-    /** 实体数据 */
     data: D;
-    /** 其它字段 */
-    [index: string]: any;
+    ifCompress = false;
+    ifEncrypt = false;
+    _data: string = '';
 
     /**
      * 实例化
@@ -58,9 +60,38 @@ export class ResData<D = any> {
     /** token没有或者失效 */
     noToken(): this {
         this.data = null;
-        this.mes = 'Token失效';
-        this.statusCode = 444;
+        this.mes = '用户Token失效';
+        this.statusCode = userNoTokenStatusCode;
         return this;
+    }
+
+    /** 压缩数据，作为特殊处理方法必须最后调用 */
+    compress(): this {
+        if (typeof this._data != 'string') { return; }
+        if (this.ifCompress) { return; }
+        this.ifCompress = true;
+        this._data = JSON.stringify(Gzip.gzip(this._data));
+        //置空响应的真实数据
+        this.data = null;
+        return this;
+    }
+
+    /** 加密数据 */
+    encrypt(): this {
+        if (this.ifEncrypt) { return; }
+        this.ifEncrypt = true;
+        this._data = Crypto.encryptionData(this.getDataStr());
+        //置空响应的真实数据
+        this.data = null;
+        return this;
+    }
+
+    /**
+     * 获取数据的字符串格式
+     * @returns 
+     */
+    getDataStr(): string {
+        return JSON.stringify(this.data);
     }
 
     /**

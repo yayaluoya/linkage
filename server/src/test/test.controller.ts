@@ -15,7 +15,7 @@ export class TestController {
     /** get */
     @Get('get')
     async get(@Query() query: any) {
-        return new ResData(query);
+        return new ResData(query).encrypt().compress();
     }
 
     @Get('testLData')

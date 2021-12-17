@@ -13,7 +13,7 @@ export class MainConfig {
     /** 端口 */
     static readonly port = config.port;
     /** 是否验证前端暗号 */
-    static readonly ifVSecretCode = true;
+    static readonly ifVSecretCode = config.ifVSecretCode;
     /** 是否运行测试模块 */
     static readonly ifTest = true;
 }

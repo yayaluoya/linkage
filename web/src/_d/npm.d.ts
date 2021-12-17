@@ -7,12 +7,8 @@ declare module '@kangc/*' {
     export default obj;
 }
 
-declare module 'prismjs' {
-    const obj: any;
-    export default obj;
-}
-
 declare module 'animejs/*' {
     const obj: any;
     export default obj;
 }
+
