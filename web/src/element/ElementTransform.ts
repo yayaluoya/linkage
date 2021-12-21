@@ -105,7 +105,7 @@ export class ElementTransform {
     }
 
     /** 滚动到指定位置 */
-    scrollTo(x?: number, y?: number) {
+    scrollTo(x?: number, y?: number, duration: number = 100) {
         if (typeof x == 'number' || typeof y == 'number') {
             //先删除掉上一个动画    
             anime.remove(this._element);
@@ -114,7 +114,7 @@ export class ElementTransform {
             anime({
                 targets: this._element,
                 scrollLeft: x,
-                duration: 300,
+                duration,
                 easing: 'easeInQuad',
             });
         }
@@ -122,7 +122,7 @@ export class ElementTransform {
             anime({
                 targets: this._element,
                 scrollTop: y,
-                duration: 300,
+                duration,
                 easing: 'easeInQuad',
             });
         }
