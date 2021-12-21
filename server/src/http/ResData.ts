@@ -67,7 +67,10 @@ export class ResData<D = any> implements ComN.IResData {
 
     /** 压缩数据，作为特殊处理方法必须最后调用 */
     compress(): this {
-        if (typeof this._data != 'string') { return; }
+        //此时的_data必须是一个字符串才能对其进行压缩
+        if (typeof this._data != 'string') {
+            this._data = this.getDataStr();
+        }
         if (this.ifCompress) { return; }
         this.ifCompress = true;
         this._data = JSON.stringify(Gzip.gzip(this._data));

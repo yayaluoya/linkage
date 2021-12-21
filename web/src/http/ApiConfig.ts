@@ -1,7 +1,8 @@
+import { Env } from "@/_d/Env";
 import { MainApiPath } from "./apiPath/MainApiPath";
 import { TestApiPath } from "./apiPath/TestApiPath";
 
-let _domain = import.meta.env.MODE == 'development' ? {
+let _domain = Env.ifDev ? {
     web: 'http://localhost:3060',
     image: 'http://localhost:3060',
 } : {

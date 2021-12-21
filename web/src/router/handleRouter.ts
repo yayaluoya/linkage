@@ -1,6 +1,5 @@
 import { WindowState } from "@/element/WindowState";
 import { Router } from "vue-router";
-import { RouterTool } from "./RouterTool";
 
 /**
  * 处理路由

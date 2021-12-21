@@ -12,27 +12,26 @@ export class RouterTool {
     static vueMetaKey = 'meta';
 
     /**
-     * 获取路由列表
-     * 期间会替换掉路由中原先配置的meta
-     * @returns 
-     */
-    static async getRoutes() {
-        for (let item of router.options.routes) {
-            //自定义的路由meta级别最高
-            item.meta = (await (item as CustomizeRouterType).metaP as any) || item.meta || null;
-        }
-        return router.options.routes;
-    }
-
-    /**
      * 获取一个页面的meta配置
      * @param _path 路径名字
      */
-    static getMate(_path: string): Promise<IRouterMata | null> {
-        return this.getRoutes().then((list) => {
-            return (list.find(item => {
-                return item.path == _path;
-            })?.meta as any) || null;
-        });
+    static async getMate(_path: string): Promise<IRouterMata | null> {
+        return this.getMate_(_path, router.options.routes as any, []);
+    }
+    /** 配合查找页面meta，深度优先查找 */
+    private static async getMate_(_path: string, routers: CustomizeRouterType[], _dir: string[]): Promise<IRouterMata | null> {
+        if (!routers || routers.length == 0) { return null; }
+        for (let i in routers) {
+            let __dir = [..._dir, routers[i].path];
+            let reset = await this.getMate_(_path, routers[i].children as any, __dir);
+            if (reset) {
+                return reset;
+            }
+            let _pathReg = __dir.join('/').replace(/:[a-zA-Z0-9]+/, '[\\s\\S]+');
+            if (new RegExp(_pathReg, 'i').test(_path)) {
+                return await routers[i].metaP || Promise.resolve(null);
+            }
+        }
+        return null;
     }
 }

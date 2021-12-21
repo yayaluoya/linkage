@@ -117,6 +117,12 @@ export class BaseApiCon {
                     _resData.data = null;
                     _resData.statusCode = res.status;
                     _resData.mes = '请求错误';
+                } else {
+                    //解析数据，主要判断数据是否被加密或者压缩
+                    //先解压
+                    if (_resData.ifCompress) { }
+                    //再解密
+                    if (_resData.ifEncrypt) { }
                 }
                 //添加响应拦截
                 return this.response_(_resData);

@@ -6,6 +6,7 @@ import { TestDataProxy } from "@/localData/dataItem/TestDataProxy";
 import { TestApiCon } from "@/http/apiCon/TestApiCon";
 import { RouterTool } from "@/router/RouterTool";
 import { IRouterMata } from "@/router/RouterType";
+import { useRoute } from "vue-router";
 
 /** 路由meta */
 export const meta: IRouterMata = {
@@ -17,6 +18,7 @@ export const meta: IRouterMata = {
 export default defineComponent({
   setup() {
     let mainStore = useMainStore();
+    const route = useRoute();
     setInterval(() => {
       mainStore.counter++;
     }, 1000);
@@ -32,8 +34,8 @@ export default defineComponent({
         });
 
       //查看所有路由
-      RouterTool.getRoutes().then((list) => {
-        console.log("所有路由列表", list);
+      RouterTool.getMate(route.path).then((item) => {
+        console.log("当前页面路由信息", route.path, item);
       });
     });
 
@@ -54,5 +56,4 @@ export default defineComponent({
   </div>
 </template>
 
-<style>
-</style>
+<style></style>
