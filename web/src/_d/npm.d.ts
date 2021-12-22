@@ -16,3 +16,8 @@ declare module 'pako' {
     const obj: any;
     export default obj;
 }
+
+declare module 'prismjs' {
+    const obj: any;
+    export default obj;
+}
