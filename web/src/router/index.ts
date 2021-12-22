@@ -104,6 +104,8 @@ Env.ifDev && console.log('路由列表', routeList);
 
 const router = createRouter({
   history: createWebHistory(''),
+  //路由切换后回到顶部
+  scrollBehavior: () => ({ top: 0 }),
   routes: [
     ...routeList,
   ],

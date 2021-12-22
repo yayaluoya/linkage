@@ -1,4 +1,3 @@
-import { WindowState } from "@/element/WindowState";
 import { Router, RouteRecordRaw_ } from "vue-router";
 import { EPage } from "./EPage";
 
@@ -33,8 +32,6 @@ export function handleRouter(router: Router) {
 
     //添加前置守卫
     router.beforeEach((to, from, next) => {
-        //路由切换后回到顶部
-        WindowState.instance.elementTransform.scrollTo(0, 0, 0);
         //
         next();
     })
