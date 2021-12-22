@@ -1,6 +1,6 @@
-import { Crypto } from "@/utils/Crypto";
+import { Crypto } from "-/Crypto";
 import { AxiosRequestConfig } from "axios";
-import { Base64 } from "../utils/Base64";
+import { Base64 } from "-/Base64";
 import { ApiConfig } from "./ApiConfig";
 import { ApiTool } from "./ApiTool";
 import { IResData } from "./res/IResData";

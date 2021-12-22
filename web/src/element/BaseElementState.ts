@@ -1,5 +1,5 @@
 import { BaseEvent } from "@/base/BaseEvent";
-import { createThrottleFun } from "@/utils/throttleAntiShake";
+import { createThrottleFun } from "-/throttleAntiShake";
 import { ElementTransform } from "./ElementTransform";
 
 /** 元素事件 */

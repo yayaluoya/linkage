@@ -1,5 +1,5 @@
 import { InstanceTool } from "com_utils/InstanceTool";
-import { createThrottleFun } from "@/utils/throttleAntiShake";
+import { createThrottleFun } from "-/throttleAntiShake";
 import { BaseElementState } from "./BaseElementState";
 
 type eventType = 'resize';

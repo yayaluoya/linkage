@@ -1,6 +1,6 @@
 import { BaseEvent } from "@/base/BaseEvent";
 import { WindowState } from "@/element/WindowState";
-import { Vector2 } from "@/utils/Vector2";
+import { Vector2 } from "-/Vector2";
 /**
  * rem计算工具
  */

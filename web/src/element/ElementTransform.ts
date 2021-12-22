@@ -1,4 +1,4 @@
-import { Vector2 } from "@/utils/Vector2";
+import { Vector2 } from "-/Vector2";
 import anime from 'animejs/lib/anime.es.js';
 
 /**

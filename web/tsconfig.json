@@ -18,6 +18,9 @@
       ],
       ">\/*": [
         "src/components/*"
+      ],
+      "-/*":[
+        "src/utils/*"
       ]
     },
     "typeRoots": [

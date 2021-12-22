@@ -28,7 +28,7 @@ export class RouterTool {
                 return reset;
             }
             let _pathReg = __dir.join('/').replace(/:[a-zA-Z0-9]+/, '[\\s\\S]+');
-            if (new RegExp(_pathReg, 'i').test(_path)) {
+            if (new RegExp(`^${_pathReg}/?(\\?[\\s\\S]*)?$`, 'i').test(_path)) {
                 return await routers[i].metaP || Promise.resolve(null);
             }
         }

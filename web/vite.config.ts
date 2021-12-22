@@ -13,15 +13,20 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: [
-      /** 根路径简写 */
+      /** 根目录简写 */
       {
         find: /@\//,
         replacement: pathResolve('src') + '/',
       },
-      /** 组件跟路径简写 */
+      /** 组件目录简写 */
       {
         find: />\//,
         replacement: pathResolve('src/components') + '/',
+      },
+      /** 工具目录简写 */
+      {
+        find: /-\//,
+        replacement: pathResolve('src/utils') + '/',
       },
     ],
   },

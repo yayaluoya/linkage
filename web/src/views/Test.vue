@@ -7,6 +7,7 @@ import { TestApiCon } from "@/http/apiCon/TestApiCon";
 import { RouterTool } from "@/router/RouterTool";
 import { RouteMeta, useRoute } from "vue-router";
 import { Env } from "@/_d/Env";
+import { Gzip } from "-/Zip";
 
 /** 路由meta */
 export const meta: RouteMeta = {
@@ -39,6 +40,8 @@ export default defineComponent({
       });
 
       console.log("env配置数据", Env.env);
+
+      console.log("压缩数据", Gzip.gzip("哈哈哈哈"));
     });
 
     return {
