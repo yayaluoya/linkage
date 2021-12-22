@@ -12,3 +12,7 @@ declare module 'animejs/*' {
     export default obj;
 }
 
+declare module 'pako' {
+    const obj: any;
+    export default obj;
+}

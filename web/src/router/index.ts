@@ -1,14 +1,14 @@
 import { Env } from '@/_d/Env';
-import { createRouter, createWebHistory } from 'vue-router';
-import { handleRouter } from './handleRouter';
+import { createRouter, createWebHistory, RouteRecordRaw_ } from 'vue-router';
+import { addRouteList, handleRouter } from './handleRouter';
 import { RouterTool } from './RouterTool';
-import { CustomizeRouterType } from './RouterType';
 
 /**
  * 路由列表
  */
-const routeList: CustomizeRouterType[] = [];
+const routeList: RouteRecordRaw_[] = [];
 
+/** 视图目录 */
 let viewUrl = '../views/';
 
 //view文件夹下的所有vue组件
@@ -25,7 +25,7 @@ for (let path in modules) {
   });
 }
 
-//遍历消耗掉整个组件列表
+//遍历消耗掉所有组件列表
 while (coms.length > 0) {
   //从尾部开始遍历
   let _onCom = coms.pop()!;
@@ -47,8 +47,8 @@ while (coms.length > 0) {
   //
   if (dirs.length > 0) {
     let onRoutes = routeList;
-    let onRoute: CustomizeRouterType;
-    let onParentRoute!: CustomizeRouterType;
+    let onRoute: RouteRecordRaw_;
+    let onParentRoute!: RouteRecordRaw_;
     for (let [index, dir] of dirs.entries()) {
       //对多余的/符号进行去重
       let path = `${index == 0 ? '/' : ''}${dir}`.replace(/\/{2,}/g, '/');
@@ -91,13 +91,16 @@ while (coms.length > 0) {
       }
       //
       onParentRoute = onRoute;
-      onRoutes = onRoute.children as CustomizeRouterType[];
+      onRoutes = onRoute.children as RouteRecordRaw_[];
     }
   }
 }
 
+//加入其它的路由
+addRouteList(routeList);
+
 //打印所有路由信息
-Env.ifDev && console.log('路由信息', routeList);
+Env.ifDev && console.log('路由列表', routeList);
 
 const router = createRouter({
   history: createWebHistory(''),

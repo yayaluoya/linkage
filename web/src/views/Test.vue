@@ -5,11 +5,11 @@ import { storeToRefs } from "pinia";
 import { TestDataProxy } from "@/localData/dataItem/TestDataProxy";
 import { TestApiCon } from "@/http/apiCon/TestApiCon";
 import { RouterTool } from "@/router/RouterTool";
-import { IRouterMata } from "@/router/RouterType";
-import { useRoute } from "vue-router";
+import { RouteMeta, useRoute } from "vue-router";
+import { Env } from "@/_d/Env";
 
 /** 路由meta */
-export const meta: IRouterMata = {
+export const meta: RouteMeta = {
   v: [],
   navName: "测试页面",
   ifShow: false,
@@ -37,6 +37,8 @@ export default defineComponent({
       RouterTool.getMate(route.path).then((item) => {
         console.log("当前页面路由信息", route.path, item);
       });
+
+      console.log("env配置数据", Env.env);
     });
 
     return {

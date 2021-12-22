@@ -1,5 +1,5 @@
+import { RouteMeta, RouteRecordRaw_ } from "vue-router";
 import router from ".";
-import { CustomizeRouterType, IRouterMata } from "./RouterType";
 
 /**
  * 路由工具
@@ -15,11 +15,11 @@ export class RouterTool {
      * 获取一个页面的meta配置
      * @param _path 路径名字
      */
-    static async getMate(_path: string): Promise<IRouterMata | null> {
+    static async getMate(_path: string): Promise<RouteMeta | null> {
         return this.getMate_(_path, router.options.routes as any, []);
     }
     /** 配合查找页面meta，深度优先查找 */
-    private static async getMate_(_path: string, routers: CustomizeRouterType[], _dir: string[]): Promise<IRouterMata | null> {
+    private static async getMate_(_path: string, routers: RouteRecordRaw_[], _dir: string[]): Promise<RouteMeta | null> {
         if (!routers || routers.length == 0) { return null; }
         for (let i in routers) {
             let __dir = [..._dir, routers[i].path];
