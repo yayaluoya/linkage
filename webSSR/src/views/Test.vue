@@ -2,8 +2,8 @@
 import { ref, reactive, defineComponent } from "vue";
 import { useTestStore } from "@/store/modules/test";
 import { storeToRefs } from "pinia";
-import { parseAsyncComOp } from "@/erect/s/AsyncComType";
-import { SSROpT } from "@/erect/s/SSROpT";
+import { parseAsyncComOp } from "@/erect/AsyncComType";
+import { SSROpT } from "@/erect/SSROpT";
 export default defineComponent({
   //注入ssr异步依赖
   ...SSROpT.inject({
@@ -14,7 +14,7 @@ export default defineComponent({
     },
     async asyncHeadLabel(_op: parseAsyncComOp) {
       return {
-        title: "vite测试页面哈哈哈哈-",
+        title: "vite测试页面哈哈哈哈---",
       };
     },
   }),

@@ -1,5 +1,5 @@
-import { AsyncComType, parseAsyncComOp } from "./AsyncComType";
-import { SSROpT } from "./SSROpT";
+import { AsyncComType, parseAsyncComOp } from "../AsyncComType";
+import { SSROpT } from "../SSROpT";
 
 
 /**
