@@ -1,0 +1,38 @@
+{
+  "name": "webssr",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "dev-server": "node server",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr src/entry-server.js ",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@kangc/v-md-editor": "^2.3.12",
+    "animejs": "^3.2.1",
+    "ant-design-vue": "^2.2.8",
+    "axios": "^0.24.0",
+    "com_utils": "file:../node_modules/@utils",
+    "crypto-js": "^4.1.1",
+    "js-base64": "^3.7.2",
+    "konva": "^8.3.1",
+    "moment": "^2.29.1",
+    "pako": "^2.0.4",
+    "pinia": "^2.0.4",
+    "prismjs": "^1.25.0",
+    "vue-router": "^4.0.12",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "cheerio": "^1.0.0-rc.10",
+    "express": "^4.17.2",
+    "less": "^4.1.2",
+    "sass": "^1.45.1",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2",
+    "vue-tsc": "^0.29.8"
+  }
+}
