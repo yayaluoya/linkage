@@ -18,7 +18,7 @@ export default defineComponent({
       };
     },
   }),
-  // components: {},
+  components: {},
   setup() {
     const testStore = useTestStore();
     return {

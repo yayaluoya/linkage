@@ -1,6 +1,14 @@
 <script lang="ts">
 import { ref, reactive } from "vue";
+import { SSROpT } from "@/erect/SSROpT";
 export default {
+  ...SSROpT.inject({
+    asyncHeadLabel() {
+      return {
+        title: "空页面",
+      };
+    },
+  }),
   components: {},
   setup() {
     return {};
@@ -9,7 +17,7 @@ export default {
 </script>
 
 <template>
-  <div class="root">空页面</div>
+  <div class="root">404</div>
 </template>
 
 <style scoped lang="scss">
