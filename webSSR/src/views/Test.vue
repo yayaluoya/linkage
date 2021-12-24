@@ -5,7 +5,6 @@ import { storeToRefs } from "pinia";
 import { parseAsyncComOp } from "@/erect/AsyncComType";
 import HelloWorld from ">/HelloWorld.vue";
 import MDEdit from ">/MDEdit.vue";
-import MDShow from ">/MDShow.vue";
 import { SSROpT } from "@/erect/SSROpT";
 export default defineComponent({
   //注入ssr异步依赖
@@ -24,29 +23,12 @@ export default defineComponent({
   components: {
     HelloWorld,
     MDEdit,
-    MDShow,
   },
   setup() {
     const testStore = useTestStore();
     const mdContent = ref("");
 
-    mdContent.value = `
-## 哈哈哈
-\`\`\`javascript
-...SSROpT.inject({
-  async asyncData(_op: parseAsyncComOp) {
-    return {
-      asyncD: "异步获取的数据",
-    };
-  },
-  async asyncHeadLabel(_op: parseAsyncComOp) {
-    return {
-      title: "vite测试页面哈哈哈哈---",
-    };
-  },
-}),
-\`\`\`
-`;
+    mdContent.value = "## 哈哈哈";
 
     setTimeout(() => {
       mdContent.value = mdContent.value + "\n1秒后";
@@ -67,8 +49,7 @@ export default defineComponent({
     <span>测试store{{ c }}</span>
     <span>异步数据-{{ asyncD }}</span>
     <HelloWorld msg="HelloWorld" />
-    <MDEdit />
-    <MDShow :content="mdContent" />
+    <MDEdit v-model:md="mdContent" />
   </div>
 </template>
 

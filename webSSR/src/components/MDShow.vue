@@ -1,26 +1,7 @@
 <script lang="ts">
 import { ref, reactive, computed, onMounted, watch, toRef } from "vue";
 import Erect from "./Erect.vue";
-import { marked } from "marked";
-import hljs from "highlight.js"; // 引入 highlight.js
-// import "highlight.js/styles/github.css"; // 引入高亮样式
-import "highlight.js/styles/atom-one-dark.css"; // 引入高亮样式
-var rendererMD = new marked.Renderer();
-marked.setOptions({
-  renderer: rendererMD,
-  highlight: function (code: string, lang: string) {
-    const language = hljs.getLanguage(lang) ? lang : "plaintext";
-    return hljs.highlight(code, { language }).value;
-  },
-  langPrefix: "hljs language-", // highlight.js css expects a top-level 'hljs' class.
-  pedantic: false,
-  gfm: true,
-  breaks: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false,
-});
+import marked from "-/marked";
 export default {
   components: { Erect },
   props: {
@@ -65,5 +46,8 @@ export default {
 
 <style scoped lang="scss">
 .root {
+  > div {
+    width: 100%;
+  }
 }
 </style>

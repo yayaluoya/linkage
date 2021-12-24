@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@kangc/v-md-editor": "^2.3.12",
     "animejs": "^3.2.1",
     "ant-design-vue": "^2.2.8",
     "axios": "^0.24.0",
