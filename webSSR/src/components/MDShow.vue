@@ -1,7 +1,8 @@
 <script lang="ts">
 import { ref, reactive } from "vue";
+import Erect from "./Erect.vue";
 export default {
-  components: {},
+  components: { Erect },
   setup() {
     return {};
   },
@@ -9,10 +10,12 @@ export default {
 </script>
 
 <template>
-  <div class="root">
-    App
-    <router-view />
-  </div>
+  <Erect class="root">
+    <h1>MD显示器</h1>
+    <template #s>
+      <span>MD显示器SSR</span>
+    </template>
+  </Erect>
 </template>
 
 <style scoped lang="scss">

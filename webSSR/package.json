@@ -18,12 +18,13 @@
     "crypto-js": "^4.1.1",
     "js-base64": "^3.7.2",
     "konva": "^8.3.1",
+    "marked": "^4.0.8",
     "moment": "^2.29.1",
     "pako": "^2.0.4",
     "pinia": "^2.0.4",
     "prismjs": "^1.25.0",
-    "vue-router": "^4.0.12",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",

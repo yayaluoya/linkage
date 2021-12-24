@@ -3,6 +3,9 @@ import { ref, reactive, defineComponent } from "vue";
 import { useTestStore } from "@/store/modules/test";
 import { storeToRefs } from "pinia";
 import { parseAsyncComOp } from "@/erect/AsyncComType";
+import HelloWorld from ">/HelloWorld.vue";
+import MDEdit from ">/MDEdit.vue";
+import MDShow from ">/MDShow.vue";
 import { SSROpT } from "@/erect/SSROpT";
 export default defineComponent({
   //注入ssr异步依赖
@@ -18,7 +21,11 @@ export default defineComponent({
       };
     },
   }),
-  components: {},
+  components: {
+    HelloWorld,
+    MDEdit,
+    MDShow,
+  },
   setup() {
     const testStore = useTestStore();
     return {
@@ -34,10 +41,14 @@ export default defineComponent({
     测试页面
     <span>测试store{{ c }}</span>
     <span>异步数据-{{ asyncD }}</span>
+    <HelloWorld msg="HelloWorld" />
+    <MDEdit />
+    <MDShow />
   </div>
 </template>
 
 <style scoped lang="scss">
 .root {
+  //
 }
 </style>

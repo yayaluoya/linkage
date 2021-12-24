@@ -28,11 +28,17 @@ const context = {};
  * @returns 
  */
 export async function render(url: string, manifest: any) {
-    //
-    router.push(url);
+    /**
+     * 路由切换
+     * TODO 这里有个超级大bug，就是这个方法是个异步的
+     */
+    await router.push({
+        path: url,
+    });
     await router.isReady();//路由切换完毕
     //
     const to = router.currentRoute;
+    // console.log('后端路由切换', url, to.value.path);
     //解析选项
     let parseOp = {
         route: to.value,
