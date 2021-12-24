@@ -68,7 +68,16 @@ declare module 'marked' {
         /** 如果为 true，则按照 XHTML 的要求为带有“/”的空元素（<br/>、<img/> 等）发出自闭合 HTML 标记。 */
         xhtml?: boolean;
     }
+
+    /**
+     * md工具实例
+     */
     export namespace marked {
+        /**
+         * 扩展
+         * @param _ops 
+         */
+        export function use(..._ops: IOp[]): void;
         /**
          * 解析md字符串
          * @param _str 
