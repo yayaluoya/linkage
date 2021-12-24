@@ -1,7 +1,7 @@
 <script lang="ts">
 import { ref, reactive, computed, onMounted, watch, toRef } from "vue";
 import Erect from "./Erect.vue";
-import marked from "-/marked";
+import marked, { addHighlightClassFile } from "-/marked";
 export default {
   components: { Erect },
   props: {
@@ -10,15 +10,22 @@ export default {
       type: String,
       default: "",
     },
+    theme: {
+      type: String,
+      default: "atom-one-dark",
+    },
   },
   setup(props) {
     const mdContent = ref("");
+    //添加主题
+    addHighlightClassFile(props.theme);
     //监听props的变化
     watch(toRef(props, "content"), () => {
       setMd();
     });
     onMounted(() => {
       setMd();
+      //
     });
 
     /** 设置md内容 */
