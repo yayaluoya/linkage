@@ -1,7 +1,10 @@
 <script lang="ts">
 import { ref, reactive, computed, onMounted, watch, toRef } from "vue";
 import Erect from "./Erect.vue";
-import marked, { addHighlightClassFile } from "-/marked";
+import marked, { getHighlightThemeStyleEl } from "-/marked";
+
+/** 默认主题 */
+const defaultTheme = "atom-one-dark";
 export default {
   components: { Erect },
   props: {
@@ -12,31 +15,53 @@ export default {
     },
     theme: {
       type: String,
-      default: "atom-one-dark",
+      default: defaultTheme,
     },
   },
   setup(props) {
-    const mdContent = ref("");
-    //添加主题
-    addHighlightClassFile(props.theme);
+    const mdRef = ref<Element>();
+    /** el */
+    let mdRootEl: ShadowRoot;
+    let mdShowEl: Element;
+    let themeEl: Element;
     //监听props的变化
     watch(toRef(props, "content"), () => {
       setMd();
     });
+    watch(toRef(props, "theme"), () => {
+      setTheme();
+    });
+    //获取影子dom或者原dom
     onMounted(() => {
-      setMd();
+      mdRootEl =
+        mdRef.value?.attachShadow({
+          mode: "open",
+        }) || (mdRef.value! as any);
+      mdShowEl = document.createElement("div");
+      mdRootEl.appendChild(mdShowEl);
       //
+      setTheme();
+      setMd();
     });
 
     /** 设置md内容 */
     function setMd() {
-      //TODO 这里有个大bug，就是必须在下一个宏任务中执行
       setTimeout(() => {
-        mdContent.value = marked.parse(props.content);
-      }, 0);
+        mdShowEl.innerHTML = marked.parse(props.content);
+      }, 100);
     }
+    /** 设置主题 */
+    function setTheme() {
+      //先删除之前的主题
+      themeEl && mdRootEl.removeChild(themeEl);
+      let _theme = getHighlightThemeStyleEl(props.theme || defaultTheme);
+      themeEl = _theme.linkEl;
+      //根据不同的主题添加主题元素
+      mdRootEl.appendChild(themeEl);
+    }
+    //
     return {
-      mdContent,
+      mdRef,
     };
   },
 };
@@ -44,7 +69,7 @@ export default {
 
 <template>
   <Erect class="root">
-    <div v-html="mdContent"></div>
+    <div ref="mdRef"></div>
     <template #s>
       {{ content }}
     </template>

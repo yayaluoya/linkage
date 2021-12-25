@@ -28,13 +28,6 @@ export default defineComponent({
     const testStore = useTestStore();
     const mdContent = ref("");
 
-    mdContent.value = `
-    ## 哈哈哈
-    \`\`\`javascript
-    const mdContent = ref("");
-    \`\`\`
-`;
-
     setTimeout(() => {
       mdContent.value = mdContent.value + "\n1秒后";
     }, 1000);

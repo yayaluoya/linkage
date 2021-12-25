@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref, reactive, watch, toRef, computed } from "vue";
+import { ref, reactive, watch, toRef, computed, onMounted } from "vue";
 import Erect from "./Erect.vue";
 import MDShow from "./MDShow.vue";
 import marked from "-/marked";
@@ -13,6 +13,7 @@ export default {
   },
   emits: ["update:md"],
   setup(props, ctx) {
+    const mdTheme = ref("");
     const input = computed(() => {
       return props.md;
     });
@@ -25,10 +26,17 @@ export default {
       ctx.emit("update:md", e.target.value);
     }
 
+    onMounted(() => {
+      setTimeout(() => {
+        mdTheme.value = "atom-one-light";
+      }, 5000);
+    });
+
     //
     return {
       input,
       md_,
+      mdTheme,
       inputChange,
     };
   },
@@ -40,7 +48,7 @@ export default {
     <div class="left">
       <textarea :value="input" @input="inputChange"></textarea>
     </div>
-    <MDShow class="right" :content="md_" />
+    <MDShow class="right" :content="md_" :theme="mdTheme" />
     <template #s>
       <span>MD编辑器SSR</span>
     </template>

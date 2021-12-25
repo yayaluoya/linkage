@@ -1,7 +1,6 @@
 import { marked } from 'marked';
 import hljs from "highlight.js"; // 引入 highlight.js
-// import "highlight.js/styles/github.css"; // 引入高亮样式
-// import "highlight.js/styles/atom-one-dark.css"; // 引入高亮样式
+import { Env } from '@/_d/Env';
 marked.setOptions({
     renderer: new marked.Renderer(),
     highlight: function (code: string, lang: string) {
@@ -19,21 +18,26 @@ marked.setOptions({
 });
 
 /**
- * 添加Highlight主题
+ * 获取Highlight主题的样式元素
  */
-export function addHighlightClassFile(_name: string) {
-    // 先检查是否已经导入
-    const id = `${_name}-min-css`;
-    let linkEl: HTMLLinkElement = document.getElementById(id)! as any;
-    if (linkEl) {
-        return;
+export function getHighlightThemeStyleEl(_name: string) {
+    let id = Date.now() + '-' + _name;
+    if (!_name) {
+        return {
+            id,
+            linkEl: document.createElement("link"),
+        };
     }
-    linkEl = document.createElement("link");
+    let linkEl = document.createElement("link");
     //添加cdn的路径
-    linkEl.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css`;
+    linkEl.href = `https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/${_name}.min.css`;
     linkEl.rel = "stylesheet";
-    linkEl.id = id;
-    document.head.appendChild(linkEl);
+    return {
+        id,
+        linkEl,
+    };
 }
+
+Env.ifC && ((window as any)['marked'] = marked);
 
 export default marked;
