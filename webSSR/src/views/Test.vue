@@ -29,7 +29,8 @@ export default defineComponent({
     const mdContent = ref("");
 
     setTimeout(() => {
-      mdContent.value = mdContent.value + "\n1秒后";
+      mdContent.value =
+        "1秒后\n## 哈哈哈哈哈\n```ts\nconsole.log('哈哈哈哈');\n```";
     }, 1000);
 
     return {

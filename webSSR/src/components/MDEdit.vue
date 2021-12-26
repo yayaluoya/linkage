@@ -13,7 +13,7 @@ export default {
   },
   emits: ["update:md"],
   setup(props, ctx) {
-    const mdTheme = ref("");
+    const codeTheme = ref("");
     const input = computed(() => {
       return props.md;
     });
@@ -27,16 +27,16 @@ export default {
     }
 
     onMounted(() => {
-      setTimeout(() => {
-        mdTheme.value = "atom-one-light";
-      }, 5000);
+      // setTimeout(() => {
+      //   codeTheme.value = "atom-one-light";
+      // }, 5000);
     });
 
     //
     return {
       input,
       md_,
-      mdTheme,
+      codeTheme,
       inputChange,
     };
   },
@@ -48,7 +48,7 @@ export default {
     <div class="left">
       <textarea :value="input" @input="inputChange"></textarea>
     </div>
-    <MDShow class="right" :content="md_" :theme="mdTheme" />
+    <MDShow class="right" :content="md_" :code_theme="codeTheme" />
     <template #s>
       <span>MD编辑器SSR</span>
     </template>
