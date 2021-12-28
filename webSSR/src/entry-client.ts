@@ -22,9 +22,11 @@ import svgIcon from '>/SvgIcon/index.vue'
 app.component('svg-icon', svgIcon)
 
 //引入vue全家桶
-app.use(await router);
-setupStore(app);
-app.use(Antd);
+router.then((r) => {
+    app.use(r);
+    setupStore(app);
+    app.use(Antd);
 
-//挂载
-app.mount('#app', true);
+    //挂载
+    app.mount('#app', true);
+});

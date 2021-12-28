@@ -29,8 +29,12 @@ import svgIcon from '>/SvgIcon/index.vue'
 app.component('svg-icon', svgIcon)
 
 setupStore(app);
-app.use(await router);
-app.use(Antd);
-//
-app.use(VueMarkdownEditor);
-app.mount('#app')
+
+//等待router
+router.then((r) => {
+    app.use(r);
+    app.use(Antd);
+    //
+    app.use(VueMarkdownEditor);
+    app.mount('#app')
+});

@@ -17,6 +17,7 @@ async function createServer() {
         server: { middlewareMode: 'ssr' }
     })
     // 使用 vite 的 Connect 实例作为中间件
+    // 这个中间件做的事有拦截静态文件路由
     app.use(vite.middlewares)
 
     app.use('*', async (req, res) => {

@@ -1,29 +1,42 @@
-import { createSSRApp } from 'vue';
+import { App, createSSRApp } from 'vue';
 import App from './App.vue';
 import { renderToString } from '@vue/server-renderer';
 import router from './router';
 import { setupStore } from './store';
 import { parseAsyncComData } from './erect/s/parseAsyncComData';
 import { parseAsyncComHeadLabel } from './erect/s/parseAsyncComHeadLabel';
-
-/** 
- * vue实例
- * 注意这里缓存了这个实例
- */
-const app = createSSRApp(App);
-
-//引入vue全家桶
-app.use(await router);
-setupStore(app);
-
 /** 注册svg组件 */
 import svgIcon from '>/SvgIcon/index.vue'
-app.component('svg-icon', svgIcon)
 
-/**
- * 上下文
- */
-const context = {};
+/** 获取app的promise */
+let _appPromise = new Promise<{
+    /** vue实例 */
+    app: App<Element>;
+    /** 上下文 */
+    context: any;
+}>(async (r) => {
+    /** 
+     * vue实例
+     * 注意这里缓存了这个实例
+     */
+    const app = createSSRApp(App);
+
+    //引入vue全家桶
+    app.use(await router);
+    setupStore(app);
+
+    app.component('svg-icon', svgIcon)
+
+    /**
+     * 上下文
+     */
+    const context = {};
+
+    r({
+        app,
+        context,
+    });
+});
 
 /**
  * 渲染函数
@@ -32,6 +45,9 @@ const context = {};
  * @returns 
  */
 export async function render(url: string, manifest: any) {
+    //获取app实例
+    let { app, context } = await _appPromise;
+    //获取router实例
     let _router = await router;
     /**
      * 路由切换
