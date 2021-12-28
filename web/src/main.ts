@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-
 import router from './router';
 import { setupStore } from './store';
+import svgIcon from '>/SvgIcon/index.vue'
 
 //引入antd ui库
 import Antd from 'ant-design-vue';
@@ -18,23 +18,21 @@ import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import Prism from 'prismjs';
-VueMarkdownEditor.use(vuepressTheme, {
-    Prism,
-});
+(async () => {
+    VueMarkdownEditor.use(vuepressTheme, {
+        Prism,
+    });
 
-let app = createApp(App)
+    let app = createApp(App)
 
-/** 注册svg组件 */
-import svgIcon from '>/SvgIcon/index.vue'
-app.component('svg-icon', svgIcon)
+    /** 注册svg组件 */
+    app.component('svg-icon', svgIcon)
 
-setupStore(app);
+    setupStore(app);
 
-//等待router
-router.then((r) => {
-    app.use(r);
+    app.use(await router);
     app.use(Antd);
     //
     app.use(VueMarkdownEditor);
     app.mount('#app')
-});
+})();
