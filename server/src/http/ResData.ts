@@ -23,7 +23,7 @@ export class ResData<D = any> implements ComN.IResData {
      * @param statusCode 
      * @param mes 
      */
-    constructor(data: any = null, statusCode: HttpStatus = HttpStatus.OK, mes: string = '') {
+    constructor(data: D = null, statusCode: HttpStatus = HttpStatus.OK, mes: string = '') {
         this.data = data;
         this.statusCode = statusCode;
         this.mes = mes;
@@ -50,7 +50,7 @@ export class ResData<D = any> implements ComN.IResData {
      * @param _code 
      * @returns 
      */
-    com(data: any = null, _code: HttpStatus = HttpStatus.OK): this {
+    com(data: D = null, _code: HttpStatus = HttpStatus.OK): this {
         this.data = data;
         this.mes = '';
         this.statusCode = _code;

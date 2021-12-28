@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path';
 import { mySSRPlugin } from './ssr/mySSRPlugin';
+import { svgBuilder } from './.vite/svgBuilder';
 
 
 function pathResolve(dir: string) {
@@ -12,7 +13,7 @@ function pathResolve(dir: string) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [mySSRPlugin(), vue(),],
+  plugins: [mySSRPlugin(), vue(), svgBuilder('./src/assets/svg/')],
   resolve: {
     alias: [
       /** 根目录简写 */

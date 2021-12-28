@@ -12,21 +12,44 @@ const moment = require('moment');
  */
 export default class FileDispose {
     /**
+     * 上传img文件
+     * @param file 
+     */
+    public uploadImg(file: IFileData) {
+        return this.uploadFile(file, 'img');
+    }
+
+    /**
+     * 上传md文件
+     * @param file 
+     */
+    public uploadMd(file: IFileData) {
+        return this.uploadFile(file, 'md');
+    }
+
+    /**
      * 上传文件
      * @param file 文件数据
+     * @param dir 中间目录，默认为com
      */
-    public uploadFile(file: IFileData): Promise<ResData> {
+    public uploadFile(file: IFileData, dir: string = 'com'): Promise<ResData> {
         return new Promise<ResData<any>>((r, e) => {
             //创建当天时间目录
             let _time: string = moment().format('YYYY-M-D');
+            /** 存储目录 */
+            let _dir: string = join(PathManager.publicFilePath, dir, _time);
             //先创建目录
             try {
-                mkdirSync(join(PathManager.publicFilePath, _time));
+                mkdirSync(_dir, {
+                    //递归创建目录
+                    recursive: true,
+                });
             } catch (E) {
+                // console.log('创建目录失败', E);
                 //已经存在该目录
             }
             //获取完整url并去除掉特殊字符
-            let _url: string = join(PathManager.publicFilePath, _time + '/' + Date.now() + '-' + file.originalname.replace(/[^a-zA-Z\.0-9]+/g, ''));
+            let _url: string = join(_dir, Date.now() + '-' + file.originalname.replace(/[^a-zA-Z\.0-9]+/g, ''));
             //保存文件
             writeFile(_url, file.buffer, (err) => {
                 if (err) {

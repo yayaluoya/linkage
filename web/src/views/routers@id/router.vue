@@ -1,19 +1,22 @@
 <script lang="ts">
 import { ref, reactive } from "vue";
 import { RouterTool } from "@/router/RouterTool";
-import { RouteMeta, useRoute } from "vue-router";
+import { RouteMeta, RouteRecordRawExport, useRoute } from "vue-router";
 
-/** 路由meta */
-export const meta: RouteMeta | Promise<RouteMeta> = Promise.resolve({
-  v: [],
-  navName: "router页面",
-  ifShow: false,
+/** 路由配置 */
+export const routeExportRaw: Promise<RouteRecordRawExport> = Promise.resolve({
+  meta: {
+    v: [],
+    navName: "路由测试页面",
+    ifShow: false,
+  },
 });
 
 export default {
   components: {},
   setup() {
     const route = useRoute();
+    console.log("路由meta", route.meta);
     return {};
   },
 };

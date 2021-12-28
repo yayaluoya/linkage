@@ -6,6 +6,18 @@ import { parseAsyncComOp } from "@/erect/AsyncComType";
 import HelloWorld from ">/HelloWorld.vue";
 import MDEdit from ">/MDEdit.vue";
 import { SSROpT } from "@/erect/SSROpT";
+import { RouteRecordRawExport, useRoute } from "vue-router";
+import { Env } from "@/_d/Env";
+
+/** 路由配置 */
+export const routeExportRaw: RouteRecordRawExport = {
+  meta: {
+    v: [],
+    navName: "测试页面哈哈哈哈",
+    ifShow: false,
+  },
+};
+
 export default defineComponent({
   //注入ssr异步依赖
   ...SSROpT.inject({
@@ -27,10 +39,13 @@ export default defineComponent({
   setup() {
     const testStore = useTestStore();
     const mdContent = ref("");
+    const route = useRoute();
 
     setTimeout(() => {
       mdContent.value =
         "1秒后\n## 哈哈哈哈哈\n```ts\nconsole.log('哈哈哈哈');\n```";
+      //
+      Env.ifC && console.log("路由配置", route.meta);
     }, 1000);
 
     return {
@@ -49,6 +64,7 @@ export default defineComponent({
     <span>异步数据-{{ asyncD }}</span>
     <HelloWorld msg="HelloWorld" />
     <MDEdit v-model:md="mdContent" />
+    <svg-icon name="link" />
   </div>
 </template>
 

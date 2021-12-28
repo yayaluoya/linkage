@@ -13,8 +13,12 @@ import { parseAsyncComHeadLabel } from './erect/s/parseAsyncComHeadLabel';
 const app = createSSRApp(App);
 
 //引入vue全家桶
-app.use(router);
+app.use(await router);
 setupStore(app);
+
+/** 注册svg组件 */
+import svgIcon from '>/SvgIcon/index.vue'
+app.component('svg-icon', svgIcon)
 
 /**
  * 上下文
@@ -28,16 +32,17 @@ const context = {};
  * @returns 
  */
 export async function render(url: string, manifest: any) {
+    let _router = await router;
     /**
      * 路由切换
      * TODO 这里有个超级大bug，就是这个方法是个异步的
      */
-    await router.push({
+    await _router.push({
         path: url,
     });
-    await router.isReady();//路由切换完毕
+    await _router.isReady();//路由切换完毕
     //
-    const to = router.currentRoute;
+    const to = _router.currentRoute;
     // console.log('后端路由切换', url, to.value.path);
     //解析选项
     let parseOp = {

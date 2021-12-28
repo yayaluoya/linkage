@@ -2,7 +2,6 @@ import { message } from "ant-design-vue";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { BaseApiCon } from "../BaseApiCon";
 import { IResData } from "../res/IResData";
-import router from "@/router";
 
 /** 用户token失效的状态码 */
 const userNoToken: number = 444;

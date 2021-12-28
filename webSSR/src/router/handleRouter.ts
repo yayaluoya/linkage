@@ -1,4 +1,4 @@
-import { Router, RouteRecordRaw_ } from "vue-router";
+import { Router, RouteRecordRaw } from "vue-router";
 import { EPage } from "./EPage";
 
 /**
@@ -6,7 +6,7 @@ import { EPage } from "./EPage";
  * @param _list 路由列表
  * @returns 
  */
-export function addRouteList(_list: RouteRecordRaw_[]) {
+export function addRouteList(_list: RouteRecordRaw[]) {
     //加入默认路由
     _list.unshift({
         path: EPage.Root,

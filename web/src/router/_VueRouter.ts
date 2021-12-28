@@ -17,10 +17,7 @@ declare module 'vue-router' {
     }
 
     /**
-     * RouteRecordRaw的扩展类型
+     * 路由配置的导出类型
      */
-    type RouteRecordRaw_ = RouteRecordRaw & {
-        /** 解决为meta的promise */
-        metaP?: Promise<RouteMeta>;
-    };
+    export type RouteRecordRawExport = Pick<Partial<RouteRecordRaw>, 'meta' | 'redirect' | 'beforeEnter'>;
 }

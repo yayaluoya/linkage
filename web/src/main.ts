@@ -24,8 +24,12 @@ VueMarkdownEditor.use(vuepressTheme, {
 
 let app = createApp(App)
 
+/** 注册svg组件 */
+import svgIcon from '>/SvgIcon/index.vue'
+app.component('svg-icon', svgIcon)
+
 setupStore(app);
-app.use(router);
+app.use(await router);
 app.use(Antd);
 //
 app.use(VueMarkdownEditor);

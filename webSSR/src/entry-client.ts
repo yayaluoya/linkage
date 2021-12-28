@@ -17,8 +17,12 @@ import "@/style/index.scss";
  */
 const app = createApp(App);
 
+/** 注册svg组件 */
+import svgIcon from '>/SvgIcon/index.vue'
+app.component('svg-icon', svgIcon)
+
 //引入vue全家桶
-app.use(router);
+app.use(await router);
 setupStore(app);
 app.use(Antd);
 
