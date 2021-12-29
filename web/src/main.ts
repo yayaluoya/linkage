@@ -4,10 +4,9 @@ import router from './router';
 import { setupStore } from './store';
 import svgIcon from '>/SvgIcon/index.vue'
 
-//引入antd ui库
-import Antd from 'ant-design-vue';
-// import 'ant-design-vue/dist/antd.css';
-import "@/style/antd.less";
+//引入ui库
+import ElementPlus from 'element-plus'
+import "@/style/element.scss";
 
 //引入自定义样式
 import "@/style/index.scss";
@@ -27,12 +26,11 @@ import Prism from 'prismjs';
 
     /** 注册svg组件 */
     app.component('svg-icon', svgIcon)
-
-    setupStore(app);
-
-    app.use(await router);
-    app.use(Antd);
-    //
+    app.use(ElementPlus);
     app.use(VueMarkdownEditor);
+    //
+    app.use(await router);
+    setupStore(app);
+    //
     app.mount('#app')
 })();

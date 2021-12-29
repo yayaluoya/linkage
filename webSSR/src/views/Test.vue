@@ -4,7 +4,7 @@ import { useTestStore } from "@/store/modules/test";
 import { storeToRefs } from "pinia";
 import { parseAsyncComOp } from "@/erect/AsyncComType";
 import HelloWorld from ">/HelloWorld.vue";
-import MDEdit from ">/MDEdit.vue";
+import MDEdit from ">/md/MDEdit.vue";
 import { SSROpT } from "@/erect/SSROpT";
 import { RouteRecordRawExport, useRoute } from "vue-router";
 import { Env } from "@/_d/Env";

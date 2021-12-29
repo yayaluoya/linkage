@@ -1,7 +1,6 @@
 <script lang="ts">
 import { FileApiCon } from "@/http/apiCon/FileApiCon";
 import { ApiTool } from "@/http/ApiTool";
-import { message } from "ant-design-vue";
 import { defineComponent, ref, toRef, watch } from "vue-demi";
 
 export default defineComponent({
@@ -42,7 +41,6 @@ export default defineComponent({
         return;
       }
       ifLoading.value = true;
-      const hide = message.loading("Action in progress..", 0);
       FileApiCon.instance
         .update(files[0])
         .then((imageUrl) => {
@@ -55,7 +53,6 @@ export default defineComponent({
         })
         .finally(() => {
           ifLoading.value = false;
-          hide();
         });
     }
 
@@ -79,5 +76,4 @@ export default defineComponent({
   ></v-md-editor>
 </template>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

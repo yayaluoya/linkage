@@ -1,6 +1,6 @@
 <script lang="ts">
 import { ref, reactive, computed, onMounted, watch, toRef } from "vue";
-import Erect from "./Erect.vue";
+import Erect from "../Erect.vue";
 import marked, { getHighlightThemeStyleEl, getMDStyleEl } from "-/marked";
 
 /** 默认md主题 */

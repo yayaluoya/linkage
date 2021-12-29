@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "animejs": "^3.2.1",
-    "ant-design-vue": "^2.2.8",
     "axios": "^0.24.0",
     "com_utils": "file:../node_modules/@utils",
     "crypto-js": "^4.1.1",
+    "element-plus": "^1.2.0-beta.6",
     "highlight.js": "^11.3.1",
     "js-base64": "^3.7.2",
     "konva": "^8.3.1",
