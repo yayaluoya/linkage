@@ -8,12 +8,13 @@ declare module 'vue-router' {
      * 路由meta类型
      */
     export interface RouteMeta {
+        [key: string]: any;
         /** 权限列表 */
-        v: string[];
+        v?: string[];
         /** 是否显示到路由列表中 */
-        ifShow: boolean;
+        ifShow?: boolean;
         /** 导航名字 */
-        navName: string;
+        navName?: string;
     }
 
     /**

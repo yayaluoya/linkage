@@ -1,6 +1,5 @@
 <script lang="ts">
 import { ref, reactive, computed, onMounted, watch, toRef } from "vue";
-import Erect from "../Erect.vue";
 import marked, { getHighlightThemeStyleEl, getMDStyleEl } from "-/marked";
 
 /** 默认md主题 */
@@ -8,7 +7,7 @@ const defaultMDTheme = "misty-light";
 /** 默认代码主题 */
 const defaultCodeTheme = "atom-one-dark";
 export default {
-  components: { Erect },
+  components: {},
   props: {
     /** md字符串 */
     content: {
@@ -26,9 +25,9 @@ export default {
   },
   setup(props) {
     const mdRef = ref<Element>();
-    /** el */
-    let mdRootEl: ShadowRoot;
-    let mdShowEl: Element;
+    /** md相关el */
+    let mdHeadEl: HTMLHeadElement;
+    let mdBodyEl: HTMLBodyElement;
     let mdThemeEl: Element;
     let codeThemeEl: Element;
     //监听props的变化
@@ -41,15 +40,23 @@ export default {
     watch(toRef(props, "code_theme"), () => {
       setCodeTheme();
     });
-    //获取影子dom或者原dom
+    //在影子dom上挂载一个html页面，并暴露出页面head和body
     onMounted(() => {
-      mdRootEl =
+      let shadowRoot =
         mdRef.value?.attachShadow({
           mode: "open",
         }) || (mdRef.value! as any);
-      mdShowEl = document.createElement("div");
-      mdRootEl.appendChild(mdShowEl);
+      let htmlEl = document.createElement("html");
+      shadowRoot.appendChild(htmlEl);
+      let headEl = document.createElement("head");
+      let bodyEl = document.createElement("body");
+      htmlEl.appendChild(headEl);
+      htmlEl.appendChild(bodyEl);
       //
+      mdHeadEl = headEl;
+      mdBodyEl = bodyEl;
+      //
+      addDefTheme();
       setMdTheme();
       setCodeTheme();
       setMd();
@@ -57,27 +64,31 @@ export default {
 
     /** 设置md内容 */
     function setMd() {
-      mdShowEl.innerHTML = marked.parse(props.content);
+      mdBodyEl.innerHTML = marked.parse(props.content);
+    }
+    /** 添加默认主题 */
+    function addDefTheme() {
+      mdHeadEl.appendChild(getMDStyleEl("index").linkEl);
     }
     /** 设置md主题 */
     function setMdTheme() {
       //先删除之前的主题
-      mdThemeEl && mdRootEl.removeChild(mdThemeEl);
+      mdThemeEl && mdHeadEl.removeChild(mdThemeEl);
       let _theme = getMDStyleEl(props.md_theme || defaultMDTheme);
       mdThemeEl = _theme.linkEl;
       //根据不同的主题添加主题元素
-      mdRootEl.appendChild(mdThemeEl);
+      mdHeadEl.appendChild(mdThemeEl);
     }
     /** 设置代码主题 */
     function setCodeTheme() {
       //先删除之前的主题
-      codeThemeEl && mdRootEl.removeChild(codeThemeEl);
+      codeThemeEl && mdHeadEl.removeChild(codeThemeEl);
       let _theme = getHighlightThemeStyleEl(
         props.code_theme || defaultCodeTheme
       );
       codeThemeEl = _theme.linkEl;
       //根据不同的主题添加主题元素
-      mdRootEl.appendChild(codeThemeEl);
+      mdHeadEl.appendChild(codeThemeEl);
     }
     //
     return {
@@ -88,16 +99,19 @@ export default {
 </script>
 
 <template>
-  <Erect class="root">
-    <div ref="mdRef"></div>
-    <template #s>
-      {{ content }}
-    </template>
-  </Erect>
+  <div class="mdShow">
+    <my-erect>
+      <div ref="mdRef"></div>
+      <template #s>
+        {{ content }}
+      </template>
+    </my-erect>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.root {
+.mdShow {
+  overflow: hidden;
   > div {
     width: 100%;
   }

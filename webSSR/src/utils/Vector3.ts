@@ -7,6 +7,11 @@ export class Vector3 {
     /** z轴分量 */
     z: number;
 
+    /** 获取长度 */
+    get length(): number {
+        return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
+    }
+
     /**
      * 初始化
      * @param _x x轴分量

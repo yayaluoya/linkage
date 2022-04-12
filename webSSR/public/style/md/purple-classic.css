@@ -1,0 +1,7 @@
+@import "./purple.css";
+
+:root,
+html {
+  --link-color: #745fb5;
+  --code-color: #ec71b7;
+}

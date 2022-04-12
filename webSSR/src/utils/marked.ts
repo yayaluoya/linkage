@@ -29,7 +29,7 @@ export function getMDStyleEl(_name: string) {
     }
     let linkEl = document.createElement("link");
     //添加cdn的路径
-    linkEl.href = `style/md/${_name}.css`;
+    linkEl.href = `/style/md/${_name}.css`;
     linkEl.rel = "stylesheet";
     return {
         id,

@@ -1,5 +1,6 @@
 import { Vector2 } from "-/Vector2";
 import anime from 'animejs/lib/anime.js';
+import { EEasing } from "@/_d/EEasing";
 
 /**
  * 元素变换
@@ -115,7 +116,7 @@ export class ElementTransform {
                 targets: this._element,
                 scrollLeft: x,
                 duration,
-                easing: 'easeInQuad',
+                easing: EEasing.easeInQuad,
             });
         }
         if (typeof y == 'number') {
@@ -123,7 +124,7 @@ export class ElementTransform {
                 targets: this._element,
                 scrollTop: y,
                 duration,
-                easing: 'easeInQuad',
+                easing: EEasing.easeInQuad,
             });
         }
     }

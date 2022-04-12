@@ -23,6 +23,7 @@ export class SSROpT {
                 //
                 let headLabel = await Promise.resolve(_op.asyncHeadLabel?.({
                     route: to,
+                    url: to.path,
                 }) || {});
                 for (let i in headLabel) {
                     let el = document.head.querySelector(i);

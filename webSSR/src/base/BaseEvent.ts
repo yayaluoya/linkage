@@ -37,7 +37,7 @@ export class BaseEvent<E extends string | symbol = string | symbol> {
         if (!key) { return; }
         let _that = this;
         //重新包装下该函数
-        let _f = function (this: any,...arg: any[]) {
+        let _f = function (this: any, ...arg: any[]) {
             //清理调该函数
             _that.off(key, _this, _f);
             //
@@ -74,6 +74,9 @@ export class BaseEvent<E extends string | symbol = string | symbol> {
      * @param arg 需要传递的参数
      */
     emit(key: E, ...arg: any[]) {
+        //调用回调
+        this.emit_(key);
+        //调用执行
         this.eventList.forEach((item) => {
             if (item.key === key) {
                 item.f.call(item._this, ...arg);
@@ -97,5 +100,10 @@ export class BaseEvent<E extends string | symbol = string | symbol> {
     /** 清理延迟触发事件 */
     clearDeferEmit() {
         this._eventList.length = 0;
+    }
+
+    /** 触发回调，继承使用 */
+    protected emit_(key: E) {
+        //
     }
 }

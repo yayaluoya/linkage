@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path';
-import { mySSRPlugin } from './ssr/mySSRPlugin';
 import { svgBuilder } from './.vite/svgBuilder';
+import { ssrTransformCustomDir } from './.vite/ssrTransformCustomDir';
+import { mySSRPlugin } from './.vite/mySSRPlugin';
 
 
 function pathResolve(dir: string) {
@@ -13,7 +14,14 @@ function pathResolve(dir: string) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [mySSRPlugin(), vue(), svgBuilder('./src/assets/svg/')],
+  plugins: [mySSRPlugin(), vue({
+    template: {
+      ssr: true,
+      compilerOptions: {
+        directiveTransforms: ssrTransformCustomDir(),
+      },
+    },
+  }), svgBuilder('./src/assets/svg/')],
   resolve: {
     alias: [
       /** 根目录简写 */
@@ -39,5 +47,9 @@ export default defineConfig({
         javascriptEnabled: true,//允许链式调用的换行
       }
     }
-  }
+  },
+  build: {
+    //转成es2015的代码
+    target: 'es2015',
+  },
 })

@@ -86,7 +86,8 @@ https://github.com/etigerstudio/typora-misty-theme
   color: #fff!important;
   text-shadow: none
 }
-:root {
+:root,
+html {
   --control-text-color: #8B97A3;
   --side-bar-bg-color: #171717;
   --bg-color: #242424;

@@ -1,7 +1,6 @@
 import { AsyncComType, parseAsyncComOp } from "../AsyncComType";
 import { SSROpT } from "../SSROpT";
 
-
 /**
  * 解析组件中的异步数据
  * @param coms 组件列表 
@@ -26,7 +25,7 @@ async function parseAsyncData_(com: AsyncComType, _op: parseAsyncComOp) {
     }
     //必须是ssr组件才能解析
     if (com[SSROpT.key as any]) {
-        let _asyncData = await Promise.resolve(com.asyncData?.({ ..._op, })).catch((e) => {
+        let _asyncData = await Promise.resolve(com.asyncData?.(_op)).catch((e) => {
             console.error(e);
             return {};
         });

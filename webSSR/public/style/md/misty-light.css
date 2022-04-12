@@ -4,7 +4,8 @@ Misty Light
 Brought to you with ❤️ by E-Tiger Studio, 2017-2020
 https://github.com/etigerstudio/typora-misty-theme
  */
-:root {
+ :root,
+ html {
   --control-text-color: #777;
   --side-bar-bg-color: #f6f8fa
 }

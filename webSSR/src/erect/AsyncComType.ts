@@ -4,11 +4,13 @@ import { _RouteLocationBase } from "vue-router";
 /**
  * 解析异步组件选项
  */
-export interface parseAsyncComOp {
+export interface parseAsyncComOp<T = any> {
     /** 其它注入数据 */
-    [key: string]: any,
+    com?: T;
     /** 路由信息 */
-    route: _RouteLocationBase,
+    route: _RouteLocationBase;
+    /** 真实url */
+    url: string;
 }
 
 /**
@@ -18,6 +20,7 @@ export type AsyncComOp = {
     /**
      * 异步获取数据
      * 返回的数据将会合并到setup返回的数据中
+     * 只有后端会处理，前端自行处理
      * @param _op 选项
      */
     asyncData?(_op: parseAsyncComOp): Promise<Record<string, any>> | Record<string, any>;

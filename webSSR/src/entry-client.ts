@@ -2,15 +2,12 @@ import { createApp, createSSRApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { setupStore } from './store';
-
-//引入ui库
-import ElementPlus from 'element-plus'
 import "@/style/element.scss";
-/** 注册svg组件 */
-import svgIcon from '>/SvgIcon/index.vue'
 
 //引入自定义样式
 import "@/style/index.scss";
+import { handleApp } from './handleApp';
+import { vUser } from './vUser';
 
 (async () => {
     /** 
@@ -20,13 +17,13 @@ import "@/style/index.scss";
      */
     const app = createApp(App);
 
-    app.component('svg-icon', svgIcon)
-    app.use(ElementPlus);
+    await handleApp(app);
 
     //引入vue全家桶
     app.use(await router);
     setupStore(app);
 
-    //挂载
     app.mount('#app', true);
 })();
+
+vUser();

@@ -1,6 +1,6 @@
 import { Env } from '@/_d/Env';
 import { createMemoryHistory, createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router';
-import { addRouteList, handleRouter } from './handleRouter';
+import { addRouteList, filterRoute, handleRouter } from './handleRouter';
 import { RouterTool } from './RouterTool';
 
 /**
@@ -19,10 +19,13 @@ let coms: {
 //
 let modules = import.meta.globEager('../views/**/*.vue')
 for (let path in modules) {
-  coms.push({
-    path,
-    com: Promise.resolve(modules[path]),
-  });
+  //过滤掉一些特殊的组件
+  if (filterRoute(path)) {
+    coms.push({
+      path,
+      com: Promise.resolve(modules[path]),
+    });
+  }
 }
 
 /** 一个promise的router */

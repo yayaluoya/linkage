@@ -8,13 +8,73 @@ declare module '@kangc/*' {
 }
 
 declare module 'animejs/*' {
-    const obj: any;
-    export default obj;
-}
-
-declare module 'pako' {
-    const obj: any;
-    export default obj;
+    export interface IAnimeOp {
+        [key: string]: any;
+        /** 目标元素 */
+        targets: string | Element | object;
+        /** 时间曲线 */
+        easing?: string | Function;
+        /** 动画持续时间 */
+        duration?: number;
+        /** 动画延迟 */
+        delay?: number;
+        /** 在动画结束时以毫秒为单位添加一些额外时间 */
+        endDelay?: number;
+        /** 数字格式 */
+        round?: number;
+        /** 定义动画的方向 */
+        direction?: 'normal' | 'reverse' | 'alternate';
+        /** 循环，如果为true则为无限循环 */
+        loop?: number | true;
+        /** 自动播放 */
+        autoplay?: boolean;
+        /** 关键帧 */
+        keyframes?: any[];
+        /** 动画开始播放后，每帧都会触发此回调 */
+        update?: (ani: any) => any;
+        /** 当动画开始播放时 */
+        begin?: (ani: any) => any;
+        /** 动画完成后 */
+        complete?: (ani: any) => any;
+        /** 每次循环开始时都会触发一次 */
+        loopBegin?: (ani: any) => any;
+        /** 每次循环结束时，就会触发一次 */
+        loopComplete?: (ani: any) => any;
+        /** 在动画的delay和endDelay之间的每个帧上触发此回调 */
+        change?: (ani: any) => any;
+        /** 每次动画改变开始时都会触发 */
+        changeBegin?: (ani: any) => any;
+        /** 每次动画改变结束时都会触发 */
+        changeComplete?: (ani: any) => any;
+    }
+    /** 动画实例 */
+    interface IAnimeItem {
+        /** 播放 */
+        play(): void;
+        /** 暂停 */
+        pause(): void;
+        /** 重新播放 */
+        restart(): void;
+        /** 反转方向 */
+        reverse(): void;
+        /** 瞬移 */
+        seek(_time: number): void;
+    }
+    interface IAnime {
+        (_op: IAnimeOp): IAnimeItem;
+        /** 删除动画 */
+        remove(target: IAnimeOp['targets']): void;
+        /** 获取动画原始值 */
+        get(target: IAnimeOp['targets'], propertyName: string, unit: string): any;
+        /** 获取动画原始值 */
+        set(target: IAnimeOp['targets'], property: Record<string, any>): void;
+        /** 获取一个范围内的随机值 */
+        random(minValue: number, maxValue: number): number;
+        /** 时间轴 */
+        timeline(_op: IAnimeOp): any;
+    }
+    const anime: IAnime;
+    export default anime;
 }
 
 declare module 'prismjs' {
@@ -97,4 +157,19 @@ declare module 'marked' {
          */
         export class Renderer { }
     }
+}
+
+declare module 'ali-oss' {
+    const obj: any;
+    export default obj;
+}
+
+declare module 'element-plus/dist/locale/*.js' {
+    const obj: any;
+    export default obj;
+}
+
+declare module 'color' {
+    const obj: any;
+    export default obj;
 }
