@@ -27,4 +27,11 @@ export class FileController {
     async upload(@UploadedFile() file: IFileData): Promise<ResData> {
         return this.m_fileDispose.uploadFile(file);
     }
+
+    @Post('uploadFileToAliOSS')
+    @UseInterceptors(FileInterceptor('file'))
+    @HttpCode(HttpStatus.OK)
+    async uploadFileToAliOSS(@UploadedFile() file: IFileData): Promise<ResData> {
+        return this.m_fileDispose.uploadFileToAliOSS(file);
+    }
 }

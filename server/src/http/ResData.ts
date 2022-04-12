@@ -1,9 +1,9 @@
 import { HttpStatus } from '@nestjs/common';
-import { Crypto } from 'src/utils/Crypto';
-import { Gzip } from 'src/utils/Zip';
+import { HandleHttpData } from '@utils/handleHttpData';
+import { Crypto_ } from 'src/utils/Crypto_';
 
-/** 用户token失效状态码 */
-const userNoTokenStatusCode: number = 444;
+/** 需要登录的状态码 */
+const needLoginStatusCode: number = 504;
 
 /**
  * 响应数据
@@ -12,10 +12,8 @@ export class ResData<D = any> implements ComN.IResData {
     timestamp: number;
     statusCode: HttpStatus;
     mes: string;
+    ['x-data-handles']: ComN.dataHandlesType[];
     data: D;
-    ifCompress = false;
-    ifEncrypt = false;
-    _data: string = '';
 
     /**
      * 实例化
@@ -27,8 +25,21 @@ export class ResData<D = any> implements ComN.IResData {
         this.data = data;
         this.statusCode = statusCode;
         this.mes = mes;
-        //
         this.timestamp = Date.now();
+        this['x-data-handles'] = [];
+    }
+
+    /**
+     * 失败数据
+     * @param data 
+     * @param mes 
+     * @param _code 
+     */
+    fialData(data: any, mes: string = '', _code: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR): this {
+        this.data = data;
+        this.statusCode = _code;
+        this.mes = mes;
+        return this;
     }
 
     /**
@@ -57,44 +68,36 @@ export class ResData<D = any> implements ComN.IResData {
         return this;
     }
 
-    /** token没有或者失效 */
-    noToken(): this {
+    /** 需要登录 */
+    needLogin(): this {
         this.data = null;
-        this.mes = '用户Token失效';
-        this.statusCode = userNoTokenStatusCode;
-        return this;
-    }
-
-    /** 压缩数据，作为特殊处理方法必须最后调用 */
-    compress(): this {
-        //此时的_data必须是一个字符串才能对其进行压缩
-        if (typeof this._data != 'string') {
-            this._data = this.getDataStr();
-        }
-        if (this.ifCompress) { return; }
-        this.ifCompress = true;
-        this._data = JSON.stringify(Gzip.gzip(this._data));
-        //置空响应的真实数据
-        this.data = null;
-        return this;
-    }
-
-    /** 加密数据 */
-    encrypt(): this {
-        if (this.ifEncrypt) { return; }
-        this.ifEncrypt = true;
-        this._data = Crypto.encryptionData(this.getDataStr());
-        //置空响应的真实数据
-        this.data = null;
+        this.mes = '未登录';
+        this.statusCode = needLoginStatusCode;
         return this;
     }
 
     /**
-     * 获取数据的字符串格式
+     * 处理数据
+     * @param _type 处理类型
      * @returns 
      */
-    getDataStr(): string {
-        return JSON.stringify(this.data);
+    handle(_type: ComN.dataHandlesType[]): this {
+        this['x-data-handles'].push(..._type);
+        this.data = HandleHttpData.handle(this.data, _type, Crypto_);
+        return this;
+    }
+
+    /** 压缩数据 */
+    compress(): this {
+        return this.handle(['z']);
+    }
+    /** 加密数据 */
+    encrypt(): this {
+        return this.handle(['e']);
+    }
+    /** 混淆数据 */
+    obscure(): this {
+        return this.handle(['o']);
     }
 
     /**

@@ -5,12 +5,12 @@ import { TestM } from "./_m/TestM";
 
 /**
  * 表连接控制器
- * 注册了所有的实体连接
+ * 注册了所有表的实体连接和处理模型
  */
 export class TabRepCon {
     /**
-     * 测试表实体连接
-     */
+   * 测试表实体连接
+   */
     @InjectRepository(TestEntity)
     public testRep: Repository<TestEntity>;
 

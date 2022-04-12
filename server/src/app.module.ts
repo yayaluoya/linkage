@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dbConfig } from './db/dbConfig';
 import { FileModule } from './file/file.module';
 import { MainModule } from './main/main.module';
+import { DataHandleMiddleware } from './middleware/DataHandle.middleware';
 import { SCMiddleware } from './middleware/SC.middleware';
 import { PathManager } from './pathManager/PathManager';
 import { TestModule } from './test/test.module';
@@ -34,10 +35,14 @@ export class AppModule {
       .exclude(
         //排除时间模块
         { path: 'time/(.*)', method: RequestMethod.GET },
+        //排除测试模块
+        { path: 'test/(.*)', method: RequestMethod.GET },
         //这里必须把静态文件的路由去掉
         { path: `${PathManager.publicFilePrefix}(.*)`, method: RequestMethod.GET },
       )
       // 匹配全部请求
-      .forRoutes('*')
+      .forRoutes('*');
+    //添加数据处理中间件
+    consumer.apply(DataHandleMiddleware).forRoutes('*');
   }
 }

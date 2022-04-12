@@ -79,6 +79,21 @@ export abstract class BaseApiCon {
     }
 
     /**
+     * 发送request请求，原生的
+     * @param _con 请求配置
+     * @returns 
+     */
+    requestPri<D = any>(_con: AxiosRequestConfig<D>): Promise<AxiosResponse<D>> {
+        return this.axios(_con).then((res) => {
+            if (res.status == HttpStatus.OK) {
+                return res;
+            } else {
+                throw res;
+            }
+        });
+    }
+
+    /**
      * 发送request请求
      * @param _con 请求配置
      * @returns 

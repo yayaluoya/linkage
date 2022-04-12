@@ -5,6 +5,7 @@ import { join, relative } from "path";
 import { mkdirSync, writeFile } from "fs";
 import { HttpStatus } from "@nestjs/common";
 import { DataT } from "src/utils/DataT";
+// import { AliOssT } from "src/utils/AliOssT";
 const moment = require('moment');
 
 /**
@@ -66,5 +67,20 @@ export default class FileDispose {
                 ));
             });
         });
+    }
+
+    /**
+     * 上传文件到阿里云
+     * @param file 
+     */
+    public uploadFileToAliOSS(file: IFileData): Promise<ResData> {
+        return Promise.resolve(new ResData().fial('缺少配置'));
+        // let _fileNames = file.originalname.
+        //     replace(/[^a-zA-Z\.0-9]+/g, '')
+        //     .split(/\.(?=[a-zA-Z]+$)/);
+        // let _fileName = `${_fileNames[0]}-${Date.now()}.${_fileNames[1]}`;
+        // return AliOssT.updateFile(file.buffer, `${moment().format('Y-M-D')}/${_fileName}`).then((str) => {
+        //     return new ResData(str);
+        // });
     }
 }

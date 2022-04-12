@@ -1,9 +1,8 @@
 import { Request } from 'express';
 import { MainConfig } from 'src/config/MainConfig';
-import { Crypto } from 'src/utils/Crypto';
+import { confusionStr } from '@utils/confusionStr';
+import { SecretCoduDataP } from 'src/localData/item/SecretCoduDataP';
 
-/** 暗号key */
-const secretCodeKey = 'secret-code';
 /**
  * 暗号
  */
@@ -24,7 +23,7 @@ export class SecretCode {
                 });
                 return;
             }
-            let secretCode = _req.headers[secretCodeKey] as string;
+            let secretCode = ((_req.headers || {} as any) as ComN.IReqHead)['x-secret-code'];
             if (!secretCode) {
                 r({
                     if: false,
@@ -33,18 +32,27 @@ export class SecretCode {
             } else {
                 try {
                     let { key, time, v, } = JSON.parse(Buffer.from(secretCode, 'base64').toString());
-                    //先检查时间，和其他端的超时时间一致为1分钟
-                    if (Math.abs(Date.now() - time) / 1000 > 60) {
+                    //先检查时间
+                    if (Math.abs(Date.now() - time) > SecretCoduDataP.instance.overrunTime) {
                         r({
                             if: false,
-                            mes: '暗号超时',
+                            mes: '暗号过期',
                         });
                     } else {
-                        if (this.confusion(`${key}-${time}`) == v) {
-                            r({
-                                if: true,
-                                mes: '',
-                            });
+                        //再检查暗号真实性
+                        if (confusionStr(`${key}-${time}`) == v) {
+                            //再检查暗号是否过期
+                            if (!SecretCoduDataP.instance.vBeOverdue(v, time)) {
+                                r({
+                                    if: true,
+                                    mes: '',
+                                });
+                            } else {
+                                r({
+                                    if: false,
+                                    mes: '该暗号已被使用',
+                                });
+                            }
                         } else {
                             r({
                                 if: false,
@@ -60,20 +68,5 @@ export class SecretCode {
                 }
             }
         });
-    }
-
-    /**
-     * 混淆字符串
-     * @param _str 
-     */
-    private static confusion(_str: string): string {
-        if (typeof _str !== 'string' || !_str) {
-            return '';
-        }
-        let newStr = '';
-        for (let i = 0; i < _str.length; i++) {
-            newStr += String.fromCharCode(_str.charCodeAt(i) + i);
-        }
-        return Crypto.md5(newStr);
     }
 }

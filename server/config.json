@@ -1,4 +1,10 @@
 {
-    "port": 3060,
-    "ifVSecretCode": false
+    "port": 6102,
+    "ifVSecretCode": false,
+    "aliOss": {
+        "access": {
+            "accessKeyId": "",
+            "accessKeySecret": ""
+        }
+    }
 }

@@ -32,4 +32,8 @@ export class PathManager {
             prefix: this.publicFilePrefix,
         });
     }
+    /** 数据路径 */
+    static get dataPath(): string {
+        return join(this.rootPath, '_data');
+    }
 }

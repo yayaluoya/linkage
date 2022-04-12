@@ -1,12 +1,10 @@
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { TestEntity } from "src/db/entities/TestEntity";
+import { EManager } from "src/db/EManager";
 import { TestController } from "./test.controller";
 
 @Module({
     imports: [
-        //引入测试表
-        TypeOrmModule.forFeature([TestEntity])
+        EManager.imports,
     ],
     controllers: [TestController],
     providers: [],

@@ -1,11 +1,11 @@
 import { MainConfig } from "src/config/MainConfig";
-import { cleanProxyObjFun, createProxyObj } from "@utils/createProxyObj";
+import { ObjProxy } from "@utils/createProxyObj";
 import { LocalStorage_ } from "./_/LocalStorage_";
 
 /**
  * 基类本地数据代理
  */
-export abstract class BaseDataProxy<Data extends object = any> {
+export abstract class BaseDataProxy<Data extends object = any> extends ObjProxy {
     /** 数据 */
     private _data: Data;
 
@@ -37,7 +37,7 @@ export abstract class BaseDataProxy<Data extends object = any> {
             return;
         } else {
             //清除旧数据的监听
-            cleanProxyObjFun(_data);
+            this.cleanProxyObjFun(_data);
             //设置数据
             LocalStorage_.setItem(this._key, _data);
             //重新获取数据
@@ -47,6 +47,7 @@ export abstract class BaseDataProxy<Data extends object = any> {
 
     //
     constructor() {
+        super();
         //默认获取数据
         this.getData();
     }
@@ -59,7 +60,7 @@ export abstract class BaseDataProxy<Data extends object = any> {
             //设置一次数据
             LocalStorage_.setItem(this._key, _data);
         }
-        this._data = createProxyObj(_data, {
+        this._data = this.createProxyObj(_data, {
             set: () => {
                 if (this._ifEditData) { return; }
                 this._ifEditData = true;

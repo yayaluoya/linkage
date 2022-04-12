@@ -11,7 +11,7 @@ export class BaseM<E extends BaseEntity>{
     /** 父节点，从这里可以拿到所有表连接 */
     protected _parent: TabRepCon;
 
-    constructor(_eRep: Repository<E>, _parent) {
+    constructor(_eRep: Repository<E>, _parent?: TabRepCon) {
         this._eRep = _eRep;
         this._parent = _parent;
     }
@@ -22,7 +22,7 @@ export class BaseM<E extends BaseEntity>{
      * 只能补全自身缺少的属性
      * @param _e 
      */
-    async completionData(_e: E): Promise<E> {
+    protected async completionData(_e: E): Promise<E> {
         return _e;
     }
 }

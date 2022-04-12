@@ -3,7 +3,7 @@ import { MainService } from './main.service';
 
 @Controller('main')
 export class MainController {
-  constructor(private readonly mianService: MainService) {}
+  constructor(private readonly mianService: MainService) { }
 
   @Get()
   getHello(): string {
