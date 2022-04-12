@@ -3,11 +3,11 @@ import { MainApiPath } from "./apiPath/MainApiPath";
 import { TestApiPath } from "./apiPath/TestApiPath";
 
 let _domain = Env.ifDev ? {
-    web: 'http://localhost:6002',
-    image: 'http://localhost:6002',
+    web: 'http://localhost:6102',
+    image: 'http://localhost:6102',
 } : {
-    web: 'https://yayaluoya.dumogu.top/api/',
-    image: 'https://yayaluoya.dumogu.top/api/',
+    web: '',
+    image: '',
 };
 
 /** 域名 */

@@ -1,3 +1,4 @@
+import { BaseEvent } from "@/base/BaseEvent";
 import { InstanceTool } from "com_utils/InstanceTool";
 
 

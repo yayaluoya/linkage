@@ -2,7 +2,6 @@
 import { ref, reactive, toRef, watch, onMounted } from "vue";
 import anime from "animejs/lib/anime.js";
 import { EEasing } from "@/_d/EEasing";
-import { inViewport_ } from "-/inViewport";
 
 /** List类型 */
 interface IList {
@@ -63,10 +62,7 @@ export default {
     }
 
     onMounted(() => {
-      //在元素第一次显示到视图后设置游标的位置
-      inViewport_(tabsRef.value!, {}, () => {
-        setVernier();
-      });
+      setVernier();
     });
 
     //

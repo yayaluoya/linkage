@@ -14,7 +14,6 @@ import Help_ from "./com/help/help.vue";
 import Theme_ from "./com/theme/theme.vue";
 import { insertContent } from "./insertContent";
 import { themeType } from "./MDTheme";
-import { inViewport_ } from "@/utils/inViewport";
 
 export default {
   components: { MDShow, table_, Dialog, Img_, Emoji_, Help_, Theme_ },
@@ -234,14 +233,6 @@ export default {
       setTimeout(() => {
         setTextareaHeight();
       }, 0);
-      //监听元素的第一次显示
-      let w = inViewport_(textareaRef.value!, {}, () => {
-        setTimeout(() => {
-          setTextareaHeight();
-          //重新监听
-          w.watch();
-        }, 0);
-      });
     });
 
     /** 控制器点击 */

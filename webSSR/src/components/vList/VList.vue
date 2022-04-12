@@ -9,7 +9,6 @@ import {
   toRefs,
   nextTick,
 } from "vue";
-import { inViewport_ } from "@/utils/inViewport";
 import State from "../State/State.vue";
 export default {
   components: { State },
@@ -103,20 +102,12 @@ export default {
 
     /** 监听子元素高度和列表长度的改变 */
     watch([itemHeight, toRef(props.list, "length")], () => {
-      touchBottom?.watch();
       computeShowItem();
     });
 
-    let touchBottom!: any;
-
     onMounted(() => {
-      //抛出触底事件
-      touchBottom = inViewport_(bottomRef.value!, {}, () => {
-        ctx.emit("touchBottom");
-      });
       //监听list根节点的滚动事件
       rootRef.value!.addEventListener("scroll", () => {
-        touchBottom.watch();
         computeShowItem();
       });
       computeShowItem();

@@ -10,4 +10,13 @@ export class AdminC {
     test() {
         return new ResData('后台模块测试');
     }
+
+    @Get('stsServer')
+    async stsServer() {
+        // return AliOssT.stsServer().then((info) => {
+        //     return new ResData(info);
+        // }).catch((e) => {
+        //     return new ResData().fialData(e);
+        // })
+    }
 }

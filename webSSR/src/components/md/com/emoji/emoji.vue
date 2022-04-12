@@ -3,7 +3,6 @@ import { ref, reactive, customRef, onMounted } from "vue";
 import Dialog from ">/Dialog/Dialog.vue";
 import Tab2_ from ">/tabs/tabs2.vue";
 import { ComApiCon } from "@/http/apiCon/main/ComApiCon";
-import { inViewport_ } from "@/utils/inViewport";
 import { Mes } from "@/mes/Mes";
 export default {
   components: { Dialog, Tab2_ },
@@ -67,9 +66,7 @@ export default {
     }
 
     onMounted(() => {
-      inViewport_(elRef.value, {}, () => {
-        getEmoji();
-      });
+      getEmoji();
     });
 
     return {

@@ -22,4 +22,20 @@ export class AdminApiCon extends WebApiCon {
             url: this._rootApi.test,
         });
     }
+
+    /** 获取sts的key */
+    stsServer() {
+        type t = {
+            accessKeyId: string;
+            accessKeySecret: string;
+            stsToken: string;
+            timeout: number;
+        };
+        return this.getData<t>({
+            url: this._rootApi.stsServer,
+        }).catch(({ mes }) => {
+            console.error('获取临时访问key出错了', mes);
+            return {} as t;
+        });;
+    }
 }

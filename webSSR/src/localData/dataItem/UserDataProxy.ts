@@ -6,7 +6,9 @@ import { Crypto_ } from "@/utils/Crypto_";
  * 用户数据
  */
 @InstanceTool()
-export class UserDataProxy extends BaseDataProxy<Partial<EN.IUserE>>{
+export class UserDataProxy extends BaseDataProxy<Partial<{
+    token: string;
+}>>{
     /** 单例 */
     static instance: UserDataProxy;
 
@@ -25,18 +27,6 @@ export class UserDataProxy extends BaseDataProxy<Partial<EN.IUserE>>{
         for (let i in this.data) {
             delete (this.data as any)[i];
         }
-    }
-
-    /**
-     * 设置用户数据
-     * @param _userData 
-     */
-    setUserData(_userData: EN.IUserE) {
-        let keys: (keyof EN.IUserE)[] = Object.keys(_userData) as any;
-        keys.forEach((key) => {
-            this.data[key] = _userData[key] as any;
-        });
-        // console.log(this.data, _userData, keys);
     }
 
     protected getNewData() {

@@ -2,7 +2,6 @@
 import { ref, reactive, customRef, onMounted } from "vue";
 import Dialog from ">/Dialog/Dialog.vue";
 import MDShow from "../../MDShow.vue";
-import { inViewport_ } from "@/utils/inViewport";
 import { Mes } from "@/mes/Mes";
 import { ComApiCon } from "@/http/apiCon/main/ComApiCon";
 export default {
@@ -46,9 +45,7 @@ export default {
     }
 
     onMounted(() => {
-      inViewport_(helpRef.value, {}, () => {
-        loadData();
-      });
+      loadData();
     });
 
     //

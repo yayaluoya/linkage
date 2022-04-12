@@ -4,7 +4,6 @@ import Dialog from ">/Dialog/Dialog.vue";
 import tabs2_ from ">/tabs/tabs2.vue";
 import { WallhavenApiCon } from "@/http/apiCon/main/WallhavenApiCon";
 import { getImgUrl, ifLoadCom } from "./getImgUrl";
-import { inViewport_ } from "@/utils/inViewport";
 import Paginate from ">/Paginate/Paginate.vue";
 export default {
   components: { Dialog, tabs2_, Paginate },
@@ -179,9 +178,7 @@ export default {
     }
 
     onMounted(() => {
-      inViewport_(WHImgSelectRef.value, {}, () => {
-        loadingData();
-      });
+      loadingData();
     });
 
     return {
