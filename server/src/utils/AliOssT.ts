@@ -31,9 +31,9 @@ export default class Client {
 const client = new OSS({
     ...AliOssConfig.access,
     //地域
-    region: 'oss-cn-beijing',
+    region: AliOssConfig.region,
     //桶名
-    bucket: '',
+    bucket: AliOssConfig.bucket,
     //超时时间
     timeout: 60 * 1000,
 });
@@ -72,7 +72,7 @@ export class AliOssT {
             "Cache-Control": "max-age=31536000",
         };
         return client.put(_url, file, headers).then(() => {
-            return `//yayaluoya-blog.oss-cn-beijing.aliyuncs.com/${_url.replace(/^\/+/, '')}`;
+            return `//${AliOssConfig.bucket}.${AliOssConfig.region}.aliyuncs.com/${_url.replace(/^\/+/, '')}`;
         });
     }
 }
