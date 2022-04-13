@@ -3,6 +3,12 @@ import { ApiConfig } from "./ApiConfig";
 import { IResData } from "./res/IResData";
 import { SecretCode } from "./SecretCode";
 import { HttpStatus } from 'com_utils/HttpStatus';
+import { HandleHttpData } from 'com_utils/handleHttpData';
+import { Env } from "@/_d/Env";
+import { Crypto_ } from "@/utils/Crypto_";
+
+/** 自定义的请求op类型 */
+interface AxiosRequestConfig_<T = any> extends AxiosRequestConfig<T>, ComN.IDataHandle { }
 
 /**
  * 基类api控制器
@@ -12,15 +18,15 @@ export class BaseApiCon {
     private cacheResList: Map<string, Promise<any>> = new Map();
 
     /** 请求实例 */
-    axios: AxiosInstance;
+    axios_: AxiosInstance;
     /** 默认选项 */
-    private _op: AxiosRequestConfig = {
+    private _op: AxiosRequestConfig_ = {
         baseURL: '',
         timeout: 1000 * 60,
     };
 
     /** 可配置选项 */
-    protected get op(): AxiosRequestConfig {
+    protected get op(): AxiosRequestConfig_ {
         return {
             headers: {},
         };
@@ -33,7 +39,7 @@ export class BaseApiCon {
 
     //
     constructor() {
-        this.axios = axios.create({
+        this.axios_ = axios.create({
             ...this._op,
             ...this._op,
             headers: {
@@ -42,9 +48,10 @@ export class BaseApiCon {
             },
         });
         // Add a request interceptor
-        this.axios.interceptors.request.use((config) => {
+        this.axios_.interceptors.request.use((config) => {
             // Do something before request is sent
             //设置暗号
+            // console.log(config);
             return SecretCode.setSC(config);
         }, function (error) {
             // Do something with request error
@@ -52,7 +59,7 @@ export class BaseApiCon {
         });
 
         // Add a response interceptor
-        this.axios.interceptors.response.use((response) => {
+        this.axios_.interceptors.response.use((response) => {
             // Any status code that lie within the range of 2xx cause this function to trigger
             // Do something with response data
             // console.log('响应', response);
@@ -62,6 +69,14 @@ export class BaseApiCon {
             // Do something with response error
             return Promise.reject(error);
         });
+    }
+
+    /**
+     * 删除缓存
+     * @param _key 
+     */
+    protected removeCache(_key: string) {
+        this.cacheResList.delete(_key);
     }
 
     /**
@@ -79,7 +94,7 @@ export class BaseApiCon {
      * @param _getRes 获取默认值的函数，如果没有找到缓存就调用这个函数并缓存它的返回值
      * @returns 
      */
-    protected getChche<T = any>(_key: string, _getRes?: () => Promise<T>): Promise<T> | null {
+    protected getCache<T = any>(_key: string, _getRes?: () => Promise<T>): Promise<T> {
         if (this.cacheResList.has(_key)) {
             return this.cacheResList.get(_key)!;
         } else if (_getRes) {
@@ -87,7 +102,7 @@ export class BaseApiCon {
             this.setCache(_key, _res);
             return _res;
         }
-        return null;
+        return Promise.reject('');
     }
 
     /**
@@ -96,7 +111,7 @@ export class BaseApiCon {
      * @param _op 请求配置
      * @returns 
      */
-    request<Data = any>(_op: AxiosRequestConfig): Promise<IResData<Data, AxiosResponse>> {
+    request<Data = any>(_op: AxiosRequestConfig_): Promise<IResData<Data, AxiosResponse>> {
         //添加请求拦截器
         return this.request_({
             ...this._op,
@@ -108,7 +123,22 @@ export class BaseApiCon {
                 ..._op.headers,
             },
         }).then((config) => {
-            return this.axios(config).then(res => {
+            //对请求发送之前的数据做一定处理，主要是加密和压缩
+            if (config['x-data-handles'] && config['x-data-handles'].length > 0) {
+                if (config.data) {
+                    config.data = {
+                        data: HandleHttpData.handle(config.data, config['x-data-handles'], Crypto_),
+                    };
+                }
+                if (config.params) {
+                    for (let i in config.params) {
+                        config.params[i] = HandleHttpData.handle(config.params[i], config['x-data-handles'], Crypto_);
+                    }
+                }
+                //把数据处理的流程添加到请求头中
+                ((config.headers || {} as any) as ComN.IReqHead)['x-data-handles'] = JSON.stringify(config['x-data-handles']) as any;
+            }
+            return this.axios_(config).then(res => {
                 let _resData: IResData = res.data || {};
                 //附带上原始响应数据
                 _resData.res = res;
@@ -119,10 +149,7 @@ export class BaseApiCon {
                     _resData.mes = '请求错误';
                 } else {
                     //解析数据，主要判断数据是否被加密或者压缩
-                    //先解压
-                    if (_resData.ifCompress) { }
-                    //再解密
-                    if (_resData.ifEncrypt) { }
+                    _resData.data = HandleHttpData.handle_(_resData.data, _resData['x-data-handles'], Crypto_);
                 }
                 //添加响应拦截
                 return this.response_(_resData);
@@ -145,7 +172,7 @@ export class BaseApiCon {
      * @param _op 
      * @returns 
      */
-    requestData<Data = any>(_op: AxiosRequestConfig): Promise<Data> {
+    requestData<Data = any>(_op: AxiosRequestConfig_): Promise<Data> {
         return this.request(_op).then((reqData) => {
             // console.log('请求回调', reqData);
             if (reqData.statusCode == HttpStatus.OK) {
@@ -163,7 +190,7 @@ export class BaseApiCon {
      * @param headers 
      * @returns 
      */
-    getData<Data = any>(_op: Omit<AxiosRequestConfig, 'method'>): Promise<Data> {
+    getData<Data = any>(_op: Omit<AxiosRequestConfig_, 'method'>): Promise<Data> {
         return this.requestData({
             ..._op,
             method: 'get',
@@ -176,7 +203,7 @@ export class BaseApiCon {
      * @param headers 
      * @returns 
      */
-    postData<Data = any>(_op: Omit<AxiosRequestConfig, 'method'>): Promise<Data> {
+    postData<Data = any>(_op: Omit<AxiosRequestConfig_, 'method'>): Promise<Data> {
         return this.requestData({
             ..._op,
             method: 'post',
@@ -189,7 +216,7 @@ export class BaseApiCon {
      * @param headers 
      * @returns 
      */
-    putData<Data = any>(_op: Omit<AxiosRequestConfig, 'method'>): Promise<Data> {
+    putData<Data = any>(_op: Omit<AxiosRequestConfig_, 'method'>): Promise<Data> {
         return this.requestData({
             ..._op,
             method: 'put',
@@ -202,7 +229,7 @@ export class BaseApiCon {
      * @param headers 
      * @returns 
      */
-    deleteData<Data = any>(_op: Omit<AxiosRequestConfig, 'method'>): Promise<Data> {
+    deleteData<Data = any>(_op: Omit<AxiosRequestConfig_, 'method'>): Promise<Data> {
         return this.requestData({
             ..._op,
             method: 'delete',
@@ -210,11 +237,11 @@ export class BaseApiCon {
     }
 
     /** 请求拦截 */
-    protected async request_(_config: AxiosRequestConfig<any>) {
+    protected async request_(_config: AxiosRequestConfig_) {
         return _config;
     }
     /** 响应拦截 */
-    protected async response_(_res: IResData<any>) {
+    protected async response_(_res: IResData) {
         return _res;
     }
 }

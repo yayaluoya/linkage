@@ -1,6 +1,6 @@
 import { Env } from '@/_d/Env';
-import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router';
-import { addRouteList, handleRouter } from './handleRouter';
+import { createMemoryHistory, createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router';
+import { addRouteList, filterRoute, handleRouter } from './handleRouter';
 import { RouterTool } from './RouterTool';
 
 /**
@@ -19,10 +19,13 @@ let coms: {
 //
 let modules = import.meta.globEager('../views/**/*.vue')
 for (let path in modules) {
-  coms.push({
-    path,
-    com: Promise.resolve(modules[path]),
-  });
+  //过滤掉一些特殊的组件
+  if (filterRoute(path)) {
+    coms.push({
+      path,
+      com: Promise.resolve(modules[path]),
+    });
+  }
 }
 
 /** 一个promise的router */
@@ -109,7 +112,7 @@ const router = new Promise<Router>(async (r, e) => {
 
   //创建router的实例
   const router = createRouter({
-    history: createWebHistory(''),
+    history: createWebHistory(),
     //路由切换后回到顶部
     scrollBehavior: () => ({ top: 0 }),
     routes: [
@@ -121,6 +124,5 @@ const router = new Promise<Router>(async (r, e) => {
   //解决
   r(router);
 });
-
 
 export default router;

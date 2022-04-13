@@ -1,22 +1,27 @@
 
 /**
  * Env
+ * 不要尝试吧import.meta.env保存起来，它是直接静态替换的，并不是动态注入的
  */
 export class Env {
-    /**
-     * env
-     */
-    static get env(): ImportMetaEnv {
-        return import.meta.env;
-    }
 
     /** 是否是调试模式 */
     static get ifDev(): boolean {
-        return this.env.MODE == 'development';
+        return import.meta.env.MODE == 'development';
     }
 
     /** 是否是生产模式 */
     static get ifPro(): boolean {
-        return this.env.MODE == 'production';
+        return import.meta.env.MODE == 'production';
+    }
+
+    /** 调试模式 */
+    static get DEV(): boolean {
+        return import.meta.env.DEV;
+    }
+
+    /** 生产模式 */
+    static get PROD(): boolean {
+        return import.meta.env.PROD;
     }
 }

@@ -3,8 +3,8 @@ import { MainApiPath } from "./apiPath/MainApiPath";
 import { TestApiPath } from "./apiPath/TestApiPath";
 
 let _domain = Env.ifDev ? {
-    web: 'http://localhost:3060',
-    image: 'http://localhost:3060',
+    web: 'http://localhost:6102',
+    image: 'http://localhost:6102',
 } : {
     web: '',
     image: '',
@@ -23,6 +23,7 @@ const apiPath = {
     /** 文件相关 */
     file: {
         update: 'file/uplode',
+        uploadFileToAliOSS: 'file/uploadFileToAliOSS',
     },
     /** 时间相关的api */
     time: {

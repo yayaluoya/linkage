@@ -57,17 +57,18 @@ export class FileApiCon extends ApiCon {
      * @param _file 
      */
     updateALIYunOSS(_file: File): Promise<string> {
-        let _fileNames = _file.name
-            .replace(/[^a-zA-Z\.0-9]+/g, '')
-            .split(/\.(?=[a-zA-Z]+$)/);
-        let _fileName = `${_fileNames[0]}-${Date.now()}.${_fileNames[1]}`;
-        //
-        return AliOssT.updateFile(_file, `${moment().format('Y-M-D')}/${_fileName}`).then((res) => {
-            return res;
-        }).catch((e) => {
-            Env.ifC && console.error(e);
-            throw '阿里云OSS上传失败';
-        });
+        return Promise.resolve('');
+        // let _fileNames = _file.name
+        //     .replace(/[^a-zA-Z\.0-9]+/g, '')
+        //     .split(/\.(?=[a-zA-Z]+$)/);
+        // let _fileName = `${_fileNames[0]}-${Date.now()}.${_fileNames[1]}`;
+        // //
+        // return AliOssT.updateFile(_file, `${moment().format('Y-M-D')}/${_fileName}`).then((res) => {
+        //     return res;
+        // }).catch((e) => {
+        //     Env.ifC && console.error(e);
+        //     throw '阿里云OSS上传失败';
+        // });
     }
 
     /**

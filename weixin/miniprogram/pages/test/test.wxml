@@ -1,4 +1,0 @@
-<!--pages/test/test.wxml-->
-<view>{{str}}</view>
-<view>测试本地数据{{a}}</view>
-<md id="md" />
