@@ -1,5 +1,4 @@
 import { BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
-import { ComVerify } from "@utils/ComVerify";
 
 /**
  * 实体基类
@@ -22,12 +21,4 @@ export class BaseE extends BaseEntity implements EN.IBaseE {
         default: false,
     })
     delete: boolean;
-
-    /** 验证工具 */
-    static VT = ComVerify;
-
-    /** 验证规则 */
-    static async V(_e: BaseE): Promise<string> {
-        return '';
-    }
 }

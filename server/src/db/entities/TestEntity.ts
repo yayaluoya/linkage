@@ -19,9 +19,4 @@ export class TestEntity extends BaseE implements EN.ITestE {
 
     @Column()
     cs2: string;
-
-    /** 验证规则 */
-    static async V(_e: TestEntity): Promise<string> {
-        return '';
-    }
 }

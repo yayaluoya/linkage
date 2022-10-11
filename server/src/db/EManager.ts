@@ -1,4 +1,5 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { EntityClassOrSchema } from "@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type";
 import { TestEntity } from "./entities/TestEntity";
 /**
  * 主体管理器
@@ -9,8 +10,10 @@ export class EManager {
         return [TestEntity];
     }
 
-    /** 导入所有主体 */
-    static get imports() {
-        return TypeOrmModule.forFeature(this.ES);
+    /** 
+     * 导入主体
+     */
+    static imports(es?: EntityClassOrSchema[]) {
+        return TypeOrmModule.forFeature(es || this.ES);
     }
 }

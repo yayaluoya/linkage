@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable, NestMiddleware, RequestMethod } 
 import { NextFunction } from "express";
 import { Request, Response } from 'express';
 import { HandleHttpData } from "@utils/handleHttpData"
-import { Crypto_ } from "src/utils/Crypto_";
 
 /**
  * 数据处理中间件
@@ -17,11 +16,11 @@ export class DataHandleMiddleware implements NestMiddleware {
         catch { }
         if (data_handles.length > 0) {
             if (req.body) {
-                req.body = HandleHttpData.handle_(req.body.data, data_handles, Crypto_);
+                req.body = HandleHttpData.handle_(req.body.data, data_handles);
             }
             if (req.query) {
                 for (let i in req.query) {
-                    req.query[i] = HandleHttpData.handle_(req.query[i], data_handles, Crypto_);
+                    req.query[i] = HandleHttpData.handle_(req.query[i], data_handles);
                 }
             }
         }

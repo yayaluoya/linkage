@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable, NestMiddleware, RequestMethod } from "@nestjs/common";
 import { NextFunction } from "express";
 import { Request, Response } from 'express';
-import { ResData } from "src/http/ResData";
+import { ResData } from "@utils/ResData";
 import { SecretCode } from "./SecretCode";
 
 /**
@@ -15,7 +15,6 @@ export class SCMiddleware implements NestMiddleware {
             .then((data) => {
                 if (data.if) {
                     next();
-                    //
                 } else {
                     res.writeHead(200, {
                         'Content-Type': 'application/json; charset=utf-8',

@@ -1,7 +1,7 @@
 import { Request } from 'express';
-import { MainConfig } from 'src/config/MainConfig';
+import { MainConfig } from 'config/MainConfig';
 import { confusionStr } from '@utils/confusionStr';
-import { SecretCoduDataP } from 'src/localData/item/SecretCoduDataP';
+import { SecretCoduDataP } from 'localData/SecretCoduDataP';
 
 /**
  * 暗号

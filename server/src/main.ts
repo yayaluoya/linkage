@@ -13,6 +13,6 @@ async function bootstrap() {
   //
   await app.listen(MainConfig.port);
   //
-  console.log(`服务已开启：http://localhost:${MainConfig.port}/`);
+  console.log(`服务已开启：http://localhost:${MainConfig.port}`);
 }
 bootstrap();

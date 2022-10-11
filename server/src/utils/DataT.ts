@@ -1,5 +1,3 @@
-import { sep } from "path";
-
 /**
  * 数据工具
  */

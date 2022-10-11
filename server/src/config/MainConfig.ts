@@ -1,4 +1,4 @@
-const config = require('../../config.json');
+const config = require('../../config/config');
 import { MainConfig as MainConfig_ } from "@utils/MainConfig";
 
 /**
@@ -10,5 +10,5 @@ export class MainConfig extends MainConfig_ {
     /** 是否验证前端暗号 */
     static readonly ifVSecretCode = config.ifVSecretCode;
     /** 是否运行测试模块 */
-    static readonly ifTest = true;
+    static readonly ifTest = config.ifTest;
 }

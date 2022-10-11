@@ -1,140 +1,82 @@
-import { HttpStatus } from '@nestjs/common';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-
-/** 自定义选项 */
-export type cuBaseApiOp = Pick<AxiosRequestConfig, 'baseURL' | 'headers' | 'timeout'>;
+import { HttpStatus } from "@nestjs/common";
+import { AxiosPromise, AxiosResponse } from "axios";
+import { ResData } from "@utils/ResData";
+import { BaseApiCon as BaseApiCon_ } from "yayaluoya-tool/dist/node/BaseApiCon";
 
 /**
- * 基类api控制器
+ * 基类api处理器
  */
-export abstract class BaseApiCon {
-    readonly axios: AxiosInstance;
-    /** 默认选项 */
-    private op: cuBaseApiOp = {
-        baseURL: '',
-        headers: {},
-        timeout: 60 * 1000,
-    };
-    /** 继承覆盖选项 */
-    protected get _op(): cuBaseApiOp {
-        return {};
-    }
-
-    //
-    constructor(_op?: AxiosRequestConfig) {
-        this.axios = axios.create({
-            ..._op,
-            ...this.op,
-            ...this._op,
-            headers: {
-                ...this.op.headers,
-                ...this._op?.headers,
-            },
-        });
-        //添加前置或者后置处理器
-        this.axios.interceptors.request.use((config) => {
-            return this.request_(config);
-        }, (e) => {
-            return e;
-        });
-        this.axios.interceptors.response.use((res) => {
-            return this.response_(res);
-        }, (e) => {
-            return e;
-        });
+export class BaseApiCon extends BaseApiCon_ {
+    /** 
+     * 响应数据获取
+     * 如果响应成功的话返回 ResData
+     * 如果响应失败的话抛出ResData的异常
+     */
+    protected resData_(data: any, con: boolean, res: AxiosResponse): ResData {
+        return new ResData(data, res.status);
     }
 
     /** 
-     * 拼接api
+     * 响应拦截
+     * 失败的话抛出AxiosResponse的异常
      */
-    joinApi(url: string, pathArgs?: Record<string, string>): string {
-        //替换url中的路径参数
-        if (pathArgs) {
-            for (let i in pathArgs) {
-                url = url.replace(new RegExp(`[/{]+${i}[/}]+`, 'g'), `/${pathArgs[i]}/`);
-            }
+    protected async response_(res) {
+        if ((res as AxiosResponse).status != HttpStatus.OK) {
+            throw res;
         }
-        //最后加上根路径
-        let baseUrl = (this.op.baseURL || this._op?.baseURL || '').replace(/\/+$/, '');
-        url = url.replace(/[\\/]+/g, '/').replace(/^\//, '');
-        //
-        return `${baseUrl}/${url}`;
+        return res;
     }
 
     /**
-     * 添加查询参数
-     * @param _url 原url
-     * @param _query 查询参数
-     */
-    addQuery(_url: string, _query: Record<string, string> = {}): string {
-        if (!_url) { return _url; }
-        //先提取原_url参数
-        let urlStructure = _url.split('?');
-        let __url = urlStructure[0];
-        let __query = new URLSearchParams(urlStructure[1] || '');
-        for (let i in _query) {
-            __query.set(i, _query[i]);
-        }
-        return `${__url}?${__query.toString()}`;
-    }
-
-    /**
-     * 发送request请求，原生的
-     * @param _con 请求配置
+     * get请求获取数据
+     * @param _op 请求配置 
+     * @param data 
+     * @param headers 
      * @returns 
      */
-    requestPri<D = any>(_con: AxiosRequestConfig<D>): Promise<AxiosResponse<D>> {
-        return this.axios(_con).then((res) => {
-            if (res.status == HttpStatus.OK) {
-                return res;
-            } else {
-                throw res;
-            }
+    get(_op) {
+        return this.request({
+            ..._op,
+            method: 'get',
         });
     }
-
     /**
-     * 发送request请求
-     * @param _con 请求配置
+     * post请求获取数据
+     * @param _op 请求配置 
+     * @param data 
+     * @param headers 
      * @returns 
      */
-    request<D = any>(_con: AxiosRequestConfig<D>): Promise<D> {
-        return this.axios(_con).then((res) => {
-            if (res.status == HttpStatus.OK) {
-                return res.data;
-            } else {
-                throw res;
-            }
+    post(_op) {
+        return this.request({
+            ..._op,
+            method: 'post',
         });
     }
-
-    /** 发送put请求 */
-    put<D = any>(_con: AxiosRequestConfig<D>) {
-        _con.method = 'put';
-        return this.request(_con);
+    /**
+     * put请求获取数据
+     * @param _op 请求配置 
+     * @param data 
+     * @param headers 
+     * @returns 
+     */
+    put(_op) {
+        return this.request({
+            ..._op,
+            method: 'put',
+        });
     }
-    /** 发送delete请求 */
-    delete<D = any>(_con: AxiosRequestConfig<D>) {
-        _con.method = 'delete';
-        return this.request(_con);
-    }
-    /** 发送post请求 */
-    post<D = any>(_con: AxiosRequestConfig<D>) {
-        _con.method = 'post';
-        return this.request(_con);
-    }
-    /** 发送get请求 */
-    get<D = any>(_con: AxiosRequestConfig<D>) {
-        _con.method = 'get';
-        return this.request(_con);
-    }
-
-    /** 请求前置 */
-    protected request_(_config: AxiosRequestConfig): Promise<AxiosRequestConfig> {
-        return Promise.resolve(_config);
-    }
-    /** 响应前置 */
-    protected response_(_res: AxiosResponse): Promise<AxiosResponse> {
-        return Promise.resolve(_res);
+    /**
+     * delete请求获取数据
+     * @param _op 请求配置 
+     * @param data 
+     * @param headers 
+     * @returns 
+     */
+    delete(_op) {
+        return this.request({
+            ..._op,
+            method: 'delete',
+        });
     }
 }

@@ -10,11 +10,11 @@
         "scope": "typescript",
         "prefix": "_instance",
         "body": [
-            "import { InstanceTool } from \"@/utils/ts/InstanceTool\";",
+            "import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';",
             "/**",
             " * ",
             "*/",
-            "@InstanceTool()",
+            "@instanceTool()",
             "export class $1{}",
         ],
         "description": "单例类"
