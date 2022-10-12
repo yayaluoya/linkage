@@ -7,7 +7,6 @@ import { ResData } from "@utils/ResData";
 import { AliOssT } from "utils/AliOssT";
 import * as moment from "moment";
 import { URLT } from "yayaluoya-tool/dist/http/URLT";
-import { finishingUrl } from "utils/finishingUrl";
 
 /**
  * 文件处理类
@@ -57,12 +56,12 @@ export default class FileDispose {
                     return;
                 }
                 r(new ResData(
-                    finishingUrl(
+                    new URLT(
                         join(
                             PathManager.publicFilePrefix,
                             relative(PathManager.publicFilePath, _url)
                         )
-                    )
+                    ).path
                 ));
             });
         });
@@ -118,5 +117,5 @@ export default class FileDispose {
  */
 function packFileName(str: string): string {
     let url = new URLT(str);
-    return Date.now() + '-' + url.path.replace(/^\//, '');
+    return Date.now() + '-' + url.path.replace(/^\//, '').replace(/[^\w./]/g, '');
 }
