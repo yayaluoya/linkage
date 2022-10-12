@@ -7,8 +7,15 @@ import { MainConfig as MainConfig_ } from "@utils/MainConfig";
 export class MainConfig extends MainConfig_ {
     /** 端口 */
     static readonly port = config.port;
-    /** 是否验证前端暗号 */
-    static readonly ifVSecretCode = config.ifVSecretCode;
+
+    /** 暗号相关 */
+    static readonly secretCode: {
+        /** 是否验证 */
+        v: boolean;
+        /** 过期时间 */
+        overrunTime: number;
+    } = config.secretCode;
+
     /** 是否运行测试模块 */
     static readonly ifTest = config.ifTest;
 }

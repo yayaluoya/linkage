@@ -5,7 +5,7 @@ import { ResData } from '@utils/ResData';
 export class TimeController {
 
   @Get('getTime')
-  getHello(): ResData {
+  getTime(): ResData {
     return new ResData(Date.now());
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ResData } from "@utils/ResData";
 import FileDispose from "./FileDispose";
@@ -10,28 +10,33 @@ import { IFileData } from "./IFileData";
 @Controller('file')
 export class FileController {
     /** 公共处理实例 */
-    private m_fileDispose: FileDispose;
+    private fileDispose: FileDispose;
     //
     public constructor() {
-        this.m_fileDispose = new FileDispose();
+        this.fileDispose = new FileDispose();
     }
 
     @Get('test')
     test() {
-        return new ResData('测试')
+        return new ResData('文件模块测试')
     }
 
-    @Post('uplode')
+    @Post('upload')
     @UseInterceptors(FileInterceptor('file'))
     @HttpCode(HttpStatus.OK)
     async upload(@UploadedFile() file: IFileData): Promise<ResData> {
-        return this.m_fileDispose.uploadFile(file);
+        return this.fileDispose.uploadFile(file);
     }
 
-    @Post('uploadFileToAliOSS')
+    @Post('uploadToAliOSS')
     @UseInterceptors(FileInterceptor('file'))
     @HttpCode(HttpStatus.OK)
-    async uploadFileToAliOSS(@UploadedFile() file: IFileData): Promise<ResData> {
-        return this.m_fileDispose.uploadFileToAliOSS(file);
+    async uploadToAliOSS(@UploadedFile() file: IFileData): Promise<ResData> {
+        return this.fileDispose.uploadToAliOSS(file);
+    }
+
+    @Delete('remove')
+    async remove(@Body() body) {
+        return this.fileDispose.remove(body.url);
     }
 }

@@ -1,7 +1,7 @@
 import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
 import cheerio from "cheerio";
 import { BaseApiCon } from "./BaseApiCon";
-import { AxiosRequestConfig } from "axios";
+import { type AxiosRequestConfig } from "axios";
 
 /** api列表 */
 const ApiList = {

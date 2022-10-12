@@ -5,8 +5,8 @@ import { ApiService } from './api.service';
 export class ApiController {
   constructor(private readonly mianService: ApiService) { }
 
-  @Get()
-  getHello(): string {
-    return this.mianService.getHello();
+  @Get('test')
+  test(): string {
+    return this.mianService.test();
   }
 }

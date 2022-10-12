@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from 'api/api.module';
+import { ExceptionFilter } from 'utils/Exception/ExceptionFilter';
 const typeormConfig = require("../config/typeormConfig");
 
 /**
@@ -14,6 +16,12 @@ const typeormConfig = require("../config/typeormConfig");
     ApiModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: ExceptionFilter,
+    },
+  ],
+
 })
 export class AppModule { }

@@ -10,6 +10,7 @@ import { AdminModule } from './admin/admin.module';
 import { ComModule } from './com/com.module';
 import { TestModule } from './test/test.module';
 import { WallhavenModule } from './wallhaven/wallhaven.module';
+import { WebModule } from './web/web.module';
 
 /**
  * 主模块
@@ -22,6 +23,7 @@ import { WallhavenModule } from './wallhaven/wallhaven.module';
     TestModule,
     TimeModule,
     WallhavenModule,
+    WebModule,
   ],
   controllers: [ApiController],
   providers: [ApiService],

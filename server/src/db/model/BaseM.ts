@@ -2,7 +2,8 @@ import { BaseEntity, Repository } from "typeorm";
 
 /**
  * 基类模型类
- * 继承此类可以直接获取到某个表的连接，也可以间接获取到所有表的连接
+ * 继承此类可以直接获取到某个表的连接
+ * TODO 相当于是处理表
  */
 export class BaseM<E extends BaseEntity>{
     /** 实体连接 */

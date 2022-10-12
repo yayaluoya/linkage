@@ -30,6 +30,8 @@ export class PathManager {
     static setStaticFileProxy(_app: NestExpressApplication) {
         _app.useStaticAssets(this.publicFilePath, {
             prefix: this.publicFilePrefix,
+            /** 缓存一年的时间 */
+            maxAge: 1000 * 60 * 60 * 24 * 360,
         });
     }
     /** 数据路径 */

@@ -1,12 +1,13 @@
 import { IFileData } from "./IFileData";
 import { PathManager } from "pathManager/PathManager";
 import { join, relative } from "path";
-import { mkdirSync, writeFile } from "fs";
+import { mkdirSync, rmSync, writeFile, statSync } from "fs";
 import { HttpStatus } from "@nestjs/common";
-import { DataT } from "utils/DataT";
 import { ResData } from "@utils/ResData";
-// import { AliOssT } from "utils/AliOssT";
-const moment = require('moment');
+import { AliOssT } from "utils/AliOssT";
+import * as moment from "moment";
+import { URLT } from "yayaluoya-tool/dist/http/URLT";
+import { finishingUrl } from "utils/finishingUrl";
 
 /**
  * 文件处理类
@@ -45,20 +46,18 @@ export default class FileDispose {
                     //递归创建目录
                     recursive: true,
                 });
-            } catch (E) {
-                // console.log('创建目录失败', E);
-                //已经存在该目录
-            }
+            } catch { }
             //获取完整url并去除掉特殊字符
-            let _url: string = join(_dir, Date.now() + '-' + file.originalname.replace(/[^a-zA-Z\.0-9]+/g, ''));
+            let _url: string = join(_dir, packFileName(file.originalname));
             //保存文件
             writeFile(_url, file.buffer, (err) => {
                 if (err) {
-                    r(new ResData(err, HttpStatus.INTERNAL_SERVER_ERROR, '存储文件失败！'));
+                    console.log('存储文件失败！', e);
+                    r(new ResData('', HttpStatus.INTERNAL_SERVER_ERROR, '存储文件失败！'));
                     return;
                 }
                 r(new ResData(
-                    DataT.finishingUrl(
+                    finishingUrl(
                         join(
                             PathManager.publicFilePrefix,
                             relative(PathManager.publicFilePath, _url)
@@ -73,14 +72,51 @@ export default class FileDispose {
      * 上传文件到阿里云
      * @param file 
      */
-    public uploadFileToAliOSS(file: IFileData): Promise<ResData> {
-        return Promise.resolve(new ResData().fial('缺少配置'));
-        // let _fileNames = file.originalname.
-        //     replace(/[^a-zA-Z\.0-9]+/g, '')
-        //     .split(/\.(?=[a-zA-Z]+$)/);
-        // let _fileName = `${_fileNames[0]}-${Date.now()}.${_fileNames[1]}`;
-        // return AliOssT.updateFile(file.buffer, `${moment().format('Y-M-D')}/${_fileName}`).then((str) => {
-        //     return new ResData(str);
-        // });
+    public uploadToAliOSS(file: IFileData): Promise<ResData> {
+        return AliOssT.instance.updateFile(file.buffer, `${moment().format('Y-M-D')}/${packFileName(file.originalname)}`).then((str) => {
+            return new ResData(str);
+        });
     }
+
+    /**
+     * 删除文件
+     * @param url_ 
+     */
+    public remove(url_: string) {
+        let url = new URLT(url_);
+        if (/aliyuncs.com/.test(url.origin)) {
+            return AliOssT.instance.client.delete(url.path).then(() => {
+                return new ResData('文件已从阿里云上删除');
+            }).catch((e) => {
+                console.log('阿里云删除文件失败', e);
+                return new ResData().fail('阿里云删除文件失败');
+            });
+        } else {
+            try {
+                let filePath = join(
+                    PathManager.publicFilePath,
+                    relative(PathManager.publicFilePrefix, url.path)
+                );
+                if (statSync(filePath, {
+                    throwIfNoEntry: false,
+                })?.isFile()) {
+                    rmSync(filePath);
+                }
+            } catch (e) {
+                console.log('删除本地文件失败', e);
+                return new ResData().fail('删除本地文件失败');
+            }
+            return new ResData('本地文件已删除');
+        }
+    }
+}
+
+/**
+ * 包装文件名
+ * @param str 
+ * @returns 
+ */
+function packFileName(str: string): string {
+    let url = new URLT(str);
+    return Date.now() + '-' + url.path.replace(/^\//, '');
 }

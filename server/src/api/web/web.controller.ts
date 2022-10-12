@@ -2,12 +2,12 @@ import { Body, Controller, Get, Head, Headers, HttpCode, HttpStatus, Post, Query
 import { ResData } from "@utils/ResData";
 
 /**
- * 后台模块控制器
+ * web模块控制器
  */
-@Controller('admin')
-export class AdminC {
+@Controller('web')
+export class WebC {
     @Get('test')
     test() {
-        return new ResData('后台模块测试');
+        return new ResData('web模块测试');
     }
 }

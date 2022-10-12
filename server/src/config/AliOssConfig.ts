@@ -13,4 +13,6 @@ export const AliOssConfig = {
         accessKeyId: config.aliOss.access.accessKeyId,
         accessKeySecret: config.aliOss.access.accessKeySecret,
     },
+    /** 角色信息 */
+    roleArn: config.aliOss.roleArn,
 };

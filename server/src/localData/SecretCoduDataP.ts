@@ -1,3 +1,4 @@
+import { MainConfig } from "config/MainConfig";
 import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
 import { BaseDataProxy } from "./BaseDataProxy";
 
@@ -14,18 +15,15 @@ export class SecretCoduDataP extends BaseDataProxy<D> {
         return [];
     }
 
-    /** 超时时间 */
-    readonly overrunTime = 60 * 1000;
-
     /**
-     * 监测暗号是否过期
+     * 暗号是否过期
      * @param v 
      * @param time 
      */
     vBeOverdue(v: string, time: number): boolean {
         //先剔除掉超时的暗号
         this.data = this.data.filter((item) => {
-            return Math.abs(item[1] - Date.now()) <= this.overrunTime;
+            return Math.abs(item[1] - Date.now()) <= MainConfig.secretCode.overrunTime;
         });
         if (this.data.some((item) => {
             return item[0] == v;
