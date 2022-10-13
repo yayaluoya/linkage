@@ -4,7 +4,7 @@ import MDShow from "./MDShow.vue";
 import marked from "-/marked";
 import table_ from "./com/table/table.vue";
 import { IConType } from "./IConType";
-import { createThrottleFun } from "@/utils/throttleAntiShake";
+import { createThrottleFun } from "yayaluoya-tool/dist/throttleAntiShake";
 import anime from "animejs/lib/anime.js";
 import { EEasing } from "@/_d/EEasing";
 import Dialog from ">/Dialog/Dialog.vue";

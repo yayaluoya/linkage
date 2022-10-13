@@ -1,9 +1,10 @@
-import { InstanceTool } from "com_utils/InstanceTool";
-import { BaseDataProxy } from "../BaseDataProxy";
+import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
+import { BaseDataProxy } from "./BaseDataProxy";
+
 /**
  * 测试数据
  */
-@InstanceTool()
+@instanceTool()
 export class TestDataProxy extends BaseDataProxy<{
     a: number;
     b: number;

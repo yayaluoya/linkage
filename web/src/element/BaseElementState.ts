@@ -1,5 +1,5 @@
-import { BaseEvent } from "@/base/BaseEvent";
-import { createThrottleFun } from "-/throttleAntiShake";
+import { BaseEvent } from "yayaluoya-tool/dist/BaseEvent";
+import { createThrottleFun } from "yayaluoya-tool/dist/throttleAntiShake";
 import { ElementTransform } from "./ElementTransform";
 
 /** 元素事件 */

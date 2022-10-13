@@ -159,12 +159,7 @@ declare module 'marked' {
     }
 }
 
-declare module 'ali-oss' {
-    const obj: any;
-    export default obj;
-}
-
-declare module 'element-plus/dist/locale/*.js' {
+declare module 'element-plus/dist/locale/*' {
     const obj: any;
     export default obj;
 }

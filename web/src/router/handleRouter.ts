@@ -1,4 +1,4 @@
-import { UserDataProxy } from "@/localData/dataItem/UserDataProxy";
+import { UserDataProxy } from "@/localData/UserDataProxy";
 import { Router, RouteRecordRaw } from "vue-router";
 import { EPage } from "./EPage";
 

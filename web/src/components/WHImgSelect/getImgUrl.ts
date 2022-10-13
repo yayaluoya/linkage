@@ -1,4 +1,4 @@
-import { WallhavenApiCon } from "@/http/apiCon/main/WallhavenApiCon";
+import { WallhavenApiCon } from "@/http/apiCon/WallhavenApiCon";
 
 interface P extends Promise<string> {
     /** 是否完成 */

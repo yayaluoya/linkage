@@ -2,7 +2,7 @@
 import { ref, reactive, customRef, onMounted, watch } from "vue";
 import Dialog from ">/Dialog/Dialog.vue";
 import tabs2_ from ">/tabs/tabs2.vue";
-import { WallhavenApiCon } from "@/http/apiCon/main/WallhavenApiCon";
+import { WallhavenApiCon } from "@/http/apiCon/WallhavenApiCon";
 import { getImgUrl, ifLoadCom } from "./getImgUrl";
 import Paginate from ">/Paginate/Paginate.vue";
 export default {

@@ -3,10 +3,10 @@ import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
 
 
 /**
- * test事件管理器
+ * 全局事件管理器
 */
 @instanceTool()
-export class TestEvent extends BaseEvent<string> {
+export class GlobalEvent extends BaseEvent<string> {
     /** 单例 */
-    static readonly instance: TestEvent;
+    static readonly instance: GlobalEvent;
 }

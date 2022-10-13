@@ -11,6 +11,9 @@ function pathResolve(dir: string) {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), svgBuilder('./src/assets/svg/')],
+  server: {
+    port: 3001,
+  },
   resolve: {
     alias: [
       /** 根目录简写 */

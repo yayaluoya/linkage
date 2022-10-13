@@ -1,11 +1,11 @@
-import { InstanceTool } from "com_utils/InstanceTool";
-import { BaseDataProxy } from "../BaseDataProxy";
-import { Crypto_ } from "@/utils/Crypto_";
+import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
+import { BaseDataProxy } from "./BaseDataProxy";
+import { Crypto_ } from "com_utils/Crypto_";
 
 /**
  * 用户数据
  */
-@InstanceTool()
+@instanceTool()
 export class UserDataProxy extends BaseDataProxy<Partial<{
     token: string;
 }>>{

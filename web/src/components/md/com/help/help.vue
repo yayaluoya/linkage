@@ -3,7 +3,7 @@ import { ref, reactive, customRef, onMounted } from "vue";
 import Dialog from ">/Dialog/Dialog.vue";
 import MDShow from "../../MDShow.vue";
 import { Mes } from "@/mes/Mes";
-import { ComApiCon } from "@/http/apiCon/main/ComApiCon";
+import { ComApiCon } from "@/http/apiCon/ComApiCon";
 export default {
   components: { Dialog, MDShow },
   props: {
@@ -34,7 +34,7 @@ export default {
     function loadData() {
       loading.value = true;
       ComApiCon.instance
-        .getMdHelp()
+        .getMdHelp()!
         .then((_str) => {
           content.value = _str;
         })

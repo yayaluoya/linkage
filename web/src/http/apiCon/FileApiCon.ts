@@ -1,7 +1,4 @@
-import { ApiConfig } from "../ApiConfig";
-import { InstanceTool } from "com_utils/InstanceTool"
-import { AxiosRequestConfig } from "axios";
-import { Env } from "@/_d/Env";
+import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
 import moment from "moment";
 import { AliOssT } from "@/utils/AliOssT";
 import { ApiCon } from "./ApiCon";
@@ -9,21 +6,10 @@ import { ApiCon } from "./ApiCon";
 /**
  * 文件api控制器
  */
-@InstanceTool()
+@instanceTool()
 export class FileApiCon extends ApiCon {
     /** 单例 */
     static readonly instance: FileApiCon;
-
-    /**  */
-    protected get op(): AxiosRequestConfig {
-        return {
-            baseURL: ApiConfig.domainPath.web,
-        };
-    }
-
-    get _rootApi() {
-        return super.rootApi.file;
-    }
 
     /**
      * 上传文件到服务器
@@ -34,7 +20,7 @@ export class FileApiCon extends ApiCon {
         let _formData = new FormData();
         _formData.set('file', _file);
         return this.postData<string>({
-            url: this._rootApi.update,
+            url: '/file/upload',
             data: _formData,
         });
     }
@@ -43,13 +29,24 @@ export class FileApiCon extends ApiCon {
      * 通过服务器上传到阿里云
      * @param _file 
      */
-    updateToALIYunOSS(_file: File): Promise<string> {
+    updateToALIYunOSS(_file: File) {
         let _formData = new FormData();
         _formData.set('file', _file);
         return this.postData<string>({
-            url: this._rootApi.uploadFileToAliOSS,
+            url: '/file/uploadToAliOSS',
             data: _formData,
         })
+    }
+
+    /**
+     * 删除文件
+     * @param url 
+     */
+    remove(url: string) {
+        return this.deleteData({
+            url: '/file/remove',
+            data: { url },
+        });
     }
 
     /**
@@ -57,18 +54,17 @@ export class FileApiCon extends ApiCon {
      * @param _file 
      */
     updateALIYunOSS(_file: File): Promise<string> {
-        return Promise.resolve('');
-        // let _fileNames = _file.name
-        //     .replace(/[^a-zA-Z\.0-9]+/g, '')
-        //     .split(/\.(?=[a-zA-Z]+$)/);
-        // let _fileName = `${_fileNames[0]}-${Date.now()}.${_fileNames[1]}`;
-        // //
-        // return AliOssT.updateFile(_file, `${moment().format('Y-M-D')}/${_fileName}`).then((res) => {
-        //     return res;
-        // }).catch((e) => {
-        //     console.error(e);
-        //     throw '阿里云OSS上传失败';
-        // });
+        let _fileNames = _file.name
+            .replace(/[^a-zA-Z\.0-9]+/g, '')
+            .split(/\.(?=[a-zA-Z]+$)/);
+        let _fileName = `${_fileNames[0]}-${Date.now()}.${_fileNames[1]}`;
+        //
+        return AliOssT.instance.updateFile(_file, `${moment().format('Y-M-D')}/${_fileName}`).then((res) => {
+            return res;
+        }).catch((e) => {
+            console.error(e);
+            throw '阿里云OSS上传失败';
+        });
     }
 
     /**

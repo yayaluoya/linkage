@@ -1,4 +1,4 @@
-import { Vector2 } from "-/Vector2";
+import { Vector2 } from "yayaluoya-tool/dist/Vector2";
 import anime from 'animejs/lib/anime.js';
 import { EEasing } from "@/_d/EEasing";
 

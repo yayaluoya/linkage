@@ -2,7 +2,7 @@
 import { ref, reactive, customRef, onMounted } from "vue";
 import Dialog from ">/Dialog/Dialog.vue";
 import Tab2_ from ">/tabs/tabs2.vue";
-import { ComApiCon } from "@/http/apiCon/main/ComApiCon";
+import { ComApiCon } from "@/http/apiCon/ComApiCon";
 import { Mes } from "@/mes/Mes";
 export default {
   components: { Dialog, Tab2_ },
@@ -54,7 +54,7 @@ export default {
     function getEmoji() {
       loading.value = true;
       ComApiCon.instance
-        .getEmoji()
+        .getEmoji()!
         .then((list) => {
           // console.log(list);
           content.value.emoji = list;

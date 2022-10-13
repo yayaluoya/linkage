@@ -1,18 +1,13 @@
-import { InstanceTool } from "com_utils/InstanceTool"
-import { WebApiCon } from "./WebApiCon";
+import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
+import { ApiCon } from "./ApiCon";
 
 /**
  * 
  */
-@InstanceTool()
-export class WallhavenApiCon extends WebApiCon {
+@instanceTool()
+export class WallhavenApiCon extends ApiCon {
     /** 单例 */
     static readonly instance: WallhavenApiCon;
-
-    /** 根路径 */
-    get _rootApi() {
-        return super.rootApi.main.wallhaven;
-    }
 
     /** 分页查询 */
     page(data: {
@@ -34,7 +29,7 @@ export class WallhavenApiCon extends WebApiCon {
             /** 页数 */
             page: number
         }>({
-            url: this._rootApi.page,
+            url: '/wallhaven/page',
             params: data,
         });
     }
@@ -42,7 +37,7 @@ export class WallhavenApiCon extends WebApiCon {
     /** 获取图片真实路径 */
     getImgUrl(url: string) {
         return this.getData<string>({
-            url: this._rootApi.getImgUrl,
+            url: '/wallhaven/getImgUrl',
             params: {
                 url,
             },

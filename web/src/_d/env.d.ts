@@ -5,5 +5,7 @@
  */
 interface ImportMetaEnv {
   /** 测试字符串 */
-  VITE_test: string;
+  VITE_TEST: string;
+  /** baseURL */
+  VITE_BASE_URL: string;
 }

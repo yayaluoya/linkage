@@ -7,7 +7,6 @@ import "@/style/element.scss";
 //引入自定义样式
 import "@/style/index.scss";
 import { handleApp } from './handleApp';
-import { vUser } from './vUser';
 
 (async () => {
     /** 
@@ -25,5 +24,3 @@ import { vUser } from './vUser';
 
     app.mount('#app', true);
 })();
-
-vUser();

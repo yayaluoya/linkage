@@ -1,9 +1,8 @@
 import { confusionStr } from "com_utils/confusionStr";
-import axios, { AxiosRequestConfig } from "axios";
-import { Base64 } from "com_utils/Base64";
-import { ApiConfig } from "./ApiConfig";
-import { ApiTool } from "./ApiTool";
-import { IResData } from "./res/IResData";
+import axios, { AxiosRequestConfig } from "yayaluoya-tool/node_modules/axios";
+import { Base64 } from "yayaluoya-tool/dist/Base64";
+import { ResData } from "com_utils/ResData";
+import { URLT } from "yayaluoya-tool/dist/http/URLT";
 
 let axios_ = axios.create();
 
@@ -38,10 +37,10 @@ export class SecretCode {
         if (!this.getTimeDiffP) {
             // console.log('获取时间');
             this.getTimeDiffP = axios_
-                .get(ApiTool.getWebApi(ApiConfig.apiPath.time.getTime))
+                .get(new URLT('/time/getTime', import.meta.env.VITE_BASE_URL).href)
                 .then((data) => {
                     return data.data;
-                }).then((data: IResData<number>) => {
+                }).then((data: ResData<number>) => {
                     return data.data! - _time;
                 }).catch(() => {
                     //如果没有获取到后端的时间戳就使用当前电脑本地的时间戳并抛出异常

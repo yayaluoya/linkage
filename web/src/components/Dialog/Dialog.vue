@@ -1,8 +1,7 @@
 <script lang="ts">
 import { ref, reactive, watch, toRef, computed, useSlots } from "vue";
-import { Env } from "@/_d/Env";
 import { CloseBold } from "@element-plus/icons-vue";
-import { Vector2 } from "@/utils/Vector2";
+import { Vector2 } from "yayaluoya-tool/dist/Vector2";
 import anime from "animejs/lib/anime.js";
 import { EEasing } from "@/_d/EEasing";
 

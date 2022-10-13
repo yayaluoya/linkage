@@ -2,9 +2,9 @@
   "name": "web",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode development",
     "build": "vue-tsc --noEmit && vite build",
-    "build2": "vite build",
+    "build-direct": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -20,7 +20,8 @@
     "pinia": "^2.0.4",
     "prismjs": "^1.25.0",
     "vue": "^3.2.16",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "yayaluoya-tool": "^1.7.5"
   },
   "devDependencies": {
     "@types/node": "^17.0.5",

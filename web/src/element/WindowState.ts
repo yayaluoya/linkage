@@ -1,5 +1,5 @@
-import { InstanceTool } from "com_utils/InstanceTool";
-import { createThrottleFun } from "-/throttleAntiShake";
+import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
+import { createThrottleFun } from "yayaluoya-tool/dist/throttleAntiShake";
 import { BaseElementState } from "./BaseElementState";
 
 type eventType = 'resize';
@@ -7,7 +7,7 @@ type eventType = 'resize';
 /**
  * Window的状态
  */
-@InstanceTool()
+@instanceTool()
 export class WindowState extends BaseElementState<eventType> {
     /** 单例 */
     static instance: WindowState;
