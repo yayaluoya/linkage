@@ -23,7 +23,7 @@ export class PageTool {
     /**
      * 页面回退
      */
-    static async pageBack(path: EPage = EPage.Home, query: any = {}) {
+    static async pageBack(path: EPage = EPage.Main, query: any = {}) {
         let _router = await router;
         await _router.push({
             path: (_router.currentRoute.value.query.back as string) || path,

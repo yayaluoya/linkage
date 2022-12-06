@@ -1,6 +1,6 @@
 import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
 import { BaseDataProxy } from "./BaseDataProxy";
-import { Crypto_ } from "com_utils/Crypto_";
+import { CryptoI } from "com_utils/dist/CryptoI";
 
 /**
  * 用户数据
@@ -37,10 +37,10 @@ export class UserDataProxy extends BaseDataProxy<Partial<{
     protected dataHandle(str: string, type: 'get' | 'set'): string {
         switch (type) {
             case 'get':
-                return Crypto_.decryptionData(str);
+                return CryptoI.instance.decryptionData(str);
             case 'set':
                 // console.log('设置用户数据', str);
-                return Crypto_.encryptionData(str);
+                return CryptoI.instance.encryptionData(str);
         }
     }
 }

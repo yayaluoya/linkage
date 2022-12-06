@@ -39,7 +39,8 @@ export class WHApiCon extends BaseApiCon {
             detailsUrl: string;
         };
 
-        return this.get({
+        return this.request({
+            method: "get",
             url: ApiList.pageQuery.replace(/{type}/, _op.type),
             params: {
                 page: _op.page,
@@ -67,7 +68,8 @@ export class WHApiCon extends BaseApiCon {
      * @param _url 
      */
     getImgUrl(_url: string) {
-        return this.get({
+        return this.request({
+            method: "get",
             url: _url,
         }).then(({ data }) => {
             let $ = cheerio.load(data);

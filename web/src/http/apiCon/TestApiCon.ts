@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from "axios";
 import { ApiCon } from "./ApiCon";
 import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
 
@@ -20,10 +19,24 @@ export class TestApiCon extends ApiCon {
     }
 
     /** 测试 post */
-    testPost(data: any) {
-        return this.postData({
+    testPost<T>(data: T) {
+        return this.postData<T>({
             url: '/test/post',
             ['x-data-handles']: ['e', 'z'],
+            data,
+        });
+    }
+
+    /** 获取测试数据列表 */
+    list() {
+        return this.getData<EN.ITestE[]>({
+            url: '/test/tab',
+        });
+    }
+    /** 添加测试数据 */
+    add(data: Partial<EN.ITestE>) {
+        return this.postData<EN.ITestE>({
+            url: '/test/tab',
             data,
         });
     }

@@ -1,18 +1,6 @@
-const config = require('../../config/config');
+import { MainConfig } from "./MainConfig";
 
 /**
  * 阿里云oss的配置
  */
-export const AliOssConfig = {
-    /** 地域 */
-    region: config.aliOss.region,
-    /** 桶名 */
-    bucket: config.aliOss.bucket,
-    /** 用户信息 */
-    access: {
-        accessKeyId: config.aliOss.access.accessKeyId,
-        accessKeySecret: config.aliOss.access.accessKeySecret,
-    },
-    /** 角色信息 */
-    roleArn: config.aliOss.roleArn,
-};
+export const AliOssConfig = MainConfig.server.aliOss;

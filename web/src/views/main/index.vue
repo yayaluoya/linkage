@@ -10,12 +10,7 @@ export default {
 </script>
 
 <template>
-  <div class="main">
-    主页面
-    <router-view v-slot="{ Component }">
-      <component :is="Component" />
-    </router-view>
-  </div>
+  <div class="main">主页面</div>
 </template>
 
 <style scoped lang="scss">

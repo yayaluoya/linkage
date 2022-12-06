@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { svgBuilder } from './.vite/svgBuilder';
 
 function pathResolve(dir: string) {
-  console.log(resolve(process.cwd(), '.', dir));
+  // console.log(resolve(process.cwd(), '.', dir));
   return resolve(process.cwd(), '.', dir);
 }
 

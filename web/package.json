@@ -5,6 +5,7 @@
     "dev": "vite --mode development",
     "build": "vue-tsc --noEmit && vite build",
     "build-direct": "vite build",
+    "clear-vite-catch": "node ./.node/clear-vite-catch.js",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -21,7 +22,7 @@
     "prismjs": "^1.25.0",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12",
-    "yayaluoya-tool": "^1.7.5"
+    "yayaluoya-tool": "^1.7.9"
   },
   "devDependencies": {
     "@types/node": "^17.0.5",

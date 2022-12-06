@@ -3,7 +3,7 @@ import { ApiCon } from "./ApiCon";
 
 
 /**
- * 主api控制器
+ * 后台api控制器
  */
 @instanceTool()
 export class AdminApiCon extends ApiCon {

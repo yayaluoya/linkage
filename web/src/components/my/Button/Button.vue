@@ -1,6 +1,5 @@
 <script lang="ts">
 import { ref, reactive, computed } from "vue";
-import { darken, lighten } from "@/utils/color";
 import { Loading } from "@element-plus/icons-vue";
 export default {
   components: { Loading },

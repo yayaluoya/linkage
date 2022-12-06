@@ -1,10 +1,11 @@
 import { Body, Controller, Get, Header, HttpCode, HttpStatus, Post, Query } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ResData } from "@utils/ResData";
+import { ResData } from "@utils/dist/ResData";
 import { TestEntity } from "db/entities/TestEntity";
 import { TestM } from "db/model/TestM";
 import { Repository } from "typeorm";
 import { HeaderDataHandlePack } from "utils/MethodDecorator/HeaderDataHandlePack";
+import { CryptoI } from "@utils/dist/CryptoI";
 
 @Controller('test')
 export class TestController {
@@ -32,16 +33,25 @@ export class TestController {
     /** post */
     @Post('post')
     @HttpCode(HttpStatus.OK)
-    post(@Body() body): ResData {
-        return new ResData(body);
+    post(@Body() body) {
+        return new Promise((r) => {
+            setTimeout(() => {
+                r(new ResData(body));
+            }, 500);
+        });
     }
 
     @Get('tab')
     async tab() {
-        return this.testM.findAll();
+        return new ResData(await this.testM.findAll());
     }
     @Post('tab')
-    async addTab() {
-        return this.testM.add();
+    async addTab(@Body() body) {
+        return new ResData(await this.testM.add(body));
+    }
+
+    @Get('md5')
+    md5() {
+        return new ResData(CryptoI.md5(Date.now().toString()));
     }
 }

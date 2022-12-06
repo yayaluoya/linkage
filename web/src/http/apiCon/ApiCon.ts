@@ -2,7 +2,7 @@ import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { BaseApiCon } from "../BaseApiCon";
 import { JSONTransform } from "@/utils/JSONTransform";
 import { EmojiT } from "yayaluoya-tool/dist/EmojiT";
-import { ResData } from "com_utils/ResData";
+import { ResData } from "com_utils/dist/ResData";
 import { UserDataProxy } from "@/localData/UserDataProxy";
 
 /**

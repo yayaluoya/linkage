@@ -1,7 +1,7 @@
 import { HttpException, Injectable, NestMiddleware, RequestMethod } from "@nestjs/common";
 import { NextFunction } from "express";
 import { Request, Response } from 'express';
-import { ResData } from "@utils/ResData";
+import { ResData } from "@utils/dist/ResData";
 import { secretCodeV } from "./secretCodeV";
 import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
 

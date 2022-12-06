@@ -1,6 +1,6 @@
 import { HttpStatus } from "@nestjs/common";
 import { type AxiosPromise, type AxiosResponse } from "axios";
-import { ResData } from "@utils/ResData";
+import { ResData } from "@utils/dist/ResData";
 import { BaseApiCon as BaseApiCon_ } from "yayaluoya-tool/dist/node/BaseApiCon";
 
 /**
@@ -25,58 +25,5 @@ export class BaseApiCon extends BaseApiCon_ {
             throw res;
         }
         return res;
-    }
-
-    /**
-     * get请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
-    get(_op) {
-        return this.request({
-            ..._op,
-            method: 'get',
-        });
-    }
-    /**
-     * post请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
-    post(_op) {
-        return this.request({
-            ..._op,
-            method: 'post',
-        });
-    }
-    /**
-     * put请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
-    put(_op) {
-        return this.request({
-            ..._op,
-            method: 'put',
-        });
-    }
-    /**
-     * delete请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
-    delete(_op) {
-        return this.request({
-            ..._op,
-            method: 'delete',
-        });
     }
 }

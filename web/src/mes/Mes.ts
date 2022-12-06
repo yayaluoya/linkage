@@ -1,4 +1,5 @@
 import { ElMessage, MessageOptions } from "element-plus";
+import { ResData } from "com_utils/dist/ResData";
 
 /**
  * 消息提示工具
@@ -34,7 +35,7 @@ export class Mes {
     }
 
     /** 处理http的错误请求提示 */
-    static handleHttpCatch({ mes }: any) {
+    static handleHttpCatch({ mes }: ResData) {
         Mes.error(mes);
     }
 

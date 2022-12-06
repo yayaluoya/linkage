@@ -3,7 +3,7 @@ import { PathManager } from "pathManager/PathManager";
 import { join, relative } from "path";
 import { mkdirSync, rmSync, writeFile, statSync } from "fs";
 import { HttpStatus } from "@nestjs/common";
-import { ResData } from "@utils/ResData";
+import { ResData } from "@utils/dist/ResData";
 import { AliOssT } from "utils/AliOssT";
 import * as moment from "moment";
 import { URLT } from "yayaluoya-tool/dist/http/URLT";

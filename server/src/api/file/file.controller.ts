@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ResData } from "@utils/ResData";
+import { ResData } from "@utils/dist/ResData";
 import FileDispose from "./FileDispose";
 import { IFileData } from "./IFileData";
 

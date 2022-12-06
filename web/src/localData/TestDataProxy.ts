@@ -16,7 +16,7 @@ export class TestDataProxy extends BaseDataProxy<{
         super();
         setInterval(() => {
             this.data.a++;
-        }, 100);
+        }, 1000);
     }
 
     protected getNewData() {

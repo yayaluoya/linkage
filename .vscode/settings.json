@@ -2,7 +2,6 @@
   //设置不显示在编辑器的文件夹
   "files.exclude": {
     // "**/node_modules/": true,
-    "node_modules/@utils/**.js": true,
   },
   "editor.formatOnSave": true,
   "editor.formatOnType": true,

@@ -1,4 +1,4 @@
-import { confusionStr } from "com_utils/confusionStr";
+import { confusionStr } from "com_utils/dist/confusionStr";
 
 /** 一个混淆颜值 */
 const iv = 'fasdfaewrqwerasdfasdfa';

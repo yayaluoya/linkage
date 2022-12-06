@@ -9,7 +9,6 @@ import { TimeModule } from './time/time.module';
 import { AdminModule } from './admin/admin.module';
 import { ComModule } from './com/com.module';
 import { TestModule } from './test/test.module';
-import { WallhavenModule } from './wallhaven/wallhaven.module';
 import { WebModule } from './web/web.module';
 
 /**
@@ -22,7 +21,6 @@ import { WebModule } from './web/web.module';
     FileModule,
     TestModule,
     TimeModule,
-    WallhavenModule,
     WebModule,
   ],
   controllers: [ApiController],
@@ -35,8 +33,6 @@ export class ApiModule {
       .exclude(
         //排除时间模块
         { path: 'time/(.*)', method: RequestMethod.GET },
-        //排除测试模块
-        { path: 'test/(.*)', method: RequestMethod.GET },
         //这里必须把静态文件的路由去掉
         { path: `${PathManager.publicFilePrefix}(.*)`, method: RequestMethod.GET },
       )

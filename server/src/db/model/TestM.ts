@@ -8,7 +8,11 @@ export class TestM extends BaseM<TestEntity>{
         return await this._eRep.find();
     }
 
-    async add() {
-        return await this._eRep.save(new TestEntity());
+    async add(data: Partial<TestEntity>) {
+        let item = new TestEntity();
+        for (let i in data) {
+            item[i] = data[i];
+        }
+        return await this._eRep.save(item);
     }
 }

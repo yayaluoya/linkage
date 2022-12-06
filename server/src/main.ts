@@ -8,12 +8,15 @@ import { cyan, yellow } from "chalk";
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   //
-  PathManager.setStaticFileProxy(app);
+  app.useStaticAssets(PathManager.publicFilePath, {
+    prefix: PathManager.publicFilePrefix,
+    maxAge: MainConfig.server.publicFileMaxAge,
+  });
   // 允许跨域
   app.enableCors();
   //
-  await app.listen(MainConfig.port);
+  await app.listen(MainConfig.server.port);
   //
-  console.log(`\n${cyan(MainConfig.ZHName)} 服务已启动: ${yellow(`http://localhost:${MainConfig.port}`)}\n`);
+  console.log(`\n${cyan(MainConfig.ZHName)} 服务已启动: ${yellow(`http://localhost:${MainConfig.server.port}`)}\n`);
 }
 bootstrap();

@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable, NestMiddleware, RequestMethod } from "@nestjs/common";
 import { NextFunction } from "express";
 import { Request, Response } from 'express';
-import { HandleHttpData } from "@utils/handleHttpData"
+import { HandleHttpData } from "@utils/dist/handleHttpData"
 
 /**
  * 数据处理中间件

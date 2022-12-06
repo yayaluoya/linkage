@@ -1,7 +1,7 @@
-import axios, { Method, AxiosResponse, AxiosRequestConfig as AxiosRequestConfig_, AxiosInstance } from "yayaluoya-tool/node_modules/axios";
-import { HandleHttpData } from 'com_utils/handleHttpData';
+import axios, { Method, AxiosResponse, AxiosRequestConfig as AxiosRequestConfig_, AxiosInstance } from "axios";
+import { HandleHttpData } from 'com_utils/dist/handleHttpData';
 import { BaseApiCon as BaseApiCon_ } from "yayaluoya-tool/dist/node/BaseApiCon";
-import { ResData } from "com_utils/ResData";
+import { ResData } from "com_utils/dist/ResData";
 import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
 import { SecretCode } from "./SecretCode";
 
@@ -18,11 +18,6 @@ export class BaseApiCon extends BaseApiCon_ {
             baseURL: import.meta.env.VITE_BASE_URL,
             timeout: 1000 * 60 * 5,
         };
-    }
-
-    /** 获取数据中的数据 */
-    requestDataData<D = any>(op: AxiosRequestConfig) {
-        return this.requestData<D>(op).then(({ data }) => data);
     }
 
     /**

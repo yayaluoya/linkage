@@ -20,5 +20,6 @@ export default {
 
 <style scoped lang="scss">
 .public {
+  width: 100%;
 }
 </style>

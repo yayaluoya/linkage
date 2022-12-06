@@ -1,6 +1,6 @@
 import { ExceptionFilter as ExceptionFilter_, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ResData } from "@utils/ResData";
+import { ResData } from "@utils/dist/ResData";
 import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
 import { red } from "chalk";
 

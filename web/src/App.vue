@@ -1,22 +1,8 @@
 <script lang="ts">
-import { ref, reactive, computed, onMounted, onUnmounted } from "vue";
-import { cssValue } from "@/const/cssValue";
 export default {
   components: {},
   setup() {
-    const cssValue_ = computed(() => {
-      return Object.keys(cssValue).reduce((a: any, b: string) => {
-        a[b] = (cssValue as any)[b].tem.replace(
-          "$",
-          (cssValue as any)[b].value
-        );
-        return a;
-      }, {});
-    });
-
-    return {
-      cssValue_,
-    };
+    return {};
   },
 };
 </script>
@@ -36,8 +22,6 @@ export default {
 
 <style scoped lang="scss">
 .root {
-  --head-heigin: v-bind("cssValue_.headHeight");
-  --content-width: v-bind("cssValue_.contentWidth");
   width: 100%;
 
   > .se {

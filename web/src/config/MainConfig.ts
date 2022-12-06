@@ -1,4 +1,4 @@
-import { MainConfig as MainConfig_ } from "com_utils/MainConfig";
+import { MainConfig as MainConfig_ } from "com_utils/dist/MainConfig";
 
 /**
  * 全局配置

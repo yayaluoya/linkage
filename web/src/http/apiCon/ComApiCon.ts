@@ -4,7 +4,7 @@ import OSS from "ali-oss";
 import { ApiCon } from "./ApiCon";
 
 /**
- * 主api控制器
+ * 公共api控制器
  */
 @instanceTool()
 export class ComApiCon extends ApiCon {

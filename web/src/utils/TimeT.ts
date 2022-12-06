@@ -9,6 +9,6 @@ export class TimeT {
      * @returns 
      */
     static getOnTime() {
-        return moment().format('MMMM Do YYYY, h:mm:ss a');
+        return moment().format('YYYY-MM-DD HH:mm:ss');
     }
 }
