@@ -35,7 +35,7 @@ export declare class ServerConfig extends MainConfig {
         username: string;
         password: string;
         database: string;
-        entities: any[];
+        entities: string[];
         synchronize: boolean;
     };
 }

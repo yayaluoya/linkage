@@ -1,7 +1,7 @@
-import { confusionStr } from "com_utils/dist/confusionStr";
+import { confusionStr } from "global-module/dist_esm/confusionStr";
 import axios, { AxiosRequestConfig } from "axios";
 import { Base64 } from "yayaluoya-tool/dist/Base64";
-import { ResData } from "com_utils/dist/ResData";
+import { ResData } from "global-module/dist_esm/ResData";
 import { URLT } from "yayaluoya-tool/dist/http/URLT";
 
 let axios_ = axios.create();

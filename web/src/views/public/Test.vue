@@ -3,7 +3,7 @@ import { ref, reactive, onMounted } from "vue";
 import ColorPicker from ">/ColorPicker/ColorPicker.vue";
 import { TestApiCon } from "@/http/apiCon/TestApiCon";
 import { ArrayUtils } from "yayaluoya-tool/dist/ArrayUtils";
-import { HandleHttpData } from "com_utils/dist/handleHttpData";
+import { HandleHttpData } from "global-module/dist_esm/HandleHttpData";
 import { LoadingT } from "yayaluoya-tool/dist/LoadingT";
 import { Mes } from "@/mes/Mes";
 import { TestDataProxy } from "@/localData/TestDataProxy";

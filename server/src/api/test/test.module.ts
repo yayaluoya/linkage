@@ -1,11 +1,10 @@
 import { Module } from "@nestjs/common";
-import { EManager } from "db/EManager";
-import { TestEntity } from "db/entities/TestEntity";
+import { TestM } from "db/model/TestM";
 import { TestController } from "./test.controller";
 
 @Module({
     imports: [
-        EManager.imports(TestEntity),
+        TestM,
     ],
     controllers: [TestController],
     providers: [],

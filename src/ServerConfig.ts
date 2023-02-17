@@ -7,7 +7,7 @@ import { PathManager } from "./PathManager";
  */
 export class ServerConfig extends MainConfig {
     /** 端口 */
-    static port = 6102;
+    static port = 6202;
     /** 暗号相关 */
     static secretCode = {
         /** 是否验证 */
@@ -22,7 +22,7 @@ export class ServerConfig extends MainConfig {
      * TODO 测试用的临时配置
      */
     static aliOss = {
-        region: "oss-cn-hangzhou",
+        region: "",
         bucket: "test",
         access: {
             accessKeyId: "",

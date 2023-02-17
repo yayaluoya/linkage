@@ -59,11 +59,10 @@ export class FileApiCon extends ApiCon {
             .split(/\.(?=[a-zA-Z]+$)/);
         let _fileName = `${_fileNames[0]}-${Date.now()}.${_fileNames[1]}`;
         //
-        return AliOssT.instance.updateFile(_file, `${moment().format('Y-M-D')}/${_fileName}`).then((res) => {
-            return res;
-        }).catch((e) => {
-            console.error(e);
-            throw '阿里云OSS上传失败';
+        return AliOssT.instance.then(_ => {
+            return _.updateFile(`/${moment().format('Y-M-D')}/${_fileName}`, _file).then((res) => {
+                return res;
+            })
         });
     }
 
@@ -78,9 +77,6 @@ export class FileApiCon extends ApiCon {
             return req.blob();
         }).then((blob) => {
             return this.updateALIYunOSS(new File([blob], fileName));
-        }).catch((e) => {
-            console.error(e);
-            throw '上传图片失败';
         });
     }
 }

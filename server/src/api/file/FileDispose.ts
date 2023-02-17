@@ -3,7 +3,7 @@ import { PathManager } from "pathManager/PathManager";
 import { join, relative } from "path";
 import { mkdirSync, rmSync, writeFile, statSync } from "fs";
 import { HttpStatus } from "@nestjs/common";
-import { ResData } from "@utils/dist/ResData";
+import { ResData } from "global-module/dist/ResData";
 import { AliOssT } from "utils/AliOssT";
 import * as moment from "moment";
 import { URLT } from "yayaluoya-tool/dist/http/URLT";
@@ -72,7 +72,7 @@ export default class FileDispose {
      * @param file 
      */
     public uploadToAliOSS(file: IFileData): Promise<ResData> {
-        return AliOssT.instance.updateFile(file.buffer, `${moment().format('Y-M-D')}/${packFileName(file.originalname)}`).then((str) => {
+        return AliOssT.instance.updateFile(`${moment().format('Y-M-D')}/${packFileName(file.originalname)}`, file.buffer as any).then((str) => {
             return new ResData(str);
         });
     }
@@ -84,7 +84,7 @@ export default class FileDispose {
     public remove(url_: string) {
         let url = new URLT(url_);
         if (/aliyuncs.com/.test(url.origin)) {
-            return AliOssT.instance.client.delete(url.path).then(() => {
+            return AliOssT.instance.delete(url.path).then(() => {
                 return new ResData('文件已从阿里云上删除');
             }).catch((e) => {
                 console.log('阿里云删除文件失败', e);

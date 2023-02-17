@@ -1,6 +1,6 @@
 import { ExceptionFilter as ExceptionFilter_, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ResData } from "@utils/dist/ResData";
+import { ResData } from "global-module/dist/ResData";
 import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
 import { red } from "chalk";
 
@@ -9,6 +9,13 @@ import { red } from "chalk";
  */
 @Catch()
 export class ExceptionFilter implements ExceptionFilter_ {
+    private static handResList: ((res: Response, resData: ResData, next: Function) => void)[] = [];
+
+    /** 添加res处理 */
+    static addResHandle(f: (res: Response, resData: ResData, next: Function) => void) {
+        this.handResList.push(f);
+    }
+
     catch(exception: unknown, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse<Response>();
@@ -21,10 +28,26 @@ export class ExceptionFilter implements ExceptionFilter_ {
 
         const message = exception instanceof HttpException
             ? exception.message
-            : (console.log(red('服务器内部错误'), exception), '服务器内部错误');
+            : (console.log(red('服务器内部错误'), exception), '服务器内部错误，具体错误请查看日志');
 
-        response
-            .status(200)
-            .json(new ResData(null, status, message));
+        let resData = new ResData(null, status, message);
+
+        // res处理列表
+        let handResList = [
+            ...ExceptionFilter.handResList,
+            (res) => {
+                res
+                    .status(HttpStatus.OK)
+                    .json(resData);
+            }
+        ];
+
+        let handleRes = () => {
+            let hf = handResList.shift();
+            if (hf) {
+                hf(response, resData, handleRes);
+            }
+        }
+        handleRes();
     }
 }

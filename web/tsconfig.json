@@ -10,7 +10,10 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "baseUrl": "./",
     "paths": {
       "@/*": [
@@ -19,13 +22,18 @@
       ">\/*": [
         "src/components/*"
       ],
-      "-/*":[
+      "-/*": [
         "src/utils/*"
       ]
     },
     "typeRoots": [
-      "../node_modules/@types"
+      "../types"
     ]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ]
 }

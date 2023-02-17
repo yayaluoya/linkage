@@ -1,6 +1,6 @@
 import { HttpStatus } from "@nestjs/common";
 import { type AxiosPromise, type AxiosResponse } from "axios";
-import { ResData } from "@utils/dist/ResData";
+import { ResData } from "global-module/dist/ResData";
 import { BaseApiCon as BaseApiCon_ } from "yayaluoya-tool/dist/node/BaseApiCon";
 
 /**

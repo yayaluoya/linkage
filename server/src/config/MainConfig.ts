@@ -1,8 +1,8 @@
-import { MainConfig as MainConfig_ } from "@utils/dist/MainConfig";
+import { ServerConfig } from "global-module/dist/ServerConfig";
 
 /**
  * 主配置
  */
-export class MainConfig extends MainConfig_ {
+export class MainConfig extends ServerConfig {
     //
 }

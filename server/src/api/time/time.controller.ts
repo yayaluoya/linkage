@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ResData } from '@utils/dist/ResData';
+import { ResData } from 'global-module/dist/ResData';
 
 /**
  * 时间相关，用来获取服务端的当前时间戳api

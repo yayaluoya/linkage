@@ -1,6 +1,6 @@
 import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
 import { BaseDataProxy } from "./BaseDataProxy";
-import { CryptoI } from "com_utils/dist/CryptoI";
+import { CryptoI } from "global-module/dist_esm/CryptoI";
 
 /**
  * 用户数据

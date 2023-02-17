@@ -18,6 +18,11 @@ const serverRootUrl = `/webs/${MainConfig.Name}`;
 /** 更新pm2 */
 function upatePm2(conn) {
     return new Promise((r) => {
+        /** 必须要传一次后才能启动pm2 */
+        if (true) {
+            r();
+            return;
+        }
         conn.exec(`pm2 start ${serverRootUrl}/ecosystem.config.js`, (err, stream) => {
             if (err) {
                 console.log('出错了', err);
@@ -25,7 +30,6 @@ function upatePm2(conn) {
                 return;
             }
             stream.on('close', (code, signal) => {
-                conn.end();
                 r();
             }).on('data', (data) => {
                 console.log('STDOUT: ' + data);
@@ -82,12 +86,13 @@ module.exports = getConfig(() => {
                         remote: `${serverRootUrl}/ecosystem.config.js`,
                     },
                 ],
-                /** 必须要传一次后才能启动pm2 */
-                // laterF(connF) {
-                //     return connF().then(conn => {
-                //         return upatePm2(conn);
-                //     })
-                // },
+                laterF(connF) {
+                    return connF().then(conn => {
+                        return upatePm2(conn).finally(() => {
+                            conn.end();
+                        });
+                    });
+                },
             },
             {
                 key: 'server',
@@ -117,7 +122,9 @@ module.exports = getConfig(() => {
                 ],
                 laterF(connF) {
                     return connF().then(conn => {
-                        return upatePm2(conn);
+                        return upatePm2(conn).finally(() => {
+                            conn.end();
+                        });
                     })
                 },
             },

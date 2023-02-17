@@ -1,7 +1,7 @@
 import axios, { Method, AxiosResponse, AxiosRequestConfig as AxiosRequestConfig_, AxiosInstance } from "axios";
-import { HandleHttpData } from 'com_utils/dist/handleHttpData';
+import { HandleHttpData } from 'global-module/dist_esm/HandleHttpData';
 import { BaseApiCon as BaseApiCon_ } from "yayaluoya-tool/dist/node/BaseApiCon";
-import { ResData } from "com_utils/dist/ResData";
+import { ResData } from "global-module/dist_esm/ResData";
 import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
 import { SecretCode } from "./SecretCode";
 
@@ -28,10 +28,7 @@ export class BaseApiCon extends BaseApiCon_ {
      * @returns 
      */
     getData<D = any>(_op: AxiosRequestConfig) {
-        return this.requestDataData<D>({
-            ..._op,
-            method: 'get',
-        });
+        return super.getData<D>(_op);
     }
     /**
      * post请求获取数据
@@ -41,10 +38,7 @@ export class BaseApiCon extends BaseApiCon_ {
      * @returns 
      */
     postData<D = any>(_op: AxiosRequestConfig) {
-        return this.requestDataData<D>({
-            ..._op,
-            method: 'post',
-        });
+        return super.postData<D>(_op);
     }
     /**
      * put请求获取数据
@@ -54,10 +48,7 @@ export class BaseApiCon extends BaseApiCon_ {
      * @returns 
      */
     putData<D = any>(_op: AxiosRequestConfig) {
-        return this.requestDataData<D>({
-            ..._op,
-            method: 'put',
-        });
+        return super.putData<D>(_op);
     }
     /**
      * delete请求获取数据
@@ -67,10 +58,7 @@ export class BaseApiCon extends BaseApiCon_ {
      * @returns 
      */
     deleteData<D = any>(_op: AxiosRequestConfig) {
-        return this.requestDataData<D>({
-            ..._op,
-            method: 'delete',
-        });
+        return super.deleteData<D>(_op);
     }
 
     /** 
@@ -87,7 +75,9 @@ export class BaseApiCon extends BaseApiCon_ {
 
     /** 请求拦截 */
     protected async request_(_: any) {
+        //添加响应头
         let config: AxiosRequestConfig = _;
+        //
         if (config['x-data-handles'] && config['x-data-handles'].length > 0) {
             if (config.data) {
                 config.data = {
@@ -111,14 +101,16 @@ export class BaseApiCon extends BaseApiCon_ {
      * 失败的话抛出AxiosResponse的异常
      */
     protected async response_(_: any) {
-        let res = _ as AxiosResponse
+        let res = _ as AxiosResponse;
         //解析数据，主要判断数据是否被加密或者压缩
         let handleType = [];
         try {
             handleType = JSON.parse((res.headers as ComN.IDataHandle)["x-data-handles"] as any);
         }
         catch { }
-        res.data = HandleHttpData.handle_(res.data || null, handleType);
+        let data = HandleHttpData.handle_(res.data || null, handleType) as ResData;
+        res.data = data;
+        //
         return res as any;
     }
 }

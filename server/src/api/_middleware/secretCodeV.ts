@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { MainConfig } from 'config/MainConfig';
-import { confusionStr } from '@utils/dist/confusionStr';
+import { confusionStr } from 'global-module/dist/confusionStr';
 import { SecretCoduDataP } from 'localData/SecretCoduDataP';
 
 /**
@@ -11,7 +11,7 @@ import { SecretCoduDataP } from 'localData/SecretCoduDataP';
 export function secretCodeV(_req: Request): Promise<string> {
     return new Promise((r) => {
         // 先判断是否验证暗号
-        if (!MainConfig.server.secretCode.v) {
+        if (!MainConfig.secretCode.v) {
             r('');
             return;
         }
@@ -23,7 +23,7 @@ export function secretCodeV(_req: Request): Promise<string> {
             try {
                 let { key, time, v, } = JSON.parse(Buffer.from(secretCode, 'base64').toString());
                 //先检查时间
-                if (Math.abs(Date.now() - time) > MainConfig.server.secretCode.overrunTime) {
+                if (Math.abs(Date.now() - time) > MainConfig.secretCode.overrunTime) {
                     r('暗号过期');
                 } else {
                     //再检查暗号真实性

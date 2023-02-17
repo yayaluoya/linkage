@@ -1,22 +1,14 @@
 import { Body, Controller, Get, Header, HttpCode, HttpStatus, Post, Query } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { ResData } from "@utils/dist/ResData";
-import { TestEntity } from "db/entities/TestEntity";
+import { ResData } from "global-module/dist/ResData";
 import { TestM } from "db/model/TestM";
-import { Repository } from "typeorm";
 import { HeaderDataHandlePack } from "utils/MethodDecorator/HeaderDataHandlePack";
-import { CryptoI } from "@utils/dist/CryptoI";
+import { CryptoI } from "global-module/dist/CryptoI";
 
 @Controller('test')
 export class TestController {
-    private testM: TestM;
-
     constructor(
-        @InjectRepository(TestEntity)
-        testRepository: Repository<TestEntity>
-    ) {
-        this.testM = new TestM(testRepository);
-    }
+        private testM: TestM
+    ) { }
 
     /** get */
     @Get('get')
@@ -43,6 +35,7 @@ export class TestController {
 
     @Get('tab')
     async tab() {
+        console.log('获取列表');
         return new ResData(await this.testM.findAll());
     }
     @Post('tab')

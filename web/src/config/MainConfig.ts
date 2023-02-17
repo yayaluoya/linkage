@@ -1,8 +1,8 @@
-import { MainConfig as MainConfig_ } from "com_utils/dist/MainConfig";
+import { WebConfig } from "global-module/dist_esm/WebConfig";
 
 /**
  * 全局配置
  */
-export class MainConfig extends MainConfig_ {
+export class MainConfig extends WebConfig {
     //
 }

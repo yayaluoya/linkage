@@ -2,7 +2,7 @@ import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, Query } fro
 import { readFileSync } from "fs";
 import { join } from "path";
 import { PathManager } from "pathManager/PathManager";
-import { ResData } from "@utils/dist/ResData";
+import { ResData } from "global-module/dist/ResData";
 import { CredentialsT } from "utils/AliOssT";
 
 /**

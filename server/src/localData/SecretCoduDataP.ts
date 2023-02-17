@@ -23,7 +23,7 @@ export class SecretCoduDataP extends BaseDataProxy<D> {
     vBeOverdue(v: string, time: number): boolean {
         //先剔除掉超时的暗号
         this.data = this.data.filter((item) => {
-            return Math.abs(item[1] - Date.now()) <= MainConfig.server.secretCode.overrunTime;
+            return Math.abs(item[1] - Date.now()) <= MainConfig.secretCode.overrunTime;
         });
         if (this.data.some((item) => {
             return item[0] == v;

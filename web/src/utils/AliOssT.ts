@@ -1,21 +1,22 @@
 import { AliOssConfig } from "@/config/AliOssConfig";
+import { AliOSST as AliOSST_ } from "yayaluoya-tool/dist/web/AliYun/AliOSST";
 import { ComApiCon } from "@/http/apiCon/ComApiCon";
-import { AliOSST } from "yayaluoya-tool/dist/web/AliYun/AliOSST";
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
+import OSS from "ali-oss";
 
 /**
  * 阿里云oss工具
  */
-@instanceTool()
-export class AliOssT extends AliOSST {
+export class AliOssT extends AliOSST_ {
     /** 单例 */
-    static instance: AliOssT;
+    static instance = ComApiCon.instance.getSts().then(info => {
+        return new AliOssT(info);
+    })
 
-    constructor() {
+    constructor(info: OSS.Credentials) {
         super({
-            accessKeyId: '',
-            accessKeySecret: '',
-            stsToken: '',
+            accessKeyId: info.AccessKeyId,
+            accessKeySecret: info.AccessKeySecret,
+            stsToken: info.SecurityToken,
             refreshSTSToken: async () => {
                 // 向您搭建的STS服务获取临时访问凭证。
                 const info = await ComApiCon.instance.getSts();
@@ -31,6 +32,6 @@ export class AliOssT extends AliOSST {
             bucket: AliOssConfig.bucket,
             //超时时间
             timeout: 60 * 1000,
-        })
+        });
     }
 }

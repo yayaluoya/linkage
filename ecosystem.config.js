@@ -1,6 +1,8 @@
+const { MainConfig } = require('./dist/MainConfig');
+
 module.exports = {
   apps: {
-    name: 'web-vars',
+    name: MainConfig.Name,
     script: './server/dist/main.js',
   },
 };

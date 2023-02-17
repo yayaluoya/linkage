@@ -1,4 +1,4 @@
-import { PathManager as PathManager_ } from "@utils/dist/PathManager";
+import { PathManager as PathManager_ } from "global-module/dist/PathManager";
 import { join } from "path";
 /**
  * 资源路径管理器
@@ -7,6 +7,10 @@ export class PathManager extends PathManager_ {
     /** 获取打包文件路径 */
     static get distPath(): string {
         return join(this.server, '/dist');
+    }
+    /** web打包文件路径 */
+    static get webDistPath(): string {
+        return join(this.web, '/dist');
     }
     /** 本地数据存储路径 */
     static get localDataPath(): string {

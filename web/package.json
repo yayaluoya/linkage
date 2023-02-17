@@ -10,19 +10,16 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
-    "ali-oss": "^6.17.1",
     "animejs": "^3.2.1",
-    "axios": "^0.24.0",
-    "com_utils": "file:../node_modules/@utils",
     "element-plus": "^2.1.9",
+    "global-module": "file:..",
     "highlight.js": "^11.5.1",
     "marked": "^4.0.14",
     "moment": "^2.29.1",
     "pinia": "^2.0.4",
     "prismjs": "^1.25.0",
     "vue": "^3.2.16",
-    "vue-router": "^4.0.12",
-    "yayaluoya-tool": "^1.7.9"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@types/node": "^17.0.5",

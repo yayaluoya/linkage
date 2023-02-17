@@ -7,7 +7,7 @@ import { PathManager } from "./PathManager";
 export class ServerConfig extends MainConfig {
 }
 /** 端口 */
-ServerConfig.port = 6102;
+ServerConfig.port = 6202;
 /** 暗号相关 */
 ServerConfig.secretCode = {
     /** 是否验证 */
@@ -22,7 +22,7 @@ ServerConfig.publicFileMaxAge = 1000 * 60 * 60 * 24 * 360;
  * TODO 测试用的临时配置
  */
 ServerConfig.aliOss = {
-    region: "oss-cn-hangzhou",
+    region: "",
     bucket: "test",
     access: {
         accessKeyId: "",

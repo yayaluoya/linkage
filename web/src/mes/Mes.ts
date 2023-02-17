@@ -1,5 +1,5 @@
 import { ElMessage, MessageOptions } from "element-plus";
-import { ResData } from "com_utils/dist/ResData";
+import { ResData } from "global-module/dist_esm/ResData";
 
 /**
  * 消息提示工具
