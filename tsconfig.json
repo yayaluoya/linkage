@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es2015",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "strict": false,
+    "baseUrl": "./",
+  },
+  "include": [
+    "./src/**/*",
+    "./types/**/*",
+    "./dist/**/*",
+    "./dist_esm/**/*",
+    "./server/src/**/*",
+    "./web/src/**/*",
+  ]
+}

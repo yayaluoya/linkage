@@ -1,0 +1,31 @@
+{
+  "name": "global-module",
+  "version": "1.0.0",
+  "description": "- 管理一些通用变量",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-w": "tsc -w -p ./tsconfig-b.json",
+    "ts-w-esm": "tsc -w -p ./tsconfig-b-esm.json",
+    "同步到服务器": "sfs -s -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wudawuer/variables.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wudawuer/variables/issues"
+  },
+  "homepage": "https://github.com/wudawuer/variables#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "server-file-sync": "^1.6.13"
+  },
+  "dependencies": {
+    "is-color": "^1.0.2",
+    "pako": "^2.0.4",
+    "yayaluoya-tool": "^1.7.12"
+  }
+}
