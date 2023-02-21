@@ -1,12 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
+import { ResData } from 'global-module/dist/ResData';
 import { ApiService } from './api.service';
 
-@Controller('api')
+@Controller('/api')
 export class ApiController {
   constructor(private readonly mianService: ApiService) { }
 
   @Get('test')
-  test(): string {
-    return this.mianService.test();
+  test() {
+    return new ResData(this.mianService.test());
   }
 }

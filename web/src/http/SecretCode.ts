@@ -37,7 +37,7 @@ export class SecretCode {
         if (!this.getTimeDiffP) {
             // console.log('获取时间');
             this.getTimeDiffP = axios_
-                .get(new URLT('/time/getTime', import.meta.env.VITE_BASE_URL).href)
+                .get(new URLT('/api/time/getTime', import.meta.env.VITE_BASE_URL).href)
                 .then((data) => {
                     return data.data;
                 }).then((data: ResData<number>) => {

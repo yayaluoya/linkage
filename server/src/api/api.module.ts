@@ -11,6 +11,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ProcessingTimeInterceptor } from './_interceptor/ProcessingTime.interceptor';
 import { DevModule } from './dev/dev.module';
 import { SCMiddleware } from './_middleware/SC.middleware';
+import { ApiMiddleware } from './_middleware/Api.middleware';
 import { DataHandleMiddleware } from './_middleware/DataHandle.middleware';
 
 /**
@@ -34,15 +35,19 @@ import { DataHandleMiddleware } from './_middleware/DataHandle.middleware';
 })
 export class ApiModule {
   configure(consumer: MiddlewareConsumer) {
+    // api中间件
+    consumer.apply(ApiMiddleware)
+      .forRoutes('/api/*');
+    //
     let forRoutes = [
-      '/admin/*',
-      '/com/*',
-      '/file/*',
-      '/web/*',
+      '/api/admin/*',
+      '/api/com/*',
+      '/api/file/*',
+      '/api/web/*',
+      '/api/test/*',
     ];
     //添加暗号验证中间件
     consumer.apply(SCMiddleware)
-      // 匹配全部请求
       .forRoutes(...forRoutes);
     //添加数据处理中间件
     consumer.apply(DataHandleMiddleware)

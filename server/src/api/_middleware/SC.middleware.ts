@@ -11,6 +11,7 @@ import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
 @Injectable()
 export class SCMiddleware implements NestMiddleware {
     use(req: Request, res: Response, next: NextFunction) {
+        // console.log('暗号验证');
         secretCodeV(req)
             .then((mes) => {
                 if (!mes) {

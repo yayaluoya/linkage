@@ -66,11 +66,14 @@ export class BaseApiCon extends BaseApiCon_ {
      * 如果响应成功的话返回 ResData
      * 如果响应失败的话抛出ResData的异常
      */
-    resData_(data: ResData, con: boolean, res: any) {
-        if (data.status != HttpStatus.OK) {
-            throw data;
+    resData_(data: ResData | undefined, con: boolean, res: AxiosResponse) {
+        let resData = new ResData(data?.data || res.data, data?.status || res.status, data?.msg || '请求错误', data?.timeStamp || Date.now());
+        resData.res = res;
+        resData.handleTime = 1;
+        if (resData.status != HttpStatus.OK) {
+            throw resData;
         }
-        return data;
+        return resData;
     }
 
     /** 请求拦截 */

@@ -12,7 +12,7 @@ export class TestApiCon extends ApiCon {
     /** 测试 get */
     testGet(params: any) {
         return this.getData({
-            url: '/test/get',
+            url: '/api/test/get',
             ['x-data-handles']: ['z', 'e'],
             params,
         });
@@ -21,7 +21,7 @@ export class TestApiCon extends ApiCon {
     /** 测试 post */
     testPost<T>(data: T) {
         return this.postData<T>({
-            url: '/test/post',
+            url: '/api/test/post',
             ['x-data-handles']: ['e', 'z'],
             data,
         });
@@ -30,13 +30,13 @@ export class TestApiCon extends ApiCon {
     /** 获取测试数据列表 */
     list() {
         return this.getData<EN.ITestE[]>({
-            url: '/test/tab',
+            url: '/api/test/tab',
         });
     }
     /** 添加测试数据 */
     add(data: Partial<EN.ITestE>) {
         return this.postData<EN.ITestE>({
-            url: '/test/tab',
+            url: '/api/test/tab',
             data,
         });
     }

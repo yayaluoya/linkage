@@ -4,7 +4,7 @@ import { TestM } from "db/model/TestM";
 import { HeaderDataHandlePack } from "utils/MethodDecorator/HeaderDataHandlePack";
 import { CryptoI } from "global-module/dist/CryptoI";
 
-@Controller('test')
+@Controller('/api/test')
 export class TestController {
     constructor(
         private testM: TestM
@@ -35,7 +35,7 @@ export class TestController {
 
     @Get('tab')
     async tab() {
-        console.log('获取列表');
+        // console.log('获取列表');
         return new ResData(await this.testM.findAll());
     }
     @Post('tab')

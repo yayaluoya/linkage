@@ -35,8 +35,9 @@ export class Mes {
     }
 
     /** 处理http的错误请求提示 */
-    static handleHttpCatch({ mes }: ResData) {
-        Mes.error(mes);
+    static handleHttpCatch(res: ResData) {
+        console.error('请求错误', res);
+        Mes.error(res.msg);
     }
 
     /** 处理表单异常 */

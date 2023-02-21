@@ -13,13 +13,16 @@ const path = require('path');
 const { MainConfig } = require('./dist/MainConfig');
 
 /** 服务器根路径 */
-const serverRootUrl = `/webs/${MainConfig.Name}`;
+const serverRootUrl = `/www/pm2/${MainConfig.Name}`;
+
+/** 是否是第一次传 */
+const first = true;
 
 /** 更新pm2 */
 function upatePm2(conn) {
     return new Promise((r) => {
         /** 必须要传一次后才能启动pm2 */
-        if (true) {
+        if (first) {
             r();
             return;
         }
@@ -47,7 +50,7 @@ module.exports = getConfig(() => {
      */
     return {
         /** 主机地址 */
-        host: '47.94.233.236',
+        host: '',
         /** 端口号 */
         port: 22,
         /** 用户名 */
@@ -68,13 +71,15 @@ module.exports = getConfig(() => {
                         ignored: [
                             path.join(__dirname, './dist/**/*.d.ts').replace(/\\+/g, '/'),
                             path.join(__dirname, './dist/**/*.d.ts.map').replace(/\\+/g, '/'),
-                            /**
-                             * 服务器会有不同版本的文件
-                             * 所以这些文件只需要同步一次
-                             */
-                            // path.join(__dirname, './dist/MainConfig.js').replace(/\\+/g, '/'),
-                            // path.join(__dirname, './dist/ServerConfig.js').replace(/\\+/g, '/'),
-                            // path.join(__dirname, './dist/WebConfig.js').replace(/\\+/g, '/'),
+                            ...(first ? [] : [
+                                /**
+                                 * 服务器会有不同版本的文件
+                                 * 所以这些文件第二次传就需要忽略掉了
+                                 */
+                                path.join(__dirname, './dist/MainConfig.js').replace(/\\+/g, '/'),
+                                path.join(__dirname, './dist/ServerConfig.js').replace(/\\+/g, '/'),
+                                path.join(__dirname, './dist/WebConfig.js').replace(/\\+/g, '/'),
+                            ]),
                         ],
                     },
                     {

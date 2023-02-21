@@ -4,7 +4,7 @@ import { ResData } from "global-module/dist/ResData";
 /**
  * 开发模块控制器
  */
-@Controller('dev')
+@Controller('/api/dev')
 export class DevC {
     @Get('test')
     async test() {

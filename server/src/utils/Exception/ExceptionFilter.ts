@@ -31,11 +31,13 @@ export class ExceptionFilter implements ExceptionFilter_ {
             : (console.log(red('服务器内部错误'), exception), '服务器内部错误，具体错误请查看日志');
 
         let resData = new ResData(null, status, message);
+        resData.handleTime = Date.now();
 
         // res处理列表
         let handResList = [
             ...ExceptionFilter.handResList,
             (res) => {
+                resData.handleTime = Date.now() - resData.handleTime;
                 res
                     .status(HttpStatus.OK)
                     .json(resData);

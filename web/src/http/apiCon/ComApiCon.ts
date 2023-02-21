@@ -13,14 +13,14 @@ export class ComApiCon extends ApiCon {
     /** 测试 */
     test() {
         return this.getData<any>({
-            url: '/com/test',
+            url: '/api/com/test',
         });
     }
     /** 获取md帮助信息 */
     getMdHelp() {
         return this.getChche('/com/getMdHelp', () => {
             return this.getData<string>({
-                url: '/com/getMdHelp',
+                url: '/api/com/getMdHelp',
             });
         });
     }
@@ -28,7 +28,7 @@ export class ComApiCon extends ApiCon {
     getEmoji() {
         return this.getChche('/com/getEmoji', () => {
             return this.getData<string>({
-                url: '/com/getEmoji',
+                url: '/api/com/getEmoji',
             }).then((str) => {
                 return JSON.parse(str).map((item: any) => {
                     item.list = [...EmojiT.utf16toEntities(item.list).matchAll(/&#[0-9]+;/g)].map((_) => {
@@ -45,7 +45,7 @@ export class ComApiCon extends ApiCon {
     /** 获取sts的key */
     getSts() {
         return this.getData<OSS.Credentials>({
-            url: '/admin/getSts',
+            url: '/api/admin/getSts',
         });
     }
 }

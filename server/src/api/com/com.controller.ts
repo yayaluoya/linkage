@@ -8,7 +8,7 @@ import { CredentialsT } from "utils/AliOssT";
 /**
  * 公共模块控制器
  */
-@Controller('com')
+@Controller('/api/com')
 export class ComC {
     @Get('test')
     async test() {

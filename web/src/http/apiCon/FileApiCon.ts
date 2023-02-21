@@ -20,7 +20,7 @@ export class FileApiCon extends ApiCon {
         let _formData = new FormData();
         _formData.set('file', _file);
         return this.postData<string>({
-            url: '/file/upload',
+            url: '/api/file/upload',
             data: _formData,
         });
     }
@@ -33,7 +33,7 @@ export class FileApiCon extends ApiCon {
         let _formData = new FormData();
         _formData.set('file', _file);
         return this.postData<string>({
-            url: '/file/uploadToAliOSS',
+            url: '/api/file/uploadToAliOSS',
             data: _formData,
         })
     }
@@ -44,7 +44,7 @@ export class FileApiCon extends ApiCon {
      */
     remove(url: string) {
         return this.deleteData({
-            url: '/file/remove',
+            url: '/api/file/remove',
             data: { url },
         });
     }

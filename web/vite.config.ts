@@ -1,16 +1,38 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path';
+import path, { resolve } from 'path';
 import { svgBuilder } from './.vite/svgBuilder';
+import vitePluginAliOss from 'vite-plugin-ali-oss';
+import { ServerConfig } from "global-module/dist/ServerConfig"
 
 function pathResolve(dir: string) {
   // console.log(resolve(process.cwd(), '.', dir));
   return resolve(process.cwd(), '.', dir);
 }
 
+const prod = process.env.NODE_ENV === 'production';
+
+const outDir = './dist';
+
+const options = {
+  region: ServerConfig.aliOss.region,
+  accessKeyId: ServerConfig.aliOss.access.accessKeyId,
+  accessKeySecret: ServerConfig.aliOss.access.accessKeySecret,
+  bucket: '',
+  overwrite: true,
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), svgBuilder('./src/assets/svg/')],
+  base: prod ? `https://${options.bucket}.${options.region}.aliyuncs.com/${ServerConfig.Name}/` : '/', // must be URL when build
+  build: {
+    outDir,
+  },
+  plugins: [
+    vue(),
+    svgBuilder('./src/assets/svg/'),
+    vitePluginAliOss(options) as any,
+  ],
   server: {
     port: 3001,
   },
@@ -39,5 +61,5 @@ export default defineConfig({
         javascriptEnabled: true,//允许链式调用的换行
       }
     }
-  }
+  },
 })

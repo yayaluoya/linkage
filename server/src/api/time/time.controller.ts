@@ -4,7 +4,7 @@ import { ResData } from 'global-module/dist/ResData';
 /**
  * 时间相关，用来获取服务端的当前时间戳api
  */
-@Controller('time')
+@Controller('/api/time')
 export class TimeController {
   @Get()
   get() {

@@ -13,7 +13,7 @@ export class AdminApiCon extends ApiCon {
     /** 测试 */
     test() {
         return this.getData<any>({
-            url: '/admin/test',
+            url: '/api/admin/test',
         });
     }
 }

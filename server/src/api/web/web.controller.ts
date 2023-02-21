@@ -4,7 +4,7 @@ import { ResData } from "global-module/dist/ResData";
 /**
  * web模块控制器
  */
-@Controller('web')
+@Controller('/api/web')
 export class WebC {
     @Get('test')
     test() {

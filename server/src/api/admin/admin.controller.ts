@@ -4,7 +4,7 @@ import { ResData } from "global-module/dist/ResData";
 /**
  * 后台模块控制器
  */
-@Controller('admin')
+@Controller('/api/admin')
 export class AdminC {
     @Get('test')
     test() {

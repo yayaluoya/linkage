@@ -7,7 +7,7 @@ import { IFileData } from "./IFileData";
 /**
  * 文件控制器
  */
-@Controller('file')
+@Controller('/api/file')
 export class FileController {
     /** 公共处理实例 */
     private fileDispose: FileDispose;
