@@ -1,8 +1,12 @@
 <script lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, onUnmounted } from "vue";
 import { Plus, Loading, UploadFilled } from "@element-plus/icons-vue";
 import { FileApiCon } from "@/http/apiCon/FileApiCon";
 import { Mes } from "@/mes/Mes";
+import { GetFileItem } from "yayaluoya-tool/dist/web/GetFileItem";
+
+const fileSelect = new GetFileItem("image/*", 1);
+
 export default {
   components: { Plus, Loading, UploadFilled },
   props: {
@@ -10,31 +14,28 @@ export default {
       type: String,
       default: "",
     },
-    size: {
+    /** 文件最大大小，kb */
+    maxSize: {
       type: Number,
       default: 1024 * 2,
     },
   },
   emits: ["update:img"],
   setup(_, ctx) {
-    const fileRef = ref<HTMLInputElement>();
     const loading = ref(false);
+
     onMounted(() => {
-      fileRef.value?.addEventListener("change", (e: any) => {
-        let _file: File = e.target?.files?.[0];
-        if (!_file) {
-          return;
-        }
+      fileSelect.on("change", undefined, (file: File) => {
         //对文件大小进行限制
-        if (_file.size > _.size * 1024) {
-          Mes.warning(`图片大小超过${_.size}kb`);
+        if (file.size > _.maxSize * 1024) {
+          Mes.warning(`图片大小超过${_.maxSize}kb`);
           return;
         }
         //
         loading.value = true;
         //或者上传图片
         FileApiCon.instance
-          .updateALIYunOSS(_file)
+          .updateALIYunOSS(file)
           .then((_str) => {
             //抛出事件
             ctx.emit("update:img", _str);
@@ -44,14 +45,14 @@ export default {
           });
       });
     });
+    onUnmounted(() => {
+      fileSelect.off("change");
+    });
+
     function selectFile() {
-      if (loading.value) {
-        return;
-      }
-      fileRef.value?.click();
+      fileSelect.select();
     }
     return {
-      fileRef,
       loading,
       selectFile,
     };
@@ -77,7 +78,6 @@ export default {
       </el-icon>
     </div>
     <el-image v-if="img" :src="img" alt="" fit="cover"></el-image>
-    <input type="file" accept="image/*" ref="fileRef" />
   </div>
 </template>
 

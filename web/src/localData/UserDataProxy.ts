@@ -1,6 +1,7 @@
 import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
 import { BaseDataProxy } from "./BaseDataProxy";
 import { CryptoI } from "global-module/dist_esm/CryptoI";
+import { computed } from "vue";
 
 /**
  * 用户数据
@@ -13,13 +14,27 @@ export class UserDataProxy extends BaseDataProxy<Partial<{
     static instance: UserDataProxy;
 
     /** 是否登录 */
-    get ifLogin() {
+    get login() {
         return !!this.data?.token;
     }
 
     /** 用户token */
     get token() {
         return this.data?.token || '';
+    }
+
+    /** 是否登录 */
+    useLogin() {
+        return computed(() => {
+            return this.login;
+        });
+    }
+
+    /** 用户token */
+    useToken() {
+        return computed(() => {
+            return this.token;
+        });
     }
 
     /** 清空数据 */

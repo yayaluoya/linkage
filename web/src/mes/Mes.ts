@@ -40,6 +40,13 @@ export class Mes {
         Mes.error(res.msg);
     }
 
+    /** 提示http的错误请求提示 */
+    static alertHttpCatch(res: ResData) {
+        console.error('请求错误', res);
+        Mes.error(res.msg);
+        throw res;
+    }
+
     /** 处理表单异常 */
     static handleFormCatch(e: any) {
         console.warn('表单验证失败', e);

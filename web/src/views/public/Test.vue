@@ -8,13 +8,16 @@ import { LoadingT } from "yayaluoya-tool/dist/LoadingT";
 import { Mes } from "@/mes/Mes";
 import { TestDataProxy } from "@/localData/TestDataProxy";
 import { TimeT } from "@/utils/TimeT";
+import ImgSelect from "@/components/imgSelect/imgSelect.vue";
+
 export default {
-  components: { ColorPicker },
+  components: { ColorPicker, ImgSelect },
   props: {},
   setup(props, ctx) {
     const color = ref("red");
     const loading = reactive(new LoadingT());
     let testDataList = ref<EN.ITestE[]>([]);
+    const img = ref("");
 
     /** 发送测试请求 */
     function request() {
@@ -81,6 +84,7 @@ export default {
     }
 
     return {
+      img,
       color,
       request,
       dataHT,
@@ -98,6 +102,7 @@ export default {
 <template>
   <div class="test">
     <span>测试页面</span>
+    <ImgSelect v-model:img="img" />
     <div>
       <ColorPicker v-model:color="color" />
     </div>
