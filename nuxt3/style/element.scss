@@ -1,0 +1,9 @@
+@import "element-plus/dist/index.css";
+
+:root {
+  --el-border-color-base: var(--border-color-dark);
+}
+
+.el-popover {
+  --el-popover-border-radius: var(--border-radius);
+}
