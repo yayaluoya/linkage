@@ -3,6 +3,10 @@ import { BaseE } from '../BaseE';
 
 @Entity('test')
 export class TestEntity extends BaseE implements EN.ITestE {
+    static get TableName(): string {
+        return 'test';
+    }
+
     @Column()
     number: number;
 

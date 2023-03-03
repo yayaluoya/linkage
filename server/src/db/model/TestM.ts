@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { EManager } from "db/EManager";
 import { TestEntity } from "db/entities/TestEntity";
 import { Repository } from "typeorm";
-import { BaseM } from "./BaseM";
+import { BaseM } from "../BaseM";
 /**
  * 测试表模型
  */
