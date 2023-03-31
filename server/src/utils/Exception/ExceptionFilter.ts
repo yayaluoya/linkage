@@ -28,7 +28,7 @@ export class ExceptionFilter implements ExceptionFilter_ {
 
         const message = exception instanceof HttpException
             ? exception.message
-            : (console.log(red('服务器内部错误'), exception), '服务器内部错误，具体错误请查看日志');
+            : (console.log(red('服务器错误❌'), exception), '服务器错误❌，错误内容请查看日志');
 
         let resData = new ResData(null, status, message);
         resData.handleTime = Date.now();

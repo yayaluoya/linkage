@@ -1,9 +1,9 @@
 import axios, { Method, AxiosResponse, AxiosRequestConfig as AxiosRequestConfig_, AxiosInstance } from "axios";
 import { HandleHttpData } from 'global-module/dist_esm/HandleHttpData';
 import { BaseApiCon as BaseApiCon_ } from "yayaluoya-tool/dist/node/BaseApiCon";
-import { ResData } from "global-module/dist_esm/ResData";
 import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
 import { SecretCode } from "./SecretCode";
+import { ResData } from "../../../dist_esm/ResData";
 
 /** 自定义的请求op类型 */
 interface AxiosRequestConfig<T = any> extends AxiosRequestConfig_<T>, ComN.IDataHandle { }
@@ -12,7 +12,6 @@ interface AxiosRequestConfig<T = any> extends AxiosRequestConfig_<T>, ComN.IData
  * 基类api控制器
  */
 export class BaseApiCon extends BaseApiCon_ {
-    /** 可配置选项 */
     get op(): AxiosRequestConfig {
         return {
             baseURL: import.meta.env.VITE_BASE_URL,
@@ -20,53 +19,24 @@ export class BaseApiCon extends BaseApiCon_ {
         };
     }
 
-    /**
-     * get请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
     getData<D = any>(_op: AxiosRequestConfig) {
         return super.getData<D>(_op);
     }
-    /**
-     * post请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
+
     postData<D = any>(_op: AxiosRequestConfig) {
         return super.postData<D>(_op);
     }
-    /**
-     * put请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
+
     putData<D = any>(_op: AxiosRequestConfig) {
         return super.putData<D>(_op);
     }
-    /**
-     * delete请求获取数据
-     * @param _op 请求配置 
-     * @param data 
-     * @param headers 
-     * @returns 
-     */
+
     deleteData<D = any>(_op: AxiosRequestConfig) {
         return super.deleteData<D>(_op);
     }
 
-    /** 
-     * 响应数据获取
-     * 如果响应成功的话返回 ResData
-     * 如果响应失败的话抛出ResData的异常
-     */
-    resData_(data: ResData | undefined, con: boolean, res: AxiosResponse) {
+    resData_(res: AxiosResponse) {
+        let data = res.data as ResData;
         let resData = new ResData(data?.data || res.data, data?.status || res.status, data?.msg || '请求错误', data?.timeStamp || Date.now());
         resData.res = res;
         resData.handleTime = 1;
@@ -76,11 +46,8 @@ export class BaseApiCon extends BaseApiCon_ {
         return resData;
     }
 
-    /** 请求拦截 */
-    protected async request_(_: any) {
+    protected async request_(config: AxiosRequestConfig) {
         //添加响应头
-        let config: AxiosRequestConfig = _;
-        //
         if (config['x-data-handles'] && config['x-data-handles'].length > 0) {
             if (config.data) {
                 config.data = {
@@ -99,12 +66,8 @@ export class BaseApiCon extends BaseApiCon_ {
             return _ as any;
         });
     }
-    /** 
-     * 响应拦截
-     * 失败的话抛出AxiosResponse的异常
-     */
-    protected async response_(_: any) {
-        let res = _ as AxiosResponse;
+
+    protected async response_(res: AxiosResponse) {
         //解析数据，主要判断数据是否被加密或者压缩
         let handleType = [];
         try {

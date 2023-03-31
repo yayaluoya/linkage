@@ -13,7 +13,9 @@ import { Response } from "express";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  //web文件代理
+  /**
+   * web文件代理
+   */
   let webIndex = 'index.html';
   app.useStaticAssets(PathManager.webDistPath, {
     prefix: '/',
@@ -25,7 +27,10 @@ async function bootstrap() {
       }
     },
   });
-  //添加404异常的处理
+  /**
+   * 添加404异常的处理
+   * 当接口404时返回代理的web主页面
+   */
   ExceptionFilter.addResHandle((res, resData, next) => {
     if (resData.status == HttpStatus.NOT_FOUND) {
       if (statSync(join(PathManager.webDistPath, webIndex), {

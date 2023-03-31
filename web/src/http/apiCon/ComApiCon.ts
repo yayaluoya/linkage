@@ -29,7 +29,7 @@ export class ComApiCon extends ApiCon {
         return this.getChche('/com/getEmoji', () => {
             return this.getData<string>({
                 url: '/api/com/getEmoji',
-            }).then((str) => {
+            }).then(({ data: str }) => {
                 return JSON.parse(str).map((item: any) => {
                     item.list = [...EmojiT.utf16toEntities(item.list).matchAll(/&#[0-9]+;/g)].map((_) => {
                         return EmojiT.entitiestoUtf16(_[0]);
@@ -45,7 +45,7 @@ export class ComApiCon extends ApiCon {
     /** 获取sts的key */
     getSts() {
         return this.getData<OSS.Credentials>({
-            url: '/api/admin/getSts',
+            url: '/api/com/getSts',
         });
     }
 }

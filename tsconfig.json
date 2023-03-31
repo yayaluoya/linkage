@@ -16,5 +16,6 @@
     "./dist_esm/**/*",
     "./server/src/**/*",
     "./web/src/**/*",
+    "./node_modules/yayaluoya-tool"
   ]
 }

@@ -5,7 +5,7 @@ import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
  * 能处理数据的resData
  */
 export class ResData<D = any> extends ResData_<D> {
-    /** 处理时长-ms */
+    /** 处理时长(ms) */
     handleTime: number;
 
     /**

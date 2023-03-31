@@ -26,6 +26,6 @@
   "dependencies": {
     "is-color": "^1.0.2",
     "pako": "^2.0.4",
-    "yayaluoya-tool": "^1.7.12"
+    "yayaluoya-tool": "^1.7.16"
   }
 }

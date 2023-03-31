@@ -2,7 +2,6 @@ import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { BaseApiCon } from "../BaseApiCon";
 import { JSONTransform } from "@/utils/JSONTransform";
 import { EmojiT } from "yayaluoya-tool/dist/EmojiT";
-import { ResData } from "global-module/dist_esm/ResData";
 import { UserDataProxy } from "@/localData/UserDataProxy";
 
 /**
@@ -21,7 +20,7 @@ export class ApiCon extends BaseApiCon {
     }
 
     /** 响应拦截 */
-    protected async response_(_res: ResData<any>) {
+    protected async response_(_res: AxiosResponse) {
         return super.response_(_res).then(_res => {
             //对响应数据中的表情进行解码
             _res.data = JSONTransform(_res.data, EmojiT.entitiestoUtf16);

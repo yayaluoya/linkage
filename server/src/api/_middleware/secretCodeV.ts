@@ -1,7 +1,43 @@
 import { Request } from 'express';
 import { MainConfig } from 'config/MainConfig';
 import { confusionStr } from 'global-module/dist/confusionStr';
-import { SecretCoduDataP } from 'localData/SecretCoduDataP';
+import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
+
+/**
+ * 暗号工具
+ * 主要在内存中缓存当前在时间段内使用的暗号列表
+ */
+@instanceTool()
+export class SecretCodeT {
+    static readonly instance: SecretCodeT;
+    /** 暗号列表 */
+    private list: Map<string, number> = new Map();
+
+    constructor() {
+        // 定时清除过期暗号
+        setInterval(() => {
+            for (let [v, time] of this.list.entries()) {
+                if (Math.abs(time - Date.now()) > MainConfig.secretCode.overrunTime) {
+                    this.list.delete(v);
+                }
+            }
+        }, MainConfig.secretCode.overrunTime / 3);
+    }
+
+    /**
+     * 暗号是否能使用
+     * @param v 
+     * @param time 
+     */
+    ifUse(v: string, time: number): boolean {
+        if (this.list.has(v)) {
+            return false;
+        } else {
+            this.list.set(v, time);
+            return true;
+        }
+    }
+}
 
 /**
  * 暗号验证
@@ -29,7 +65,7 @@ export function secretCodeV(_req: Request): Promise<string> {
                     //再检查暗号真实性
                     if (confusionStr(`${key}-${time}`) == v) {
                         //再检查暗号是否过期
-                        if (!SecretCoduDataP.instance.vBeOverdue(v, time)) {
+                        if (SecretCodeT.instance.ifUse(v, time)) {
                             r('');
                         } else {
                             r('该暗号已被使用');

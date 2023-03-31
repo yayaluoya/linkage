@@ -55,7 +55,7 @@ export default {
     }
 
     onMounted(() => {
-      TestApiCon.instance.list().then((list) => {
+      TestApiCon.instance.list().then(({ data: list }) => {
         testDataList.value = list;
       }, Mes.handleHttpCatch);
       //
@@ -74,7 +74,7 @@ export default {
           number: Date.now(),
           string: input.value,
         })
-        .then((item) => {
+        .then(({ data: item }) => {
           testDataList.value.push(item);
           input.value = "";
         }, Mes.handleHttpCatch)
