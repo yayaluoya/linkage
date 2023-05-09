@@ -1,33 +1,33 @@
 :root {
-  --color: #40485b;
-  --background-color: #fbfbfb;
-  --border-color: #e6e9ee;
-  --border-color-dark: #dbdbdb;
-  --border-radius: 10px;
-  --theme-color: #444461;
-  --padding: 20px;
+    --color: #40485b;
+    --background-color: #fbfbfb;
+    --border-color: #e6e9ee;
+    --border-color-dark: #dbdbdb;
+    --border-radius: 10px;
+    --theme-color: #444461;
+    --padding: 20px;
 }
 
 body {
-  background-color: #fbfbfb;
+    background-color: #fbfbfb;
 }
 
 button,
 .button {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .box-shadow {
-  box-shadow: 1px 2px 5px rgb(0 0 0 / 5%);
+    box-shadow: 1px 2px 5px rgb(0 0 0 / 5%);
 }
 
 .border-box {
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
 }
 
 .stroke-text {
-  color: white;
-  text-shadow: var(--color) 1px 0 0, var(--color) 0 1px 0,
-    var(--color) -1px 0 0, var(--color) 0 -1px 0;
+    color: white;
+    text-shadow: var(--color) 1px 0 0, var(--color) 0 1px 0, var(--color) -1px 0 0,
+        var(--color) 0 -1px 0;
 }

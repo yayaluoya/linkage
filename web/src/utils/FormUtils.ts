@@ -2,7 +2,7 @@
  * 表单工具
  */
 export class FormUtils {
-    /** 
+    /**
      * 获取验证规则的快捷方式
      */
     static getRules(_f: (value: any) => string | void | undefined, _op: any = {}) {

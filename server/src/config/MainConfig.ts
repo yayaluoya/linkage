@@ -1,4 +1,4 @@
-import { ServerConfig } from "global-module/dist/ServerConfig";
+import { ServerConfig } from 'global-module/dist/ServerConfig';
 
 /**
  * 主配置

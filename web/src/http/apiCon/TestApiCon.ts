@@ -1,5 +1,5 @@
-import { ApiCon } from "./ApiCon";
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
+import { ApiCon } from './ApiCon';
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
 
 /**
  * 测试api控制

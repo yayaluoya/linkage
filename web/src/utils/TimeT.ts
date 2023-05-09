@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from 'moment';
 
 /**
  * 时间工具
@@ -14,8 +14,8 @@ export class TimeT {
 
     /**
      * 获取时间
-     * @param op 
-     * @returns 
+     * @param op
+     * @returns
      */
     static getTime(op: moment.MomentInput) {
         return moment(op).format(this.format);
@@ -23,7 +23,7 @@ export class TimeT {
 
     /**
      * 获取当前时间的标准格式字符串
-     * @returns 
+     * @returns
      */
     static getOnTime() {
         return this.getTime(undefined);

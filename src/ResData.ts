@@ -1,6 +1,6 @@
-import { ResData as ResData_ } from "yayaluoya-tool/dist/http/ResData";
-import { HandleHttpData } from "./HandleHttpData";
-import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
+import { ResData as ResData_ } from 'yayaluoya-tool/dist/http/ResData';
+import { HandleHttpData } from './HandleHttpData';
+import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
 /**
  * 能处理数据的resData
  */
@@ -10,11 +10,11 @@ export class ResData<D = any> extends ResData_<D> {
 
     /**
      * 处理数据
-     * @param handType 
-     * @returns 
+     * @param handType
+     * @returns
      */
     handle(handType: ComN.dataHandlesType[] = []) {
-        return HandleHttpData.handle(this.toString(), handType)
+        return HandleHttpData.handle(this.toString(), handType);
     }
 
     /**
@@ -29,8 +29,8 @@ export class ResData<D = any> extends ResData_<D> {
 
     /**
      * 处理响应
-     * @param res 
-     * @returns 
+     * @param res
+     * @returns
      */
     static handleRes(res) {
         return new ResData(res);
@@ -38,7 +38,7 @@ export class ResData<D = any> extends ResData_<D> {
 
     /**
      * 处理错误
-     * @param e 
+     * @param e
      */
     static handleError(e) {
         if (typeof e == 'object') {

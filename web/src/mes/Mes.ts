@@ -1,5 +1,5 @@
-import { ElMessage, MessageOptions } from "element-plus";
-import { ResData } from "global-module/dist_esm/ResData";
+import { ElMessage, MessageOptions } from 'element-plus';
+import { ResData } from 'global-module/dist_esm/ResData';
 
 /**
  * 消息提示工具
@@ -7,28 +7,28 @@ import { ResData } from "global-module/dist_esm/ResData";
 export class Mes {
     /**
      * 成功提示
-     * @param _str 
+     * @param _str
      */
     static success(_str: string) {
         ElMessage.success(_str);
     }
     /**
      * 警告提示
-     * @param _str 
+     * @param _str
      */
     static warning(_str: string) {
         ElMessage.warning(_str);
     }
     /**
      * info提示
-     * @param _str 
+     * @param _str
      */
     static info(_str: string) {
         ElMessage.info(_str);
     }
     /**
      * 异常提示
-     * @param _str 
+     * @param _str
      */
     static error(_str: string) {
         ElMessage.error(_str);

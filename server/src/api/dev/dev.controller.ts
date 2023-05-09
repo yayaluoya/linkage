@@ -1,5 +1,14 @@
-import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, Query } from "@nestjs/common";
-import { ResData } from "global-module/dist/ResData";
+import {
+    Body,
+    Controller,
+    Get,
+    Headers,
+    HttpCode,
+    HttpStatus,
+    Post,
+    Query,
+} from '@nestjs/common';
+import { ResData } from 'global-module/dist/ResData';
 
 /**
  * 开发模块控制器
@@ -20,15 +29,15 @@ export class DevC {
         return new ResData([
             {
                 lable: '进程执行总内存',
-                value: (memoryUsage.rss / 1024 / 1024) + 'M',
+                value: memoryUsage.rss / 1024 / 1024 + 'M',
             },
             {
                 lable: '堆总大小',
-                value: (memoryUsage.heapTotal / 1024 / 1024) + 'M',
+                value: memoryUsage.heapTotal / 1024 / 1024 + 'M',
             },
             {
                 lable: '实际使用内存',
-                value: (memoryUsage.heapUsed / 1024 / 1024) + 'M',
+                value: memoryUsage.heapUsed / 1024 / 1024 + 'M',
             },
         ]);
     }

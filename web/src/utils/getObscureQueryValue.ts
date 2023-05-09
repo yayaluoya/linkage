@@ -1,13 +1,15 @@
-import { confusionStr } from "global-module/dist_esm/confusionStr";
+import { confusionStr } from 'global-module/dist_esm/confusionStr';
 
 /** 一个混淆颜值 */
 const iv = 'fasdfaewrqwerasdfasdfa';
 
 /**
  * 获取混淆查询参数
- * @param _string 
+ * @param _string
  */
-export function getObscureQueryValue(_string: string | undefined | null): string | undefined {
+export function getObscureQueryValue(
+    _string: string | undefined | null,
+): string | undefined {
     if (!_string) {
         return undefined;
     }
@@ -23,8 +25,8 @@ export function getObscureQueryValue(_string: string | undefined | null): string
 
 /**
  * 获取混淆字符串
- * @param _string 
- * @returns 
+ * @param _string
+ * @returns
  */
 export function getObscureQueryStr(_string: string): string {
     return `${_string}-${confusionStr(`${_string}-${iv}`)}`;

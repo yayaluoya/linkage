@@ -1,7 +1,7 @@
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
-import { EmojiT } from "yayaluoya-tool/dist/EmojiT";
-import OSS from "ali-oss";
-import { ApiCon } from "./ApiCon";
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
+import { EmojiT } from 'yayaluoya-tool/dist/EmojiT';
+import OSS from 'ali-oss';
+import { ApiCon } from './ApiCon';
 
 /**
  * 公共api控制器
@@ -31,7 +31,9 @@ export class ComApiCon extends ApiCon {
                 url: '/api/com/getEmoji',
             }).then(({ data: str }) => {
                 return JSON.parse(str).map((item: any) => {
-                    item.list = [...EmojiT.utf16toEntities(item.list).matchAll(/&#[0-9]+;/g)].map((_) => {
+                    item.list = [
+                        ...EmojiT.utf16toEntities(item.list).matchAll(/&#[0-9]+;/g),
+                    ].map((_) => {
                         return EmojiT.entitiestoUtf16(_[0]);
                     });
                     return item;

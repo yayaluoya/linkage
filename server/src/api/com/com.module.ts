@@ -1,5 +1,5 @@
-import { Module } from "@nestjs/common";
-import { ComC } from "./com.controller";
+import { Module } from '@nestjs/common';
+import { ComC } from './com.controller';
 
 /**
  * 公共模块
@@ -8,4 +8,4 @@ import { ComC } from "./com.controller";
     imports: [],
     controllers: [ComC],
 })
-export class ComModule { }
+export class ComModule {}

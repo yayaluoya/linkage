@@ -1,4 +1,4 @@
-import { BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 /**
  * 实体基类

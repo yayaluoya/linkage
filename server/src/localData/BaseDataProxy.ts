@@ -1,7 +1,7 @@
-import { LocalStorage_ as LocalStorage__ } from "yayaluoya-tool/dist/node/localData/LocalStorage_";
-import { BaseDataProxy as BaseDataProxy_ } from "yayaluoya-tool/dist/node/localData/BaseDataProxy";
-import { PathManager } from "pathManager/PathManager";
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
+import { LocalStorage_ as LocalStorage__ } from 'yayaluoya-tool/dist/node/localData/LocalStorage_';
+import { BaseDataProxy as BaseDataProxy_ } from 'yayaluoya-tool/dist/node/localData/BaseDataProxy';
+import { PathManager } from 'pathManager/PathManager';
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
 
 @instanceTool()
 class LocalStorage_ extends LocalStorage__ {

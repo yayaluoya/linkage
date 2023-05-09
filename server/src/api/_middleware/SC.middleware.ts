@@ -1,9 +1,9 @@
-import { HttpException, Injectable, NestMiddleware, RequestMethod } from "@nestjs/common";
-import { NextFunction } from "express";
+import { HttpException, Injectable, NestMiddleware, RequestMethod } from '@nestjs/common';
+import { NextFunction } from 'express';
 import { Request, Response } from 'express';
-import { ResData } from "global-module/dist/ResData";
-import { secretCodeV } from "./secretCodeV";
-import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
+import { ResData } from 'global-module/dist/ResData';
+import { secretCodeV } from './secretCodeV';
+import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
 
 /**
  * 暗号中间件
@@ -12,16 +12,15 @@ import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
 export class SCMiddleware implements NestMiddleware {
     use(req: Request, res: Response, next: NextFunction) {
         // console.log('暗号验证');
-        secretCodeV(req)
-            .then((mes) => {
-                if (!mes) {
-                    next();
-                } else {
-                    res.writeHead(200, {
-                        'Content-Type': 'application/json; charset=utf-8',
-                    });
-                    res.end(new ResData(null, HttpStatus.BAD_REQUEST, mes).toString());
-                }
-            });
+        secretCodeV(req).then((mes) => {
+            if (!mes) {
+                next();
+            } else {
+                res.writeHead(200, {
+                    'Content-Type': 'application/json; charset=utf-8',
+                });
+                res.end(new ResData(null, HttpStatus.BAD_REQUEST, mes).toString());
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-import { WebConfig } from "global-module/dist_esm/WebConfig";
+import { WebConfig } from 'global-module/dist_esm/WebConfig';
 
 /**
  * 全局配置

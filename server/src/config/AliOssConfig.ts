@@ -1,4 +1,4 @@
-import { MainConfig } from "./MainConfig";
+import { MainConfig } from './MainConfig';
 
 /**
  * 阿里云oss的配置

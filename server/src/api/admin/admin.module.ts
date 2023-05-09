@@ -1,5 +1,5 @@
-import { Module } from "@nestjs/common";
-import { AdminC } from "./admin.controller";
+import { Module } from '@nestjs/common';
+import { AdminC } from './admin.controller';
 
 /**
  * 后台模块
@@ -8,4 +8,4 @@ import { AdminC } from "./admin.controller";
     imports: [],
     controllers: [AdminC],
 })
-export class AdminModule { }
+export class AdminModule {}

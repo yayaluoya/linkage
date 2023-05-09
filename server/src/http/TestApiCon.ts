@@ -1,4 +1,4 @@
-import { BaseApiCon } from "./BaseApiCon";
+import { BaseApiCon } from './BaseApiCon';
 
 /**
  * 测试api控制

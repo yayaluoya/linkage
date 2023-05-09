@@ -1,15 +1,24 @@
-import { ExceptionFilter as ExceptionFilter_, Catch, ArgumentsHost, HttpException } from '@nestjs/common';
+import {
+    ExceptionFilter as ExceptionFilter_,
+    Catch,
+    ArgumentsHost,
+    HttpException,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ResData } from "global-module/dist/ResData";
+import { ResData } from 'global-module/dist/ResData';
 import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
-import { red } from "chalk";
+import { red } from 'chalk';
 
 /**
  * 异常过滤
  */
 @Catch()
 export class ExceptionFilter implements ExceptionFilter_ {
-    private static handResList: ((res: Response, resData: ResData, next: Function) => void)[] = [];
+    private static handResList: ((
+        res: Response,
+        resData: ResData,
+        next: Function,
+    ) => void)[] = [];
 
     /** 添加res处理 */
     static addResHandle(f: (res: Response, resData: ResData, next: Function) => void) {
@@ -26,9 +35,11 @@ export class ExceptionFilter implements ExceptionFilter_ {
                 ? exception.getStatus()
                 : HttpStatus.INTERNAL_SERVER_ERROR;
 
-        const message = exception instanceof HttpException
-            ? exception.message
-            : (console.log(red('服务器错误❌'), exception), '服务器错误❌，错误内容请查看日志');
+        const message =
+            exception instanceof HttpException
+                ? exception.message
+                : (console.log(red('服务器错误❌'), exception),
+                  '服务器错误❌，错误内容请查看日志');
 
         let resData = new ResData(null, status, message);
         resData.handleTime = Date.now();
@@ -38,10 +49,8 @@ export class ExceptionFilter implements ExceptionFilter_ {
             ...ExceptionFilter.handResList,
             (res) => {
                 resData.handleTime = Date.now() - resData.handleTime;
-                res
-                    .status(HttpStatus.OK)
-                    .json(resData);
-            }
+                res.status(HttpStatus.OK).json(resData);
+            },
         ];
 
         let handleRes = () => {
@@ -49,7 +58,7 @@ export class ExceptionFilter implements ExceptionFilter_ {
             if (hf) {
                 hf(response, resData, handleRes);
             }
-        }
+        };
         handleRes();
     }
 }

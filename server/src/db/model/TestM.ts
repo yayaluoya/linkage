@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { EManager } from "db/EManager";
-import { TestEntity } from "db/entities/TestEntity";
-import { Repository } from "typeorm";
-import { BaseM } from "../BaseM";
+import { Module } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { EManager } from 'db/EManager';
+import { TestEntity } from 'db/entities/TestEntity';
+import { Repository } from 'typeorm';
+import { BaseM } from '../BaseM';
 /**
  * 测试表模型
  */
@@ -11,10 +11,10 @@ import { BaseM } from "../BaseM";
     imports: [EManager.imports(TestEntity)],
     exports: [TestM],
 })
-export class TestM extends BaseM<TestEntity>{
+export class TestM extends BaseM<TestEntity> {
     constructor(
         @InjectRepository(TestEntity)
-        private rep: Repository<TestEntity>
+        private rep: Repository<TestEntity>,
     ) {
         super();
     }

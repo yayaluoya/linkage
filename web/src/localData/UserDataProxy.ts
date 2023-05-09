@@ -1,15 +1,17 @@
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
-import { BaseDataProxy } from "./BaseDataProxy";
-import { CryptoI } from "global-module/dist_esm/CryptoI";
-import { computed } from "vue";
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
+import { BaseDataProxy } from './BaseDataProxy';
+import { CryptoI } from 'global-module/dist_esm/CryptoI';
+import { computed } from 'vue';
 
 /**
  * 用户数据
  */
 @instanceTool()
-export class UserDataProxy extends BaseDataProxy<Partial<{
-    token: string;
-}>>{
+export class UserDataProxy extends BaseDataProxy<
+    Partial<{
+        token: string;
+    }>
+> {
     /** 单例 */
     static instance: UserDataProxy;
 

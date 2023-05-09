@@ -6,21 +6,20 @@ import { ResData } from 'global-module/dist/ResData';
  */
 @Controller('/api/time')
 export class TimeController {
-  @Get()
-  get() {
-    return this.getTime();
-  }
-  @Get('getTime')
-  getTime_(): ResData {
-    return this.getTime();
-  }
+    @Get()
+    get() {
+        return this.getTime();
+    }
+    @Get('getTime')
+    getTime_(): ResData {
+        return this.getTime();
+    }
 
-
-  /**
-   * 获取时间
-   * @returns 
-   */
-  getTime() {
-    return new ResData(Date.now());
-  }
+    /**
+     * 获取时间
+     * @returns
+     */
+    getTime() {
+        return new ResData(Date.now());
+    }
 }

@@ -1,5 +1,5 @@
-import router from ".";
-import { EPage } from "./EPage";
+import router from '.';
+import { EPage } from './EPage';
 
 /**
  * 页面工具
@@ -7,14 +7,17 @@ import { EPage } from "./EPage";
 export class PageTool {
     /**
      * 去一个会回退的页面
-     * @param path  
+     * @param path
+     * @param query
      */
     static async toBackPage(path: EPage, query: any = {}) {
         let _router = await router;
         await _router.push({
             path,
             query: {
-                back: _router.currentRoute.value.query.back || _router.currentRoute.value.fullPath,
+                back:
+                    _router.currentRoute.value.query.back ||
+                    _router.currentRoute.value.fullPath,
                 ...query,
             },
         });

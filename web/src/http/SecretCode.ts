@@ -1,8 +1,8 @@
-import { confusionStr } from "global-module/dist_esm/confusionStr";
-import axios, { AxiosRequestConfig } from "axios";
-import { Base64 } from "yayaluoya-tool/dist/Base64";
-import { ResData } from "global-module/dist_esm/ResData";
-import { URLT } from "yayaluoya-tool/dist/http/URLT";
+import { confusionStr } from 'global-module/dist_esm/confusionStr';
+import axios, { AxiosRequestConfig } from 'axios';
+import { Base64 } from 'yayaluoya-tool/dist/Base64';
+import { ResData } from 'global-module/dist_esm/ResData';
+import { URLT } from 'yayaluoya-tool/dist/http/URLT';
 
 let axios_ = axios.create();
 
@@ -13,19 +13,24 @@ export class SecretCode {
     /** 设置暗号 */
     static setSC(_res: AxiosRequestConfig): Promise<AxiosRequestConfig> {
         return new Promise((r) => {
-            let _onlyKey = `@${Date.now()}-${Math.random().toString().replace(/^0\./, '')}`;
-            this.getTimeDiff()
-                .then((time) => {
-                    // console.log('客户端与后端时间差为', time);
-                    //真实时间是当前时间加上后端与当前客户端的时间差组成
-                    time = time + Date.now();
-                    (_res.headers || (_res.headers = {}) as ComN.IReqHead)['x-secret-code'] = Base64.encode(JSON.stringify({
+            let _onlyKey = `@${Date.now()}-${Math.random()
+                .toString()
+                .replace(/^0\./, '')}`;
+            this.getTimeDiff().then((time) => {
+                // console.log('客户端与后端时间差为', time);
+                //真实时间是当前时间加上后端与当前客户端的时间差组成
+                time = time + Date.now();
+                (_res.headers || ((_res.headers = {}) as ComN.IReqHead))[
+                    'x-secret-code'
+                ] = Base64.encode(
+                    JSON.stringify({
                         key: _onlyKey,
-                        time,//后端需要比对的时间，这个用明文
+                        time, //后端需要比对的时间，这个用明文
                         v: confusionStr(`${_onlyKey}-${time}`),
-                    }));
-                    r(_res);
-                });
+                    }),
+                );
+                r(_res);
+            });
         });
     }
 
@@ -40,9 +45,11 @@ export class SecretCode {
                 .get(new URLT('/api/time/getTime', import.meta.env.VITE_BASE_URL).href)
                 .then((data) => {
                     return data.data;
-                }).then((data: ResData<number>) => {
+                })
+                .then((data: ResData<number>) => {
                     return data.data! - _time;
-                }).catch(() => {
+                })
+                .catch(() => {
                     //如果没有获取到后端的时间戳就使用当前电脑本地的时间戳并抛出异常
                     console.error('同步时间戳出错了!');
                     //

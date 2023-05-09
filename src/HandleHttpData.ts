@@ -1,11 +1,11 @@
-import { Gzip } from "./Zip";
-import { CryptoI } from "./CryptoI";
+import { Gzip } from './Zip';
+import { CryptoI } from './CryptoI';
 
 /**
  * 处理http的数据
  */
 export class HandleHttpData {
-    /** 
+    /**
      * 处理数据
      */
     static handle<T = any>(_data: T, _handType: ComN.dataHandlesType[] = []): T {
@@ -16,7 +16,9 @@ export class HandleHttpData {
             for (let o of _handType) {
                 switch (o) {
                     case 'e':
-                        _data = CryptoI.instance.encryptionData(JSON.stringify(_data)) as any;
+                        _data = CryptoI.instance.encryptionData(
+                            JSON.stringify(_data),
+                        ) as any;
                         break;
                     case 'z':
                         _data = JSON.stringify(Gzip.gzip(JSON.stringify(_data))) as any;
@@ -26,14 +28,13 @@ export class HandleHttpData {
                         break;
                 }
             }
-        }
-        catch (e) {
+        } catch (e) {
             // console.log('处理数据错误', e);
         }
         return _data;
     }
 
-    /** 
+    /**
      * 解析数据
      */
     static handle_<T = any>(_data: T, _handType: ComN.dataHandlesType[] = []): T {
@@ -46,15 +47,16 @@ export class HandleHttpData {
                         _data = JSON.parse(CryptoI.instance.decryptionData(_data as any));
                         break;
                     case 'z':
-                        _data = JSON.parse(Gzip.ungzip(JSON.parse(_data as any)) as string);
+                        _data = JSON.parse(
+                            Gzip.ungzip(JSON.parse(_data as any)) as string,
+                        );
                         break;
                     case 'o':
                         _data = JSON.parse((_data as any).split('').reverse().join(''));
                         break;
                 }
             }
-        }
-        catch (e) {
+        } catch (e) {
             // console.log('解析数据错误', e, _data);
         }
         return _data;

@@ -6,8 +6,8 @@ import { TimeController } from './time.controller';
  * 此模块不受暗号验证中间件影响
  */
 @Module({
-  imports: [],
-  controllers: [TimeController],
-  providers: [],
+    imports: [],
+    controllers: [TimeController],
+    providers: [],
 })
-export class TimeModule { }
+export class TimeModule {}

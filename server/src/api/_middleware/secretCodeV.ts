@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { MainConfig } from 'config/MainConfig';
 import { confusionStr } from 'global-module/dist/confusionStr';
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
 
 /**
  * 暗号工具
@@ -26,8 +26,8 @@ export class SecretCodeT {
 
     /**
      * 暗号是否能使用
-     * @param v 
-     * @param time 
+     * @param v
+     * @param time
      */
     ifUse(v: string, time: number): boolean {
         if (this.list.has(v)) {
@@ -42,7 +42,7 @@ export class SecretCodeT {
 /**
  * 暗号验证
  * @param _req 请求
- * @returns 
+ * @returns
  */
 export function secretCodeV(_req: Request): Promise<string> {
     return new Promise((r) => {
@@ -52,12 +52,16 @@ export function secretCodeV(_req: Request): Promise<string> {
             return;
         }
         // 获取暗号
-        let secretCode = ((_req.headers || {} as any) as ComN.IReqHead)['x-secret-code'];
+        let secretCode = ((_req.headers || ({} as any)) as ComN.IReqHead)[
+            'x-secret-code'
+        ];
         if (!secretCode) {
             r('缺少暗号');
         } else {
             try {
-                let { key, time, v, } = JSON.parse(Buffer.from(secretCode, 'base64').toString());
+                let { key, time, v } = JSON.parse(
+                    Buffer.from(secretCode, 'base64').toString(),
+                );
                 //先检查时间
                 if (Math.abs(Date.now() - time) > MainConfig.secretCode.overrunTime) {
                     r('暗号过期');

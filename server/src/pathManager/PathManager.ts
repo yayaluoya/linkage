@@ -1,5 +1,5 @@
-import { PathManager as PathManager_ } from "global-module/dist/PathManager";
-import { join } from "path";
+import { PathManager as PathManager_ } from 'global-module/dist/PathManager';
+import { join } from 'path';
 /**
  * 资源路径管理器
  */

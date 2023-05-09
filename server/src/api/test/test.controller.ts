@@ -1,14 +1,21 @@
-import { Body, Controller, Get, Header, HttpCode, HttpStatus, Post, Query } from "@nestjs/common";
-import { ResData } from "global-module/dist/ResData";
-import { TestM } from "db/model/TestM";
-import { HeaderDataHandlePack } from "utils/MethodDecorator/HeaderDataHandlePack";
-import { CryptoI } from "global-module/dist/CryptoI";
+import {
+    Body,
+    Controller,
+    Get,
+    Header,
+    HttpCode,
+    HttpStatus,
+    Post,
+    Query,
+} from '@nestjs/common';
+import { ResData } from 'global-module/dist/ResData';
+import { TestM } from 'db/model/TestM';
+import { HeaderDataHandlePack } from 'utils/MethodDecorator/HeaderDataHandlePack';
+import { CryptoI } from 'global-module/dist/CryptoI';
 
 @Controller('/api/test')
 export class TestController {
-    constructor(
-        private testM: TestM
-    ) { }
+    constructor(private testM: TestM) {}
 
     /** get */
     @Get('get')

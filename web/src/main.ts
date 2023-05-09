@@ -2,10 +2,10 @@ import { createApp, createSSRApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { setupStore } from './store';
-import "@/style/element.scss";
+import '@/style/element.scss';
 
 //引入自定义样式
-import "@/style/index.scss";
+import '@/style/index.scss';
 import { handleApp } from './handleApp';
 
 (async () => {

@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Head, Headers, HttpCode, HttpStatus, Post, Query } from "@nestjs/common";
-import { ResData } from "global-module/dist/ResData";
+import {
+    Body,
+    Controller,
+    Get,
+    Head,
+    Headers,
+    HttpCode,
+    HttpStatus,
+    Post,
+    Query,
+} from '@nestjs/common';
+import { ResData } from 'global-module/dist/ResData';
 
 /**
  * 后台模块控制器

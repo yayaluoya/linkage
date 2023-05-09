@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path';
 /**
  * 路径管理器
  */

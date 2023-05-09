@@ -1,5 +1,5 @@
-import { Crypto } from "yayaluoya-tool/dist/Crypto";
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
+import { Crypto } from 'yayaluoya-tool/dist/Crypto';
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
 
 /**
  * 加密用工具实例

@@ -1,5 +1,5 @@
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
-import { BaseDataProxy } from "./BaseDataProxy";
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
+import { BaseDataProxy } from './BaseDataProxy';
 
 interface D {
     s: string;
@@ -7,14 +7,14 @@ interface D {
     obj: {
         a: string[];
         b: boolean;
-    },
+    };
 }
 
 /**
  * 测试数据
  */
 @instanceTool()
-export class TestLDataP extends BaseDataProxy<D>{
+export class TestLDataP extends BaseDataProxy<D> {
     static readonly instance: TestLDataP;
 
     test() {

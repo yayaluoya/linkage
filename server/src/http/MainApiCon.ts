@@ -1,4 +1,4 @@
-import { BaseApiCon } from "./BaseApiCon";
+import { BaseApiCon } from './BaseApiCon';
 
 /**
  * 主api控制器

@@ -18,39 +18,39 @@ import { DataHandleMiddleware } from './_middleware/DataHandle.middleware';
  * 主模块
  */
 @Module({
-  imports: [
-    AdminModule,
-    ComModule,
-    DevModule,
-    FileModule,
-    TestModule,
-    TimeModule,
-    WebModule,
-  ],
-  controllers: [ApiController],
-  providers: [ApiService, {
-    provide: APP_INTERCEPTOR,
-    useClass: ProcessingTimeInterceptor,
-  }],
+    imports: [
+        AdminModule,
+        ComModule,
+        DevModule,
+        FileModule,
+        TestModule,
+        TimeModule,
+        WebModule,
+    ],
+    controllers: [ApiController],
+    providers: [
+        ApiService,
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: ProcessingTimeInterceptor,
+        },
+    ],
 })
 export class ApiModule {
-  configure(consumer: MiddlewareConsumer) {
-    // api中间件
-    consumer.apply(ApiMiddleware)
-      .forRoutes('/api/*');
-    //
-    let forRoutes = [
-      '/api/admin/*',
-      '/api/com/*',
-      '/api/file/*',
-      '/api/web/*',
-      '/api/test/*',
-    ];
-    //添加暗号验证中间件
-    consumer.apply(SCMiddleware)
-      .forRoutes(...forRoutes);
-    //添加数据处理中间件
-    consumer.apply(DataHandleMiddleware)
-      .forRoutes(...forRoutes);
-  }
+    configure(consumer: MiddlewareConsumer) {
+        // api中间件
+        consumer.apply(ApiMiddleware).forRoutes('/api/*');
+        //
+        let forRoutes = [
+            '/api/admin/*',
+            '/api/com/*',
+            '/api/file/*',
+            '/api/web/*',
+            '/api/test/*',
+        ];
+        //添加暗号验证中间件
+        consumer.apply(SCMiddleware).forRoutes(...forRoutes);
+        //添加数据处理中间件
+        consumer.apply(DataHandleMiddleware).forRoutes(...forRoutes);
+    }
 }

@@ -1,8 +1,18 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
-import { ResData } from "global-module/dist/ResData";
-import FileDispose from "./FileDispose";
-import { IFileData } from "./IFileData";
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    HttpCode,
+    HttpStatus,
+    Post,
+    UploadedFile,
+    UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ResData } from 'global-module/dist/ResData';
+import FileDispose from './FileDispose';
+import { IFileData } from './IFileData';
 
 /**
  * 文件控制器
@@ -18,7 +28,7 @@ export class FileController {
 
     @Get('test')
     test() {
-        return new ResData('文件模块测试')
+        return new ResData('文件模块测试');
     }
 
     @Post('upload')

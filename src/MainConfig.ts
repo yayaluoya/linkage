@@ -11,5 +11,5 @@ export class MainConfig {
     /** 是否运行测试模块 */
     static ifTest = true;
     /** 根域 */
-    static rootDomain = 'https://linkage.top'
+    static rootDomain = 'https://linkage.top';
 }

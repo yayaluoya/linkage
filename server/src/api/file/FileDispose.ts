@@ -1,12 +1,12 @@
-import { IFileData } from "./IFileData";
-import { PathManager } from "pathManager/PathManager";
-import { join, relative } from "path";
-import { mkdirSync, rmSync, writeFile, statSync } from "fs";
-import { HttpStatus } from "@nestjs/common";
-import { ResData } from "global-module/dist/ResData";
-import { AliOssT } from "utils/AliOssT";
-import * as moment from "moment";
-import { URLT } from "yayaluoya-tool/dist/http/URLT";
+import { IFileData } from './IFileData';
+import { PathManager } from 'pathManager/PathManager';
+import { join, relative } from 'path';
+import { mkdirSync, rmSync, writeFile, statSync } from 'fs';
+import { HttpStatus } from '@nestjs/common';
+import { ResData } from 'global-module/dist/ResData';
+import { AliOssT } from 'utils/AliOssT';
+import * as moment from 'moment';
+import { URLT } from 'yayaluoya-tool/dist/http/URLT';
 
 /**
  * 文件处理类
@@ -14,7 +14,7 @@ import { URLT } from "yayaluoya-tool/dist/http/URLT";
 export default class FileDispose {
     /**
      * 上传img文件
-     * @param file 
+     * @param file
      */
     public uploadImg(file: IFileData) {
         return this.uploadFile(file, 'img');
@@ -22,7 +22,7 @@ export default class FileDispose {
 
     /**
      * 上传md文件
-     * @param file 
+     * @param file
      */
     public uploadMd(file: IFileData) {
         return this.uploadFile(file, 'md');
@@ -45,60 +45,78 @@ export default class FileDispose {
                     //递归创建目录
                     recursive: true,
                 });
-            } catch { }
+            } catch {}
             //获取完整url并去除掉特殊字符
             let _url: string = join(_dir, packFileName(file.originalname));
             //保存文件
             writeFile(_url, file.buffer, (err) => {
                 if (err) {
                     console.log('存储文件失败！', e);
-                    r(new ResData('', HttpStatus.INTERNAL_SERVER_ERROR, '存储文件失败！'));
+                    r(
+                        new ResData(
+                            '',
+                            HttpStatus.INTERNAL_SERVER_ERROR,
+                            '存储文件失败！',
+                        ),
+                    );
                     return;
                 }
-                r(new ResData(
-                    new URLT(
-                        join(
-                            PathManager.publicFilePrefix,
-                            relative(PathManager.publicFilePath, _url)
-                        )
-                    ).path
-                ));
+                r(
+                    new ResData(
+                        new URLT(
+                            join(
+                                PathManager.publicFilePrefix,
+                                relative(PathManager.publicFilePath, _url),
+                            ),
+                        ).path,
+                    ),
+                );
             });
         });
     }
 
     /**
      * 上传文件到阿里云
-     * @param file 
+     * @param file
      */
     public uploadToAliOSS(file: IFileData): Promise<ResData> {
-        return AliOssT.instance.updateFile(`${moment().format('Y-M-D')}/${packFileName(file.originalname)}`, file.buffer as any).then((str) => {
-            return new ResData(str);
-        });
+        return AliOssT.instance
+            .updateFile(
+                `${moment().format('Y-M-D')}/${packFileName(file.originalname)}`,
+                file.buffer as any,
+            )
+            .then((str) => {
+                return new ResData(str);
+            });
     }
 
     /**
      * 删除文件
-     * @param url_ 
+     * @param url_
      */
     public remove(url_: string) {
         let url = new URLT(url_);
         if (/aliyuncs.com/.test(url.origin)) {
-            return AliOssT.instance.delete(url.path).then(() => {
-                return new ResData('文件已从阿里云上删除');
-            }).catch((e) => {
-                console.log('阿里云删除文件失败', e);
-                return new ResData().fail('阿里云删除文件失败');
-            });
+            return AliOssT.instance
+                .delete(url.path)
+                .then(() => {
+                    return new ResData('文件已从阿里云上删除');
+                })
+                .catch((e) => {
+                    console.log('阿里云删除文件失败', e);
+                    return new ResData().fail('阿里云删除文件失败');
+                });
         } else {
             try {
                 let filePath = join(
                     PathManager.publicFilePath,
-                    relative(PathManager.publicFilePrefix, url.path)
+                    relative(PathManager.publicFilePrefix, url.path),
                 );
-                if (statSync(filePath, {
-                    throwIfNoEntry: false,
-                })?.isFile()) {
+                if (
+                    statSync(filePath, {
+                        throwIfNoEntry: false,
+                    })?.isFile()
+                ) {
                     rmSync(filePath);
                 }
             } catch (e) {
@@ -112,8 +130,8 @@ export default class FileDispose {
 
 /**
  * 包装文件名
- * @param str 
- * @returns 
+ * @param str
+ * @returns
  */
 function packFileName(str: string): string {
     let url = new URLT(str);

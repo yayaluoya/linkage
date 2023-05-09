@@ -1,17 +1,17 @@
-/** 
+/**
  * 文件数据结构
  */
 export interface IFileData {
     /** 字段名 */
-    fieldname: string,
+    fieldname: string;
     /** 原始文件名 */
-    originalname: string,
+    originalname: string;
     /** 编码 */
-    encoding: string,
+    encoding: string;
     /** 文档类型 */
-    mimetype: string,
+    mimetype: string;
     /** 内容 */
-    buffer: Buffer,
+    buffer: Buffer;
     /** 大小 */
-    size: number,
+    size: number;
 }

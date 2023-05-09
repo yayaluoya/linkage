@@ -1,5 +1,5 @@
-import { Module } from "@nestjs/common";
-import { WebC } from "./web.controller";
+import { Module } from '@nestjs/common';
+import { WebC } from './web.controller';
 
 /**
  * web模块
@@ -8,4 +8,4 @@ import { WebC } from "./web.controller";
     imports: [],
     controllers: [WebC],
 })
-export class WebModule { }
+export class WebModule {}

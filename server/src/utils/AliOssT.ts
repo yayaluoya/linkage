@@ -1,7 +1,7 @@
-import { AliOSST } from "yayaluoya-tool/dist/http/AliYun/AliOSST";
-import { CredentialsT as CredentialsT_ } from "yayaluoya-tool/dist/node/AliYun/CredentialsT";
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
-import { AliOssConfig } from "config/AliOssConfig";
+import { AliOSST } from 'yayaluoya-tool/dist/http/AliYun/AliOSST';
+import { CredentialsT as CredentialsT_ } from 'yayaluoya-tool/dist/node/AliYun/CredentialsT';
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
+import { AliOssConfig } from 'config/AliOssConfig';
 /**
  * 阿里云工具
  */
@@ -35,7 +35,7 @@ export class CredentialsT extends CredentialsT_ {
 
     /**
      * 获取临时凭证
-     * @returns 
+     * @returns
      */
     getSts() {
         return super.getSts(AliOssConfig.roleArn);

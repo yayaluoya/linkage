@@ -1,5 +1,5 @@
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool"
-import { BaseDataProxy } from "./BaseDataProxy";
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
+import { BaseDataProxy } from './BaseDataProxy';
 
 /**
  * 测试数据
@@ -8,7 +8,7 @@ import { BaseDataProxy } from "./BaseDataProxy";
 export class TestDataProxy extends BaseDataProxy<{
     a: number;
     b: number;
-}>{
+}> {
     /** 单例 */
     static instance: TestDataProxy;
 

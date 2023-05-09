@@ -1,16 +1,16 @@
-import { AliOssConfig } from "@/config/AliOssConfig";
-import { AliOSST as AliOSST_ } from "yayaluoya-tool/dist/web/AliYun/AliOSST";
-import { ComApiCon } from "@/http/apiCon/ComApiCon";
-import OSS from "ali-oss";
+import { AliOssConfig } from '@/config/AliOssConfig';
+import { AliOSST as AliOSST_ } from 'yayaluoya-tool/dist/web/AliYun/AliOSST';
+import { ComApiCon } from '@/http/apiCon/ComApiCon';
+import OSS from 'ali-oss';
 
 /**
  * 阿里云oss工具
  */
 export class AliOssT extends AliOSST_ {
     /** 单例 */
-    static instance = ComApiCon.instance.getSts().then(info => {
+    static instance = ComApiCon.instance.getSts().then((info) => {
         return new AliOssT(info);
-    })
+    });
 
     constructor(info: OSS.Credentials) {
         super({
@@ -24,7 +24,7 @@ export class AliOssT extends AliOSST_ {
                     accessKeyId: info.AccessKeyId,
                     accessKeySecret: info.AccessKeySecret,
                     stsToken: info.SecurityToken,
-                }
+                };
             },
             //地域
             region: AliOssConfig.region,

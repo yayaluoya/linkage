@@ -1,10 +1,9 @@
-import { BaseEvent } from "yayaluoya-tool/dist/BaseEvent";
-import { instanceTool } from "yayaluoya-tool/dist/instanceTool";
-
+import { BaseEvent } from 'yayaluoya-tool/dist/BaseEvent';
+import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
 
 /**
  * 案件按下事件管理器
-*/
+ */
 @instanceTool()
 export class KeydownE extends BaseEvent<'keydown'> {
     /** 单例 */
