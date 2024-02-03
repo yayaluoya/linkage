@@ -73,6 +73,9 @@ export default {
         .add({
           number: Date.now(),
           string: input.value,
+          isActive: false,
+          cs: '测试内容',
+          cs2: '测试内容2',
         })
         .then(({ data: item }) => {
           testDataList.value.push(item);

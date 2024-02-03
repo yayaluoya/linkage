@@ -7,7 +7,9 @@ export class TestEntity extends BaseE implements EN.ITestE {
     return 'test';
   }
 
-  @Column()
+  @Column({
+    type: 'bigint',
+  })
   number: number;
 
   @Column()
