@@ -46,25 +46,35 @@ async function uploadDist() {
     ...localConfig,
     /** 同步列表 */
     syncList: [
+      {
+        key: 'config',
+        title: '配置文件',
+        paths: [
+          {
+            local: path.join(__dirname, '../.local/.keep'),
+            remote: `${serverRootUrl}/.local/.keep`,
+          },
+        ],
+      },
       /** 因为后端不会打包依赖，所以需要把依赖的全局模块传上去 */
       {
         key: 'global',
         title: '全局模块',
         paths: [
           {
-            local: path.join(__dirname, './dist'),
+            local: path.join(__dirname, '../dist'),
             remote: `${serverRootUrl}/dist`,
             ignored: [
-              path.join(__dirname, './dist/**/*.d.ts').replace(/\\+/g, '/'),
-              path.join(__dirname, './dist/**/*.d.ts.map').replace(/\\+/g, '/'),
+              path.join(__dirname, '../dist/**/*.d.ts').replace(/\\+/g, '/'),
+              path.join(__dirname, '../dist/**/*.d.ts.map').replace(/\\+/g, '/'),
             ],
           },
           {
-            local: path.join(__dirname, './package.json'),
+            local: path.join(__dirname, '../package.json'),
             remote: `${serverRootUrl}/package.json`,
           },
           {
-            local: path.join(__dirname, './ecosystem.config.js'),
+            local: path.join(__dirname, '../ecosystem.config.js'),
             remote: `${serverRootUrl}/ecosystem.config.js`,
           },
         ],
@@ -78,18 +88,18 @@ async function uploadDist() {
       },
       {
         key: 'server',
-        title: '后端',
+        title: '后端包',
         paths: [
           {
-            local: path.join(__dirname, './server/_data'),
+            local: path.join(__dirname, '../server/_data'),
             remote: `${serverRootUrl}/server/_data`,
           },
           {
-            local: path.join(__dirname, './server/_localData/.keep'),
+            local: path.join(__dirname, '../server/_localData/.keep'),
             remote: `${serverRootUrl}/server/_localData/.keep`,
           },
           {
-            local: path.join(__dirname, './server/dist'),
+            local: path.join(__dirname, '../server/dist'),
             remote: `${serverRootUrl}/server/dist`,
             ignored: [
               path.join(__dirname, './server/dist/**/*.js.map').replace(/\\+/g, '/'),
@@ -98,7 +108,7 @@ async function uploadDist() {
             ],
           },
           {
-            local: path.join(__dirname, './server/package.json'),
+            local: path.join(__dirname, '../server/package.json'),
             remote: `${serverRootUrl}/server/package.json`,
           },
         ],
@@ -112,10 +122,10 @@ async function uploadDist() {
       },
       {
         key: 'web',
-        title: '前端',
+        title: '前端包',
         paths: [
           {
-            local: path.join(__dirname, './web/dist/index.html'),
+            local: path.join(__dirname, '../web/dist/index.html'),
             remote: `${serverRootUrl}/web/dist/index.html`,
           },
         ],
