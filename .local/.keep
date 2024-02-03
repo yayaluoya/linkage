@@ -1,0 +1,5 @@
+只在本地生效的配置
+
+server.config.js 的配置会在./dist/ServerConfig文件中使用
+web.config.js 的配置会在./dist/WebConfig文件中使用
+uploadDist.config.js 的配置会在./.node/uploadDist文件中使用

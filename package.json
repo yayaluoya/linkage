@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ts-w": "tsc -w -p ./tsconfig-b.json",
-    "ts-w-esm": "tsc -w -p ./tsconfig-b-esm.json",
-    "同步到服务器": "sfs -s -d"
+    "打包全局src模块": "node ./.node/build.js",
+    "上传包到服务器": "node ./.node/uploadDIst.js"
   },
   "repository": {
     "type": "git",
@@ -21,11 +20,12 @@
   "homepage": "https://github.com/wudawuer/variables#readme",
   "devDependencies": {
     "@types/node": "^18.11.18",
-    "server-file-sync": "^1.6.13"
+    "server-file-sync": "^1.6.13",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "is-color": "^1.0.2",
     "pako": "^2.0.4",
-    "yayaluoya-tool": "1.8.0"
+    "yayaluoya-tool": "^4.0.1"
   }
 }

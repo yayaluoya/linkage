@@ -3,3 +3,6 @@ package-lock.json
 
 .ssh/*
 !.ssh/.keep
+
+.local/*
+!.local/.keep
