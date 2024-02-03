@@ -1,4 +1,4 @@
-import { ResData as ResData_ } from "yayaluoya-tool/dist/http/ResData";
+import { ResData as ResData_ } from 'yayaluoya-tool/dist/http/ResData';
 /**
  * 能处理数据的resData
  */

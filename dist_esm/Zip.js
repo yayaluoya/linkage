@@ -1,4 +1,4 @@
-import { gzip, inflate } from "pako";
+import { gzip, inflate } from 'pako';
 /**
  * 压缩工具
  */
@@ -16,7 +16,7 @@ export class Gzip {
      */
     static ungzip(data) {
         return inflate(data, {
-            to: 'string'
+            to: 'string',
         });
     }
 }

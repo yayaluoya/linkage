@@ -1,5 +1,5 @@
-import isColor from "is-color";
-import { isUrl } from "yayaluoya-tool/dist/is";
+import isColor from 'is-color';
+import { isUrl } from 'yayaluoya-tool/dist/is';
 /**
  * 公共验证
  */

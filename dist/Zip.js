@@ -19,7 +19,7 @@ class Gzip {
      */
     static ungzip(data) {
         return (0, pako_1.inflate)(data, {
-            to: 'string'
+            to: 'string',
         });
     }
 }

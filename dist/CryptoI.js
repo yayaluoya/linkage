@@ -17,7 +17,7 @@ let CryptoI = class CryptoI extends Crypto_1.Crypto {
         super('asdfwerfasdfsdfasdfqwerqwerqweqw', 'fasdfasdfasdfasd');
     }
 };
-CryptoI = __decorate([
+exports.CryptoI = CryptoI;
+exports.CryptoI = CryptoI = __decorate([
     (0, instanceTool_1.instanceTool)()
 ], CryptoI);
-exports.CryptoI = CryptoI;

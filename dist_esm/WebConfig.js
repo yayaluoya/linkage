@@ -1,6 +1,8 @@
-import { MainConfig } from "./MainConfig";
+import { ObjectUtils } from 'yayaluoya-tool/dist/obj/ObjectUtils';
+import { MainConfig } from './MainConfig';
 /**
  * 前端配置
+ * TODO 此模块只能前端导入
  */
 export class WebConfig extends MainConfig {
 }
@@ -9,6 +11,12 @@ export class WebConfig extends MainConfig {
  * TODO 测试用的临时配置
  */
 WebConfig.aliOss = {
-    region: "",
-    bucket: "",
+    region: '',
+    bucket: '',
 };
+try {
+    ObjectUtils.merge(WebConfig, require('../.local/web.config'));
+}
+catch (_a) {
+    //
+}

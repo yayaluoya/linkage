@@ -1,4 +1,4 @@
-import { Crypto } from "yayaluoya-tool/dist/Crypto";
+import { Crypto } from 'yayaluoya-tool/dist/Crypto';
 /**
  * 加密用工具实例
  */

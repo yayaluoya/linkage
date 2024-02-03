@@ -1,5 +1,5 @@
-import { Gzip } from "./Zip";
-import { CryptoI } from "./CryptoI";
+import { Gzip } from './Zip';
+import { CryptoI } from './CryptoI';
 /**
  * 处理http的数据
  */

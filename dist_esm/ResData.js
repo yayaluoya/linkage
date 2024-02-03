@@ -1,6 +1,6 @@
-import { ResData as ResData_ } from "yayaluoya-tool/dist/http/ResData";
-import { HandleHttpData } from "./HandleHttpData";
-import { HttpStatus } from "yayaluoya-tool/dist/http/HttpStatus";
+import { ResData as ResData_ } from 'yayaluoya-tool/dist/http/ResData';
+import { HandleHttpData } from './HandleHttpData';
+import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
 /**
  * 能处理数据的resData
  */

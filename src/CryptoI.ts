@@ -6,9 +6,9 @@ import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
  */
 @instanceTool()
 export class CryptoI extends Crypto {
-    static readonly instance: CryptoI;
+  static readonly instance: CryptoI;
 
-    constructor() {
-        super('asdfwerfasdfsdfasdfqwerqwerqweqw', 'fasdfasdfasdfasd');
-    }
+  constructor() {
+    super('asdfwerfasdfsdfasdfqwerqwerqweqw', 'fasdfasdfasdfasd');
+  }
 }

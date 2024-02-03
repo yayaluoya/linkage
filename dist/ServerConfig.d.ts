@@ -1,6 +1,7 @@
-import { MainConfig } from "./MainConfig";
+import { MainConfig } from './MainConfig';
 /**
  * 后端配置
+ * TODO 此模块只能后端导入
  */
 export declare class ServerConfig extends MainConfig {
     /** 端口 */

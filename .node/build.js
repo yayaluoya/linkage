@@ -3,7 +3,7 @@ const path = require('path');
 
 console.log('开始打包src');
 
-let a = exec('tsc -w -p ./tsconfig.json', {
+let a = exec('tsc -w -p ./tsconfig-b.json', {
   cwd: path.join(__dirname, '../'),
 });
 a.stdout.setEncoding('utf-8');
@@ -15,7 +15,7 @@ a.stderr.on('data', (err) => {
   console.log('common-err', err);
 });
 
-let b = exec('tsc -w -p ./tsconfig-esm.json', {
+let b = exec('tsc -w -p ./tsconfig-b-esm.json', {
   cwd: path.join(__dirname, '../'),
 });
 b.stdout.setEncoding('utf-8');

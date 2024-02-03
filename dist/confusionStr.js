@@ -5,6 +5,7 @@ const CryptoI_1 = require("./CryptoI");
 /**
  * 混淆字符串
  * @param _str
+ * @param _ifMd5
  * @returns
  */
 function confusionStr(_str, _ifMd5 = true) {

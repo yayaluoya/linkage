@@ -1,7 +1,8 @@
-import { CryptoI } from "./CryptoI";
+import { CryptoI } from './CryptoI';
 /**
  * 混淆字符串
  * @param _str
+ * @param _ifMd5
  * @returns
  */
 export function confusionStr(_str, _ifMd5 = true) {
