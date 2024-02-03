@@ -7,16 +7,16 @@ import { AliOssConfig } from 'config/AliOssConfig';
  */
 @instanceTool()
 export class AliOssT extends AliOSST {
-    static readonly instance: AliOssT;
+  static readonly instance: AliOssT;
 
-    constructor() {
-        super({
-            accessKeyId: AliOssConfig.access.accessKeyId,
-            accessKeySecret: AliOssConfig.access.accessKeySecret,
-            bucket: AliOssConfig.bucket,
-            region: AliOssConfig.region,
-        });
-    }
+  constructor() {
+    super({
+      accessKeyId: AliOssConfig.access.accessKeyId,
+      accessKeySecret: AliOssConfig.access.accessKeySecret,
+      bucket: AliOssConfig.bucket,
+      region: AliOssConfig.region,
+    });
+  }
 }
 
 /**
@@ -24,20 +24,20 @@ export class AliOssT extends AliOSST {
  */
 @instanceTool()
 export class CredentialsT extends CredentialsT_ {
-    static readonly instance: CredentialsT;
+  static readonly instance: CredentialsT;
 
-    constructor() {
-        super({
-            accessKeyId: AliOssConfig.access.accessKeyId,
-            accessKeySecret: AliOssConfig.access.accessKeySecret,
-        });
-    }
+  constructor() {
+    super({
+      accessKeyId: AliOssConfig.access.accessKeyId,
+      accessKeySecret: AliOssConfig.access.accessKeySecret,
+    });
+  }
 
-    /**
-     * 获取临时凭证
-     * @returns
-     */
-    getSts() {
-        return super.getSts(AliOssConfig.roleArn);
-    }
+  /**
+   * 获取临时凭证
+   * @returns
+   */
+  getSts() {
+    return super.getSts(AliOssConfig.roleArn);
+  }
 }

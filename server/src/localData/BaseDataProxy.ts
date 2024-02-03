@@ -5,18 +5,18 @@ import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
 
 @instanceTool()
 class LocalStorage_ extends LocalStorage__ {
-    static readonly instance: LocalStorage_;
+  static readonly instance: LocalStorage_;
 
-    get getPath(): string {
-        return PathManager.localDataPath;
-    }
+  get getPath(): string {
+    return PathManager.localDataPath;
+  }
 }
 
 /**
  * 基类本地数据代理
  */
 export abstract class BaseDataProxy<D = any> extends BaseDataProxy_<D> {
-    get LocalStorage_() {
-        return LocalStorage_.instance;
-    }
+  get LocalStorage_() {
+    return LocalStorage_.instance;
+  }
 }

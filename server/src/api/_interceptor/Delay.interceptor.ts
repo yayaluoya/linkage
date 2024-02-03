@@ -1,8 +1,8 @@
 import {
-    Injectable,
-    NestInterceptor,
-    ExecutionContext,
-    CallHandler,
+  Injectable,
+  NestInterceptor,
+  ExecutionContext,
+  CallHandler,
 } from '@nestjs/common';
 
 /**
@@ -10,12 +10,12 @@ import {
  */
 @Injectable()
 export class DelayInterceptor implements NestInterceptor {
-    constructor(private time = 0) {}
-    intercept(context: ExecutionContext, next: CallHandler) {
-        return new Promise<any>((r) => {
-            setTimeout(() => {
-                r(next.handle());
-            }, this.time);
-        });
-    }
+  constructor(private time = 0) {}
+  intercept(context: ExecutionContext, next: CallHandler) {
+    return new Promise<any>((r) => {
+      setTimeout(() => {
+        r(next.handle());
+      }, this.time);
+    });
+  }
 }

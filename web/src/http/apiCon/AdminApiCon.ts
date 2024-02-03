@@ -6,13 +6,13 @@ import { ApiCon } from './ApiCon';
  */
 @instanceTool()
 export class AdminApiCon extends ApiCon {
-    /** 单例 */
-    static readonly instance: AdminApiCon;
+  /** 单例 */
+  static readonly instance: AdminApiCon;
 
-    /** 测试 */
-    test() {
-        return this.getData<any>({
-            url: '/api/admin/test',
-        });
-    }
+  /** 测试 */
+  test() {
+    return this.getData<any>({
+      url: '/api/admin/test',
+    });
+  }
 }

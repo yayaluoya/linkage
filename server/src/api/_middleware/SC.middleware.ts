@@ -10,17 +10,17 @@ import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
  */
 @Injectable()
 export class SCMiddleware implements NestMiddleware {
-    use(req: Request, res: Response, next: NextFunction) {
-        // console.log('暗号验证');
-        secretCodeV(req).then((mes) => {
-            if (!mes) {
-                next();
-            } else {
-                res.writeHead(200, {
-                    'Content-Type': 'application/json; charset=utf-8',
-                });
-                res.end(new ResData(null, HttpStatus.BAD_REQUEST, mes).toString());
-            }
+  use(req: Request, res: Response, next: NextFunction) {
+    // console.log('暗号验证');
+    secretCodeV(req).then((mes) => {
+      if (!mes) {
+        next();
+      } else {
+        res.writeHead(200, {
+          'Content-Type': 'application/json; charset=utf-8',
         });
-    }
+        res.end(new ResData(null, HttpStatus.BAD_REQUEST, mes).toString());
+      }
+    });
+  }
 }

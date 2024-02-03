@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 import path, { resolve } from 'path';
 import { svgBuilder } from './.vite/svgBuilder';
 import vitePluginAliOss from 'vite-plugin-ali-oss';
-import { ServerConfig } from "global-module/dist/ServerConfig"
+import { ServerConfig } from 'global-module/dist/ServerConfig';
 
 function pathResolve(dir: string) {
   // console.log(resolve(process.cwd(), '.', dir));
@@ -24,15 +24,13 @@ const options = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: prod ? `https://${options.bucket}.${options.region}.aliyuncs.com/${ServerConfig.Name}/` : '/', // must be URL when build
+  base: prod
+    ? `https://${options.bucket}.${options.region}.aliyuncs.com/${ServerConfig.Name}/`
+    : '/', // must be URL when build
   build: {
     outDir,
   },
-  plugins: [
-    vue(),
-    svgBuilder('./src/assets/svg/'),
-    vitePluginAliOss(options) as any,
-  ],
+  plugins: [vue(), svgBuilder('./src/assets/svg/'), vitePluginAliOss(options) as any],
   server: {
     port: 3001,
   },
@@ -58,8 +56,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        javascriptEnabled: true,//允许链式调用的换行
-      }
-    }
+        javascriptEnabled: true, //允许链式调用的换行
+      },
+    },
   },
-})
+});

@@ -4,10 +4,10 @@ import { ApiService } from './api.service';
 
 @Controller('/api')
 export class ApiController {
-    constructor(private readonly mianService: ApiService) {}
+  constructor(private readonly mianService: ApiService) {}
 
-    @Get('test')
-    test() {
-        return new ResData(this.mianService.test());
-    }
+  @Get('test')
+  test() {
+    return new ResData(this.mianService.test());
+  }
 }

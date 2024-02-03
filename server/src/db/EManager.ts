@@ -5,18 +5,18 @@ import { TestEntity } from './entities/TestEntity';
  * 主体管理器
  */
 export class EManager {
-    /**
-     * 所有主体列表
-     * TODO 一般不要用
-     */
-    static get AllES() {
-        return [TestEntity];
-    }
+  /**
+   * 所有主体列表
+   * TODO 一般不要用
+   */
+  static get AllES() {
+    return [TestEntity];
+  }
 
-    /**
-     * 导入主体
-     */
-    static imports(...es: EntityClassOrSchema[]) {
-        return TypeOrmModule.forFeature(es);
-    }
+  /**
+   * 导入主体
+   */
+  static imports(...es: EntityClassOrSchema[]) {
+    return TypeOrmModule.forFeature(es);
+  }
 }

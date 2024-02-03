@@ -1,13 +1,13 @@
 import {
-    Body,
-    Controller,
-    Get,
-    Head,
-    Headers,
-    HttpCode,
-    HttpStatus,
-    Post,
-    Query,
+  Body,
+  Controller,
+  Get,
+  Head,
+  Headers,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Query,
 } from '@nestjs/common';
 import { ResData } from 'global-module/dist/ResData';
 
@@ -16,8 +16,8 @@ import { ResData } from 'global-module/dist/ResData';
  */
 @Controller('/api/admin')
 export class AdminC {
-    @Get('test')
-    test() {
-        return new ResData('后台模块测试');
-    }
+  @Get('test')
+  test() {
+    return new ResData('后台模块测试');
+  }
 }

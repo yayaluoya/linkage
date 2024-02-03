@@ -6,13 +6,13 @@ import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
  */
 @instanceTool()
 export class KeydownE extends BaseEvent<'keydown'> {
-    /** 单例 */
-    static readonly instance: KeydownE;
+  /** 单例 */
+  static readonly instance: KeydownE;
 
-    constructor() {
-        super();
-        window.addEventListener('keydown', (e) => {
-            this.emit('keydown', e);
-        });
-    }
+  constructor() {
+    super();
+    window.addEventListener('keydown', (e) => {
+      this.emit('keydown', e);
+    });
+  }
 }

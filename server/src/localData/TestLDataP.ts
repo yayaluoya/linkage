@@ -2,12 +2,12 @@ import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
 import { BaseDataProxy } from './BaseDataProxy';
 
 interface D {
-    s: string;
-    n: number;
-    obj: {
-        a: string[];
-        b: boolean;
-    };
+  s: string;
+  n: number;
+  obj: {
+    a: string[];
+    b: boolean;
+  };
 }
 
 /**
@@ -15,21 +15,25 @@ interface D {
  */
 @instanceTool()
 export class TestLDataP extends BaseDataProxy<D> {
-    static readonly instance: TestLDataP;
+  static readonly instance: TestLDataP;
 
-    test() {
-        this.data.n++;
-    }
+  constructor() {
+    super();
+  }
 
-    //
-    protected getNewData(): D {
-        return {
-            s: 's',
-            n: 1,
-            obj: {
-                a: [],
-                b: false,
-            },
-        };
-    }
+  test() {
+    this.data.n++;
+  }
+
+  //
+  protected getNewData(): D {
+    return {
+      s: 's',
+      n: 1,
+      obj: {
+        a: [],
+        b: false,
+      },
+    };
+  }
 }

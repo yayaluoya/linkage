@@ -3,6 +3,6 @@
  */
 
 declare module 'element-plus/dist/locale/*' {
-    const obj: any;
-    export default obj;
+  const obj: any;
+  export default obj;
 }

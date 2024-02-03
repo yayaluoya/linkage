@@ -5,18 +5,18 @@
  * @param query
  */
 export function querySelector<T extends HTMLElement = HTMLElement>(
-    el: HTMLElement,
-    query: (el: HTMLElement) => boolean,
+  el: HTMLElement,
+  query: (el: HTMLElement) => boolean,
 ): T[] {
-    let list: any[] = [];
-    if (el) {
-        //遍历子节点
-        Array.from((el.shadowRoot || el).children).forEach((item) => {
-            list.push(...querySelector(item as any, query));
-        });
-        if (query(el)) {
-            list.push(el);
-        }
+  let list: any[] = [];
+  if (el) {
+    //遍历子节点
+    Array.from((el.shadowRoot || el).children).forEach((item) => {
+      list.push(...querySelector(item as any, query));
+    });
+    if (query(el)) {
+      list.push(el);
     }
-    return list;
+  }
+  return list;
 }

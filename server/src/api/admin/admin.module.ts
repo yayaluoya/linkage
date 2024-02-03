@@ -5,7 +5,7 @@ import { AdminC } from './admin.controller';
  * 后台模块
  */
 @Module({
-    imports: [],
-    controllers: [AdminC],
+  imports: [],
+  controllers: [AdminC],
 })
 export class AdminModule {}

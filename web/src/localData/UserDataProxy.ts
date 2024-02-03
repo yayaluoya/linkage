@@ -8,56 +8,56 @@ import { computed } from 'vue';
  */
 @instanceTool()
 export class UserDataProxy extends BaseDataProxy<
-    Partial<{
-        token: string;
-    }>
+  Partial<{
+    token: string;
+  }>
 > {
-    /** 单例 */
-    static instance: UserDataProxy;
+  /** 单例 */
+  static instance: UserDataProxy;
 
-    /** 是否登录 */
-    get login() {
-        return !!this.data?.token;
-    }
+  /** 是否登录 */
+  get login() {
+    return !!this.data?.token;
+  }
 
-    /** 用户token */
-    get token() {
-        return this.data?.token || '';
-    }
+  /** 用户token */
+  get token() {
+    return this.data?.token || '';
+  }
 
-    /** 是否登录 */
-    useLogin() {
-        return computed(() => {
-            return this.login;
-        });
-    }
+  /** 是否登录 */
+  useLogin() {
+    return computed(() => {
+      return this.login;
+    });
+  }
 
-    /** 用户token */
-    useToken() {
-        return computed(() => {
-            return this.token;
-        });
-    }
+  /** 用户token */
+  useToken() {
+    return computed(() => {
+      return this.token;
+    });
+  }
 
-    /** 清空数据 */
-    resetData() {
-        for (let i in this.data) {
-            delete (this.data as any)[i];
-        }
+  /** 清空数据 */
+  resetData() {
+    for (let i in this.data) {
+      delete (this.data as any)[i];
     }
+  }
 
-    protected getNewData() {
-        return {};
-    }
+  protected getNewData() {
+    return {};
+  }
 
-    /** 数据处理，可以在数据被获取和设置前做加密解密操作 */
-    protected dataHandle(str: string, type: 'get' | 'set'): string {
-        switch (type) {
-            case 'get':
-                return CryptoI.instance.decryptionData(str);
-            case 'set':
-                // console.log('设置用户数据', str);
-                return CryptoI.instance.encryptionData(str);
-        }
+  /** 数据处理，可以在数据被获取和设置前做加密解密操作 */
+  protected dataHandle(str: string, type: 'get' | 'set'): string {
+    switch (type) {
+      case 'get':
+        return CryptoI.instance.decryptionData(str);
+      case 'set':
+        // console.log('设置用户数据', str);
+        return CryptoI.instance.encryptionData(str);
     }
+  }
 }

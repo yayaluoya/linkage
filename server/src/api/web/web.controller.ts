@@ -1,13 +1,13 @@
 import {
-    Body,
-    Controller,
-    Get,
-    Head,
-    Headers,
-    HttpCode,
-    HttpStatus,
-    Post,
-    Query,
+  Body,
+  Controller,
+  Get,
+  Head,
+  Headers,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Query,
 } from '@nestjs/common';
 import { ResData } from 'global-module/dist/ResData';
 
@@ -16,8 +16,8 @@ import { ResData } from 'global-module/dist/ResData';
  */
 @Controller('/api/web')
 export class WebC {
-    @Get('test')
-    test() {
-        return new ResData('web模块测试');
-    }
+  @Get('test')
+  test() {
+    return new ResData('web模块测试');
+  }
 }

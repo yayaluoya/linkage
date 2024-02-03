@@ -7,14 +7,14 @@ import { createThrottleFun } from 'yayaluoya-tool/dist/throttleAntiShake';
  */
 @instanceTool()
 export class ScrollE extends BaseEvent<'scroll'> {
-    /** 单例 */
-    static readonly instance: ScrollE;
+  /** 单例 */
+  static readonly instance: ScrollE;
 
-    constructor() {
-        super();
-        let f = createThrottleFun(() => {
-            this.emit('scroll', document.documentElement.scrollTop);
-        }, 30);
-        window.addEventListener('scroll', f);
-    }
+  constructor() {
+    super();
+    let f = createThrottleFun(() => {
+      this.emit('scroll', document.documentElement.scrollTop);
+    }, 30);
+    window.addEventListener('scroll', f);
+  }
 }

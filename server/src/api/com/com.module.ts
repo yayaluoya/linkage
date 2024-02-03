@@ -5,7 +5,7 @@ import { ComC } from './com.controller';
  * 公共模块
  */
 @Module({
-    imports: [],
-    controllers: [ComC],
+  imports: [],
+  controllers: [ComC],
 })
 export class ComModule {}

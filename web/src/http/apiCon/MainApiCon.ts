@@ -6,6 +6,6 @@ import { ApiCon } from './ApiCon';
  */
 @instanceTool()
 export class MainApiCon extends ApiCon {
-    /** 单例 */
-    static readonly instance: MainApiCon;
+  /** 单例 */
+  static readonly instance: MainApiCon;
 }

@@ -8,26 +8,26 @@ import { BaseM } from '../BaseM';
  * 测试表模型
  */
 @Module({
-    imports: [EManager.imports(TestEntity)],
-    exports: [TestM],
+  imports: [EManager.imports(TestEntity)],
+  exports: [TestM],
 })
 export class TestM extends BaseM<TestEntity> {
-    constructor(
-        @InjectRepository(TestEntity)
-        private rep: Repository<TestEntity>,
-    ) {
-        super();
-    }
+  constructor(
+    @InjectRepository(TestEntity)
+    private rep: Repository<TestEntity>,
+  ) {
+    super();
+  }
 
-    async findAll() {
-        return await this.rep.createQueryBuilder().getMany();
-    }
+  async findAll() {
+    return await this.rep.createQueryBuilder().getMany();
+  }
 
-    async add(data: Partial<TestEntity>) {
-        let item = new TestEntity();
-        for (let i in data) {
-            item[i] = data[i];
-        }
-        return await this.rep.save(item);
+  async add(data: Partial<TestEntity>) {
+    let item = new TestEntity();
+    for (let i in data) {
+      item[i] = data[i];
     }
+    return await this.rep.save(item);
+  }
 }

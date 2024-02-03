@@ -3,24 +3,24 @@ import { BaseE } from '../BaseE';
 
 @Entity('test')
 export class TestEntity extends BaseE implements EN.ITestE {
-    static get TableName(): string {
-        return 'test';
-    }
+  static get TableName(): string {
+    return 'test';
+  }
 
-    @Column()
-    number: number;
+  @Column()
+  number: number;
 
-    @Column()
-    string: string;
+  @Column()
+  string: string;
 
-    @Column({
-        default: true,
-    })
-    isActive: boolean;
+  @Column({
+    default: true,
+  })
+  isActive: boolean;
 
-    @Column()
-    cs: string;
+  @Column()
+  cs: string;
 
-    @Column()
-    cs2: string;
+  @Column()
+  cs2: string;
 }

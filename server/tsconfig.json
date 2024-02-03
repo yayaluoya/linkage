@@ -17,8 +17,6 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "typeRoots": [
-      "../types"
-    ],
-  },
+    "typeRoots": ["../types"]
+  }
 }

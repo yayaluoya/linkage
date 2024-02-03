@@ -8,19 +8,19 @@ const iv = 'fasdfaewrqwerasdfasdfa';
  * @param _string
  */
 export function getObscureQueryValue(
-    _string: string | undefined | null,
+  _string: string | undefined | null,
 ): string | undefined {
-    if (!_string) {
-        return undefined;
-    }
-    let _strs = _string?.split('-');
-    if (_strs.length != 2) {
-        return undefined;
-    }
-    if (_strs[1] != confusionStr(`${_strs[0]}-${iv}`)) {
-        return undefined;
-    }
-    return _strs[0];
+  if (!_string) {
+    return undefined;
+  }
+  let _strs = _string?.split('-');
+  if (_strs.length != 2) {
+    return undefined;
+  }
+  if (_strs[1] != confusionStr(`${_strs[0]}-${iv}`)) {
+    return undefined;
+  }
+  return _strs[0];
 }
 
 /**
@@ -29,5 +29,5 @@ export function getObscureQueryValue(
  * @returns
  */
 export function getObscureQueryStr(_string: string): string {
-    return `${_string}-${confusionStr(`${_string}-${iv}`)}`;
+  return `${_string}-${confusionStr(`${_string}-${iv}`)}`;
 }

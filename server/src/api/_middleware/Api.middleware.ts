@@ -1,9 +1,9 @@
 import {
-    HttpException,
-    HttpStatus,
-    Injectable,
-    NestMiddleware,
-    RequestMethod,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NestMiddleware,
+  RequestMethod,
 } from '@nestjs/common';
 import { NextFunction } from 'express';
 import { Request, Response } from 'express';
@@ -13,8 +13,8 @@ import { Request, Response } from 'express';
  */
 @Injectable()
 export class ApiMiddleware implements NestMiddleware {
-    use(req: Request, res: Response, next: NextFunction) {
-        // console.log('api', req.baseUrl, req.ip, req.method);
-        next();
-    }
+  use(req: Request, res: Response, next: NextFunction) {
+    // console.log('api', req.baseUrl, req.ip, req.method);
+    next();
+  }
 }

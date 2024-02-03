@@ -6,6 +6,6 @@ import { instanceTool } from 'yayaluoya-tool/dist/instanceTool';
  */
 @instanceTool()
 export class TestEvent extends BaseEvent<string> {
-    /** 单例 */
-    static readonly instance: TestEvent;
+  /** 单例 */
+  static readonly instance: TestEvent;
 }

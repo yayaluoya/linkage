@@ -1,0 +1,8 @@
+{
+  //设置不显示在编辑器的文件夹
+  "files.exclude": {
+    // "**/node_modules/": true,
+    // "**/dist/": true,
+  },
+  "editor.tabSize": 2
+}

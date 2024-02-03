@@ -11,32 +11,32 @@ let myCom = import.meta.globEager('./components/my/**/*.vue');
  * @param app
  */
 export async function handleApp(app: App<Element>) {
-    /** 注册svg组件 */
-    app.component('svg-icon', svgIcon);
+  /** 注册svg组件 */
+  app.component('svg-icon', svgIcon);
 
-    //注册全局的my组件
-    for (let path in myCom) {
-        app.component(
-            'my-' +
-                path.match(/([a-zA-Z]+)\.vue$/)![1].replace(/[A-Z]/g, (_, index) => {
-                    if (index == 0) {
-                        return _.toLowerCase();
-                    } else {
-                        return '-' + _.toLowerCase();
-                    }
-                }),
-            myCom[path].default,
-        );
-    }
+  //注册全局的my组件
+  for (let path in myCom) {
+    app.component(
+      'my-' +
+        path.match(/([a-zA-Z]+)\.vue$/)![1].replace(/[A-Z]/g, (_, index) => {
+          if (index == 0) {
+            return _.toLowerCase();
+          } else {
+            return '-' + _.toLowerCase();
+          }
+        }),
+      myCom[path].default,
+    );
+  }
 
-    //注入elment中的组件
-    app.use(ElementPlus, {
-        locale: zhCn,
-    });
+  //注入elment中的组件
+  app.use(ElementPlus, {
+    locale: zhCn,
+  });
 
-    //TODO 暂时不知道这个有什么用
-    app.provide(ID_INJECTION_KEY, {
-        prefix: 0,
-        current: 0,
-    });
+  //TODO 暂时不知道这个有什么用
+  app.provide(ID_INJECTION_KEY, {
+    prefix: 0,
+    current: 0,
+  });
 }

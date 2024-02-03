@@ -9,13 +9,13 @@ import '@/style/index.scss';
 import { handleApp } from './handleApp';
 
 (async () => {
-    const app = createApp(App);
+  const app = createApp(App);
 
-    await handleApp(app);
+  await handleApp(app);
 
-    //引入vue全家桶
-    app.use(await router);
-    setupStore(app);
+  //引入vue全家桶
+  app.use(await router);
+  setupStore(app);
 
-    app.mount('#app', true);
+  app.mount('#app', true);
 })();

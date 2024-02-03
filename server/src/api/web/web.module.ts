@@ -5,7 +5,7 @@ import { WebC } from './web.controller';
  * web模块
  */
 @Module({
-    imports: [],
-    controllers: [WebC],
+  imports: [],
+  controllers: [WebC],
 })
 export class WebModule {}
