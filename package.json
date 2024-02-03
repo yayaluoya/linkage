@@ -20,7 +20,7 @@
   "homepage": "https://github.com/wudawuer/variables#readme",
   "devDependencies": {
     "@types/node": "^18.11.18",
-    "server-file-sync": "^1.6.13",
+    "server-file-sync": "^1.7.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
