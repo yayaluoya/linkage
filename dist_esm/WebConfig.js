@@ -15,7 +15,9 @@ WebConfig.aliOss = {
     bucket: '',
 };
 try {
-    ObjectUtils.merge(WebConfig, require('../.local/web.config'));
+    import('../.local/web.config').then((module) => {
+        ObjectUtils.merge(WebConfig, module.default);
+    });
 }
 catch (_a) {
     //

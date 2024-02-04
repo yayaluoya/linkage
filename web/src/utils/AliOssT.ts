@@ -19,7 +19,7 @@ export class AliOssT extends AliOSST_ {
       stsToken: info.SecurityToken,
       refreshSTSToken: async () => {
         // 向您搭建的STS服务获取临时访问凭证。
-        const info = await ComApiCon.instance.getSts();
+        const info = (await ComApiCon.instance.getSts()).data;
         return {
           accessKeyId: info.AccessKeyId,
           accessKeySecret: info.AccessKeySecret,

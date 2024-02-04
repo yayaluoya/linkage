@@ -39,7 +39,7 @@ export default {
           .then((_str) => {
             //抛出事件
             ctx.emit('update:img', _str);
-          })
+          }, Mes.handleHttpCatch)
           .finally(() => {
             loading.value = false;
           });
@@ -69,7 +69,7 @@ export default {
     </div>
     <div v-if="img" class="mask upload">
       <el-icon>
-        <UploadFilled :size="size" />
+        <UploadFilled />
       </el-icon>
     </div>
     <div v-if="loading" class="mask">
