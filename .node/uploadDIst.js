@@ -1,6 +1,5 @@
 const { startSync } = require('server-file-sync');
 const path = require('path');
-const fs = require('fs');
 const { MainConfig } = require('../dist/MainConfig');
 const { ObjectUtils } = require('yayaluoya-tool/dist/obj/ObjectUtils');
 
@@ -46,21 +45,6 @@ function upatePm2(conn) {
  * 上传打包后的代码
  */
 async function uploadDist() {
-  const keyUrl = path.join(__dirname, '../.ssh/a');
-  if (
-    !fs
-      .statSync(keyUrl, {
-        throwIfNoEntry: false,
-      })
-      ?.isFile()
-  ) {
-    console.log(`
-请配置服务器ssh连接私钥以便上传包文件到服务器
-可以在当前项目执行目录下执行ssh-keygen -f ./.ssh/a命令生成秘钥并把公钥（.pub结尾的文件）交给后端添加到服务器中
-然后重新上传就可以了
-      `);
-    return;
-  }
   /** 是否要更新pm2 */
   let ifUpdatePm2 = false;
   //
@@ -72,22 +56,10 @@ async function uploadDist() {
       port: 22,
       /** 用户名 */
       username: 'root',
-      /** 私钥字符串 */
-      privateKey: fs.readFileSync(keyUrl),
       /** 合并本地的配置 */
       ...localConfig,
       /** 同步列表 */
       syncList: [
-        {
-          key: 'config',
-          title: '配置文件',
-          paths: [
-            {
-              local: path.join(__dirname, '../.local/.keep'),
-              remote: `${serverRootUrl}/.local/.keep`,
-            },
-          ],
-        },
         /** 因为后端不会打包依赖，所以需要把依赖的全局模块传上去 */
         {
           key: 'global',

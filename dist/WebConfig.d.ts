@@ -6,7 +6,6 @@ import { MainConfig } from './MainConfig';
 export declare class WebConfig extends MainConfig {
     /**
      * 阿里云相关配置
-     * TODO 测试用的临时配置
      */
     static aliOss: {
         region: string;

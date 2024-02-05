@@ -1,1 +1,1 @@
-{"version":3,"file":"WebConfig.d.ts","sourceRoot":"","sources":["../src/WebConfig.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,UAAU,EAAE,MAAM,cAAc,CAAC;AAE1C;;;GAGG;AACH,qBAAa,SAAU,SAAQ,UAAU;IACvC;;;OAGG;IACH,MAAM,CAAC,MAAM;;;MAGX;CACH"}
+{"version":3,"file":"WebConfig.d.ts","sourceRoot":"","sources":["../src/WebConfig.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,cAAc,CAAC;AAE1C;;;GAGG;AACH,qBAAa,SAAU,SAAQ,UAAU;IACvC;;OAEG;IACH,MAAM,CAAC,MAAM;;;MAGX;CACH"}

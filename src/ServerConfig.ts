@@ -1,7 +1,6 @@
 import path from 'path';
 import { MainConfig } from './MainConfig';
 import { PathManager } from './PathManager';
-import { ObjectUtils } from 'yayaluoya-tool/dist/obj/ObjectUtils';
 
 /**
  * 后端配置
@@ -25,7 +24,7 @@ export class ServerConfig extends MainConfig {
    */
   static aliOss = {
     region: '',
-    bucket: 'test',
+    bucket: '',
     access: {
       accessKeyId: '',
       accessKeySecret: '',
@@ -38,15 +37,9 @@ export class ServerConfig extends MainConfig {
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '123456',
-    database: 'test',
+    password: '',
+    database: '',
     entities: [path.join(PathManager.server, './dist/db/entities/**/*{.ts,.js}')],
     synchronize: true,
   };
-}
-
-try {
-  ObjectUtils.merge(ServerConfig, require('../.local/server.config'));
-} catch {
-  //
 }

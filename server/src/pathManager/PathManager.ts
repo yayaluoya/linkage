@@ -8,10 +8,6 @@ export class PathManager extends PathManager_ {
   static get distPath(): string {
     return join(this.server, '/dist');
   }
-  /** web打包文件路径 */
-  static get webDistPath(): string {
-    return join(this.web, '/dist');
-  }
   /** 本地数据存储路径 */
   static get localDataPath(): string {
     return join(this.server, '/_localData');

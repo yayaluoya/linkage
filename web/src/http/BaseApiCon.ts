@@ -4,6 +4,7 @@ import { BaseApiCon as BaseApiCon_ } from 'yayaluoya-tool/dist/node/BaseApiCon';
 import { HttpStatus } from 'yayaluoya-tool/dist/http/HttpStatus';
 import { SecretCode } from './SecretCode';
 import { ResData } from '../../../dist_esm/ResData';
+import { Env } from '@/_d/Env';
 
 /** 自定义的请求op类型 */
 interface AxiosRequestConfig<T = any> extends AxiosRequestConfig_<T>, ComN.IDataHandle {}
@@ -14,7 +15,7 @@ interface AxiosRequestConfig<T = any> extends AxiosRequestConfig_<T>, ComN.IData
 export class BaseApiCon extends BaseApiCon_ {
   get op(): AxiosRequestConfig {
     return {
-      baseURL: import.meta.env.VITE_BASE_URL,
+      baseURL: Env.BASE_URL,
       timeout: 1000 * 60 * 5,
     };
   }

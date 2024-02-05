@@ -1,1 +1,1 @@
-{"version":3,"file":"PathManager.d.ts","sourceRoot":"","sources":["../src/PathManager.ts"],"names":[],"mappings":"AACA;;GAEG;AACH,qBAAa,WAAW;IACpB,cAAc;IACd,MAAM,KAAK,QAAQ,IAAI,MAAM,CAE5B;IAED,YAAY;IACZ,MAAM,KAAK,MAAM,WAEhB;IACD,eAAe;IACf,MAAM,KAAK,GAAG,WAEb;CACJ"}
+{"version":3,"file":"PathManager.d.ts","sourceRoot":"","sources":["../src/PathManager.ts"],"names":[],"mappings":"AACA;;GAEG;AACH,qBAAa,WAAW;IACtB,cAAc;IACd,MAAM,KAAK,QAAQ,IAAI,MAAM,CAE5B;IAED,YAAY;IACZ,MAAM,KAAK,MAAM,WAEhB;IACD,eAAe;IACf,MAAM,KAAK,GAAG,WAEb;CACF"}

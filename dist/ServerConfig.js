@@ -7,7 +7,6 @@ exports.ServerConfig = void 0;
 const path_1 = __importDefault(require("path"));
 const MainConfig_1 = require("./MainConfig");
 const PathManager_1 = require("./PathManager");
-const ObjectUtils_1 = require("yayaluoya-tool/dist/obj/ObjectUtils");
 /**
  * 后端配置
  * TODO 此模块只能后端导入
@@ -32,7 +31,7 @@ ServerConfig.publicFileMaxAge = 1000 * 60 * 60 * 24 * 360;
  */
 ServerConfig.aliOss = {
     region: '',
-    bucket: 'test',
+    bucket: '',
     access: {
         accessKeyId: '',
         accessKeySecret: '',
@@ -45,14 +44,8 @@ ServerConfig.orm = {
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '123456',
-    database: 'test',
+    password: '',
+    database: '',
     entities: [path_1.default.join(PathManager_1.PathManager.server, './dist/db/entities/**/*{.ts,.js}')],
     synchronize: true,
 };
-try {
-    ObjectUtils_1.ObjectUtils.merge(ServerConfig, require('../.local/server.config'));
-}
-catch (_a) {
-    //
-}

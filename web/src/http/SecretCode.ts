@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { Base64 } from 'yayaluoya-tool/dist/Base64';
 import { ResData } from 'global-module/dist_esm/ResData';
 import { URLT } from 'yayaluoya-tool/dist/http/URLT';
+import { Env } from '@/_d/Env';
 
 let axios_ = axios.create();
 
@@ -39,7 +40,7 @@ export class SecretCode {
     if (!this.getTimeDiffP) {
       // console.log('获取时间');
       this.getTimeDiffP = axios_
-        .get(new URLT('/api/time/getTime', import.meta.env.VITE_BASE_URL).href)
+        .get(new URLT('/api/time/getTime', Env.BASE_URL).href)
         .then((data) => {
           return data.data;
         })

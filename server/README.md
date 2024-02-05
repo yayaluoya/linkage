@@ -71,3 +71,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## 特殊目录介绍
+
+- _localData 存放一些本地数据，不会加到版本管理中
+  - server.config.json 存放本地的配置，将会合并到MainConfig中
