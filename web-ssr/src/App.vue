@@ -1,31 +1,40 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+export default {
+  components: {},
+  setup() {
+    return {};
+  },
+};
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="root">
+    <div class="content">
+      <router-view v-slot="{ Component }">
+        <!-- 注意：这里加缓存有些不好形容的问题，跟vue-router的工作原理有关系 -->
+        <!-- <keep-alive> -->
+        <component :is="Component" />
+        <!-- </keep-alive> -->
+      </router-view>
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style scoped lang="scss">
+.root {
+  width: 100%;
+
+  > .se {
+    z-index: 0;
+  }
+
+  > .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
 }
 </style>
